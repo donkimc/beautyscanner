@@ -13,7 +13,7 @@ function fallback(a: Answers, name: string, evidence: string) {
 export async function POST(req: Request) {
   const { answers, productIds } = (await req.json()) as { answers: Answers; productIds: string[] };
   const products = PRODUCTS.filter((p) => productIds.includes(p.id));
-  const key = process.env.ANTHROPIC_API_KEY;
+  const key = process.env.DEEPSEEK_API_KEY;
 
   if (!key) {
     return Response.json({
@@ -30,18 +30,19 @@ export async function POST(req: Request) {
 JSON만 출력: {"<id>": "설명", ...}`;
 
   try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
+    const res = await fetch("https://api.deepseek.com/chat/completions", {
       method: "POST",
-      headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+      headers: { authorization: `Bearer ${key}`, "content-type": "application/json" },
       body: JSON.stringify({
-        model: process.env.ANTHROPIC_MODEL ?? "claude-sonnet-5-5",
+        model: process.env.DEEPSEEK_MODEL ?? "deepseek-chat",
         max_tokens: 800,
+        response_format: { type: "json_object" },
         messages: [{ role: "user", content: prompt }],
       }),
     });
     if (!res.ok) throw new Error(`API ${res.status}`);
     const data = await res.json();
-    const text: string = data.content?.[0]?.text ?? "{}";
+    const text: string = data.choices?.[0]?.message?.content ?? "{}";
     const parsed = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
     const explanations = Object.fromEntries(
       products.map((p) => [p.id, typeof parsed[p.id] === "string" ? parsed[p.id] : fallback(answers, p.name, p.evidence)]),
