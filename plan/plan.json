@@ -4,22 +4,79 @@
   "decisions": {
     "stack": "Next.js + TypeScript on Railway",
     "recommendation": "Rules over curated data decide products; AI only explains them",
-    "signup": "After the survey; demo modal now, Auth.js + Railway Postgres later",
-    "ai_provider": "DeepSeek (server-side key, optional; template fallback)"
+    "signup": "After the survey; real Google login (own OAuth + signed cookie, no DB) now; saved routines in a database later",
+    "ai_provider": "DeepSeek (server-side key, optional; template fallback)",
+    "styling": "Tailwind CSS v4; design tokens in design/tokens.json generate the @theme block",
+    "newsletter": "Mock only: validates and confirms, stores and sends nothing"
   },
   "milestones": [
-    { "id": "m1", "name": "Survey and rules-based routine", "status": "done" },
-    { "id": "m2", "name": "Result page with evidence badges, AD labels, consent modal", "status": "done" },
-    { "id": "m3", "name": "Railway deploy", "status": "done" },
-    { "id": "m4", "name": "Real product and evidence data with citations", "status": "todo" },
-    { "id": "m5", "name": "Real login and saved routines (Auth.js, Postgres)", "status": "todo" },
-    { "id": "m6", "name": "Coupang Partners / Naver adapter behind a retailer interface", "status": "todo" }
+    {
+      "id": "m1",
+      "name": "Survey and rules-based routine",
+      "status": "done"
+    },
+    {
+      "id": "m2",
+      "name": "Result page with evidence badges, AD labels, consent",
+      "status": "done"
+    },
+    {
+      "id": "m3",
+      "name": "Railway deploy",
+      "status": "done"
+    },
+    {
+      "id": "m4",
+      "name": "Mobile landing page with animation, Login and Try-out buttons",
+      "status": "done"
+    },
+    {
+      "id": "m5",
+      "name": "Tailwind redesign",
+      "status": "done"
+    },
+    {
+      "id": "m6",
+      "name": "Google login (code flow + PKCE, signed session cookie)",
+      "status": "done"
+    },
+    {
+      "id": "m7",
+      "name": "Mock newsletter section",
+      "status": "done"
+    },
+    {
+      "id": "m8",
+      "name": "Set Google OAuth credentials on Railway and test real sign-in",
+      "status": "todo"
+    },
+    {
+      "id": "m9",
+      "name": "Real product and evidence data with citations",
+      "status": "todo"
+    },
+    {
+      "id": "m10",
+      "name": "Save routines to the account (Railway Postgres)",
+      "status": "todo"
+    },
+    {
+      "id": "m11",
+      "name": "Coupang Partners / Naver adapter behind a retailer interface",
+      "status": "todo"
+    }
   ],
-  "out_of_scope_for_mvp": ["photo upload analysis", "price alerts", "scraping", "multi-retailer comparison"],
+  "out_of_scope_for_mvp": [
+    "photo upload analysis",
+    "price alerts",
+    "scraping",
+    "multi-retailer comparison"
+  ],
   "risks": [
     "Sample data must be replaced with cited evidence before launch",
     "Ingredient-level evidence must not be presented as product-level",
     "Survey answers are sensitive; overseas AI transfer needs explicit consent and legal review",
-    "Affiliate income must not influence evidence grades"
+    "Affiliate income must not influence evidence grades",
+    "Google login cannot be verified end to end until real OAuth credentials are configured"
   ]
 }

@@ -2,10 +2,29 @@
   "description": "Allowed import directions between top-level folders. Enforced by tests/architecture.test.ts.",
   "layers": {
     "design": [],
-    "lib": ["design"],
-    "agent": ["lib", "design"],
-    "app": ["lib", "agent", "design"],
-    "evals": ["lib", "agent", "design"],
-    "scripts": ["lib", "agent", "design"]
+    "lib": [
+      "design"
+    ],
+    "agent": [
+      "lib",
+      "design"
+    ],
+    "app": [
+      "lib",
+      "agent",
+      "design",
+      "auth"
+    ],
+    "evals": [
+      "lib",
+      "agent",
+      "design"
+    ],
+    "scripts": [
+      "lib",
+      "agent",
+      "design"
+    ],
+    "auth": []
   }
 }

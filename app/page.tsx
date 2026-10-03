@@ -1,171 +1,81 @@
-"use client";
+import Link from "next/link";
+import AuthButton from "./_components/AuthButton";
+import Newsletter from "./_components/Newsletter";
+import RotatingWord from "./_components/RotatingWord";
+import ScanCard from "./_components/ScanCard";
 
-import { useState } from "react";
-import { GRADE_LABEL, STEP_LABEL, type Concern, type SkinType } from "@/lib/products";
-import { buildRoutine, type Answers, type Routine } from "@/lib/recommend";
-
-interface Question {
-  key: keyof Answers;
-  title: string;
-  options: { label: string; value: string | number | boolean }[];
-}
-
-const QUESTIONS: Question[] = [
-  { key: "skinType", title: "피부 타입이 어떻게 되세요?", options: [
-    { label: "건성", value: "dry" }, { label: "지성", value: "oily" },
-    { label: "복합성", value: "combo" }, { label: "민감성", value: "sensitive" }] },
-  { key: "concern", title: "가장 신경 쓰이는 고민은요?", options: [
-    { label: "건조함·수분", value: "dryness" }, { label: "트러블", value: "acne" },
-    { label: "색소·잡티", value: "pigmentation" }, { label: "주름·탄력", value: "aging" }] },
-  { key: "sensitive", title: "화장품에 따갑거나 붉어진 적이 있나요?", options: [
-    { label: "자주 있어요", value: true }, { label: "거의 없어요", value: false }] },
-  { key: "budget", title: "루틴 전체 예산은요?", options: [
-    { label: "3만원 이하", value: 30000 }, { label: "5만원 이하", value: 50000 }, { label: "8만원 이하", value: 80000 }] },
-  { key: "steps", title: "어느 정도 단계를 원하세요?", options: [
-    { label: "간단하게 3단계", value: 3 }, { label: "꼼꼼하게 5단계", value: 5 }] },
+const FEATURES = [
+  { dot: "bg-grade-clinical", title: "근거 등급 표시", body: "임상 검증부터 브랜드 자체 시험까지, 신뢰도가 다르면 다르다고 표시해요." },
+  { dot: "bg-grade-multiple", title: "예산에 맞춘 루틴", body: "3단계·5단계, 내 예산 안에서 빠진 단계까지 짚어드려요." },
+  { dot: "bg-grade-emerging", title: "솔직한 광고 표기", body: "구매 링크에는 AD를 붙이고, 광고가 근거 등급을 바꾸지 않아요." },
 ];
 
-type Phase = "survey" | "note" | "loading" | "result";
-
 export default function Home() {
-  const [phase, setPhase] = useState<Phase>("survey");
-  const [idx, setIdx] = useState(0);
-  const [ans, setAns] = useState<Partial<Answers>>({ note: "" });
-  const [routine, setRoutine] = useState<Routine | null>(null);
-  const [explain, setExplain] = useState<Record<string, string>>({});
-  const [aiUsed, setAiUsed] = useState(false);
-  const [open, setOpen] = useState<string | null>(null);
-  const [signup, setSignup] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const [consent, setConsent] = useState(false);
-
-  function pick(q: Question, value: string | number | boolean) {
-    setAns((a) => ({ ...a, [q.key]: value }));
-    if (idx + 1 < QUESTIONS.length) setIdx(idx + 1);
-    else setPhase("note");
-  }
-
-  async function finish() {
-    setPhase("loading");
-    const answers = ans as Answers;
-    const r = buildRoutine(answers);
-    setRoutine(r);
-    try {
-      const res = await fetch("/api/explain", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ answers, productIds: r.items.map((p) => p.id) }),
-      });
-      const data = await res.json();
-      setExplain(data.explanations);
-      setAiUsed(data.ai);
-    } catch {
-      setExplain({});
-    }
-    setPhase("result");
-  }
-
-  function restart() {
-    setPhase("survey"); setIdx(0); setAns({ note: "" }); setRoutine(null); setSaved(false);
-  }
-
-  const q = QUESTIONS[idx];
-
   return (
-    <main>
-      <header className="hero">
-        <p className="eyebrow">과학적 근거 기반 추천</p>
-        <h1>왜 이 제품인지, 근거까지</h1>
-        <p className="sub">제품마다 어떤 연구를 근거로 추천했는지 확인하세요. 근거의 신뢰도가 다르면, 다르다고 정직하게 표시합니다.</p>
-        <p className="demo">데모 버전 · 제품과 근거는 샘플 데이터입니다</p>
-      </header>
+    <div className="relative overflow-hidden">
+      {/* animated background blobs */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
+        <div className="absolute -left-24 -top-24 size-72 animate-float rounded-full bg-brand/25 blur-3xl" />
+        <div className="absolute -right-28 top-64 size-80 animate-float-slow rounded-full bg-grade-emerging/20 blur-3xl" />
+        <div className="absolute -left-20 top-[34rem] size-64 animate-float rounded-full bg-grade-clinical/15 blur-3xl" />
+      </div>
 
-      {phase === "survey" && (
-        <section className="card">
-          <div className="progress"><span style={{ width: `${((idx + 1) / (QUESTIONS.length + 1)) * 100}%` }} /></div>
-          <p className="eyebrow">질문 {idx + 1} / {QUESTIONS.length}</p>
-          <h2>{q.title}</h2>
-          <div className="options">
-            {q.options.map((o) => (
-              <button key={o.label} className="opt" onClick={() => pick(q, o.value)}>{o.label}</button>
-            ))}
+      <div className="relative z-10 mx-auto max-w-md px-4 pb-16">
+        <header className="flex items-center justify-between py-4">
+          <span className="text-lg font-extrabold tracking-tight">뷰티스캐너</span>
+          <AuthButton />
+        </header>
+
+        <section className="pt-2 text-center">
+          <p className="animate-rise text-xs font-semibold tracking-[0.2em] text-muted">과학적 근거 기반 스킨케어</p>
+          <h1 className="mt-3 animate-rise text-[2rem] font-extrabold leading-tight [animation-delay:120ms]">
+            광고 말고,
+            <br />
+            <span className="animate-shimmer bg-gradient-to-r from-brand via-grade-emerging to-brand bg-[length:200%_auto] bg-clip-text text-transparent">
+              근거
+            </span>
+            로 고르는 내 스킨케어
+          </h1>
+          <p className="mt-4 animate-rise text-base text-muted [animation-delay:240ms]">
+            <RotatingWord /> 고민에 맞는 루틴을
+            <br />
+            예산 안에서, 이유까지 알려드려요.
+          </p>
+
+          <div className="mt-6 animate-rise [animation-delay:360ms]">
+            <ScanCard />
           </div>
-          {idx > 0 && <button className="link" onClick={() => setIdx(idx - 1)}>← 이전</button>}
+
+          <div className="mt-6 grid animate-rise gap-2.5 [animation-delay:480ms]">
+            <Link href="/try" className="rounded-button bg-ink py-3.5 text-base font-bold text-white shadow-lg shadow-ink/20 active:scale-[0.99]">
+              무료로 체험하기 →
+            </Link>
+            <Link href="/login" className="rounded-button border border-ink/15 bg-card py-3.5 text-base font-semibold active:scale-[0.99]">
+              로그인
+            </Link>
+          </div>
+          <p className="mt-3 text-xs text-muted">설문 5문항 · 가입 없이 결과 확인</p>
         </section>
-      )}
 
-      {phase === "note" && (
-        <section className="card">
-          <p className="eyebrow">마지막 · 선택사항</p>
-          <h2>피부에 대해 더 알려주실 게 있나요?</h2>
-          <textarea
-            placeholder="예: 레티놀 쓰면 붉어져요 / 환절기에 특히 건조해요"
-            value={ans.note}
-            maxLength={200}
-            onChange={(e) => setAns((a) => ({ ...a, note: e.target.value }))}
-          />
-          <button className="primary" onClick={finish}>내 루틴 보기</button>
+        <section className="mt-14 space-y-3">
+          {FEATURES.map((f) => (
+            <div key={f.title} className="flex gap-3 rounded-product border border-line bg-card/80 p-4 backdrop-blur">
+              <span className={`mt-1.5 size-3 shrink-0 rounded-full ${f.dot}`} />
+              <div>
+                <h2 className="font-bold">{f.title}</h2>
+                <p className="mt-0.5 text-sm text-muted">{f.body}</p>
+              </div>
+            </div>
+          ))}
         </section>
-      )}
 
-      {phase === "loading" && <section className="card"><p className="eyebrow">루틴을 만드는 중…</p></section>}
+        <div className="mt-10"><Newsletter /></div>
 
-      {phase === "result" && routine && (
-        <section className="card result">
-          <p className="eyebrow">맞춤 루틴 · {routine.items.length} STEP</p>
-          <h2>당신을 위한 추천</h2>
-          <p className="sub small">예산 {Number(ans.budget).toLocaleString()}원 이하 · 합계 {routine.total.toLocaleString()}원{aiUsed ? " · AI 설명" : ""}</p>
-
-          {routine.warnings.map((w) => <p key={w} className="warn">⚠ {w}</p>)}
-
-          {routine.items.map((p, i) => {
-            const g = GRADE_LABEL[p.grade];
-            const isOpen = open === p.id;
-            return (
-              <article key={p.id} className="product">
-                <div className="head" onClick={() => setOpen(isOpen ? null : p.id)}>
-                  <div>
-                    <span className="step">{i + 1}. {STEP_LABEL[p.step]}</span>
-                    <h3>{p.name}</h3>
-                    <p className="price">{p.price.toLocaleString()}원 <span className="badge" style={{ color: g.color, borderColor: g.color }}>● {g.label}</span></p>
-                  </div>
-                  <span className="chev">{isOpen ? "▲" : "▼"}</span>
-                </div>
-                <p className="why">{explain[p.id]}</p>
-                {isOpen && <p className="evidence"><strong>근거</strong> {p.evidence}</p>}
-                <div className="buy">
-                  <a className="buy-btn" href={p.url} onClick={(e) => e.preventDefault()}>구매하러 가기 ↗</a>
-                  <span className="ad">AD</span>
-                </div>
-              </article>
-            );
-          })}
-
-          <div className="legend">
-            {Object.values(GRADE_LABEL).map((g) => <span key={g.label}><i style={{ background: g.color }} />{g.label}</span>)}
-          </div>
-          <p className="fine">성분 수준의 근거는 제품 자체의 효과를 보장하지 않습니다. 이 서비스는 진단이나 치료를 대체하지 않으며, 증상이 지속되면 피부과 전문의와 상담하세요. 구매 링크는 광고(AD)를 포함할 수 있습니다.</p>
-
-          <div className="actions">
-            <button className="primary" onClick={() => setSignup(true)}>{saved ? "저장됨 ✓" : "루틴 저장하기"}</button>
-            <button className="link" onClick={restart}>다시 하기</button>
-          </div>
-        </section>
-      )}
-
-      {signup && (
-        <div className="overlay" onClick={() => setSignup(false)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <h2>루틴을 저장하려면 가입하세요</h2>
-            <p className="sub small">(데모) 실제 로그인은 연결되어 있지 않습니다.</p>
-            <label className="consent">
-              <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} /> [필수] 피부 설문 정보(건강 관련 민감정보 포함) 수집·이용에 동의합니다. 목적: 맞춤 루틴 제공.
-            </label>
-            <button className="primary" disabled={!consent} onClick={() => { setSaved(true); setSignup(false); }}>Google로 계속하기 (데모)</button>
-            <button className="primary kakao" disabled={!consent} onClick={() => { setSaved(true); setSignup(false); }}>카카오로 계속하기 (데모)</button>
-          </div>
-        </div>
-      )}
-    </main>
+        <footer className="mt-10 text-center text-xs leading-relaxed text-muted">
+          <p className="mb-2 inline-block rounded-full bg-warn-bg px-3 py-1 text-warn-ink">데모 버전 · 제품과 근거는 샘플 데이터입니다</p>
+          <p>이 서비스는 진단이나 치료를 대체하지 않아요. 증상이 지속되면 피부과 전문의와 상담하세요.</p>
+        </footer>
+      </div>
+    </div>
   );
 }

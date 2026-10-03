@@ -1,10 +1,12 @@
 flowchart LR
-  user([User]) --> app["app/ (survey UI, /api/explain)"]
-  app --> lib["lib/ (products, recommend rules)"]
-  app --> agent["agent/ (explainer: prompt + guardrails)"]
+  user([User]) --> landing["app/ (landing, /try survey, /login)"]
+  landing --> lib["lib/ (products, recommend rules)"]
+  landing --> agent["agent/ (explainer: prompt + guardrails)"]
+  landing --> design["design/ (tokens.json -> app/tokens.css -> Tailwind @theme)"]
+  landing --> authlayer["auth/ (Google OAuth + signed session cookie)"]
+  authlayer -. "code flow + PKCE" .-> google[(Google OAuth)]
   agent --> lib
   agent -. "optional, server-side key" .-> deepseek[(DeepSeek API)]
-  app --> design["design/ (tokens.json -> app/tokens.css)"]
   lib --> design
   evals["evals/ (scenario checks)"] --> lib
   evals --> agent
