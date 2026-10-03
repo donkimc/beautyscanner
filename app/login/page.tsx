@@ -14,13 +14,13 @@ export default async function LoginPage(props: { searchParams: Promise<Record<st
   return (
     <main className="mx-auto max-w-md px-4 pb-12">
       <SiteHeader />
-      <div className="mt-4 rounded-card border border-line bg-card p-6">
-        <p className="text-xs tracking-widest text-muted">{m.login.label}</p>
-        <h1 className="mt-1 font-display text-2xl font-bold">{m.login.title}</h1>
-        <p className="mb-5 mt-2 text-sm text-muted">{m.login.sub}</p>
+      <div className="mt-4 rounded-card bg-surface p-6 shadow-phone">
+        <p className="eyebrow">{m.login.label}</p>
+        <h1 className="mt-1 font-display text-2xl font-semibold">{m.login.title}</h1>
+        <p className="mb-5 mt-2 text-sm text-ink-soft">{m.login.sub}</p>
         <LoginForm next={next} initialError={error} />
       </div>
-      <p className="mt-4 text-center text-sm text-muted">
+      <p className="mt-4 text-center text-sm text-ink-soft">
         <Link href="/try" className="font-semibold text-ink underline">{m.login.tryAnyway}</Link>
       </p>
       <SiteFooter />

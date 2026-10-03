@@ -48,29 +48,29 @@ export default function LoginForm({ next, initialError }: { next: string; initia
   if (sentTo)
     return (
       <div role="status" className="space-y-3">
-        <h2 className="font-display text-xl font-bold">{m.login.sent}</h2>
-        <p className="text-sm text-muted">{m.login.sentBody(sentTo)}</p>
-        <p className="text-xs text-muted">{m.login.spam}</p>
+        <h2 className="font-display text-xl font-semibold">{m.login.sent}</h2>
+        <p className="text-sm text-ink-soft">{m.login.sentBody(sentTo)}</p>
+        <p className="text-xs text-ink-soft">{m.login.spam}</p>
         {devLink && (
-          <p className="rounded-2xl bg-warn-bg p-3 text-sm text-warn-ink">
+          <p className="rounded-2xl bg-warn-soft border border-dashed border-warn p-3 text-sm text-ink">
             {m.login.devLink}
             <br />
             <Link href={devLink} className="break-all underline">{devLink}</Link>
           </p>
         )}
-        <button className="text-sm text-muted underline" onClick={() => { setSentTo(null); setDevLink(null); }}>{m.login.resend}</button>
+        <button className="text-sm text-ink-soft underline" onClick={() => { setSentTo(null); setDevLink(null); }}>{m.login.resend}</button>
       </div>
     );
 
   return (
     <div className="space-y-4">
-      {error && <p role="alert" className="rounded-2xl bg-warn-bg p-3 text-sm text-warn-ink">{errors[error] ?? errors.signin_failed}</p>}
+      {error && <p role="alert" className="rounded-2xl bg-warn-soft border border-dashed border-warn p-3 text-sm text-ink">{errors[error] ?? errors.signin_failed}</p>}
       <form onSubmit={submit} className="space-y-3" noValidate>
         <label className="block text-sm font-semibold" htmlFor="email">{m.login.email}</label>
         <input
           id="email" type="email" inputMode="email" autoComplete="email" placeholder="you@example.com" value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-button border-[1.5px] border-line bg-bg px-4 py-3 text-base outline-none focus:border-ink"
+          className="w-full rounded-button border-[1.5px] border-border bg-bg px-4 py-3 text-base outline-none focus:border-accent"
         />
         <button disabled={busy} className="w-full rounded-button bg-ink py-3.5 font-semibold text-bg active:scale-[0.99] disabled:opacity-60">
           {busy ? "…" : m.login.send}
@@ -78,8 +78,8 @@ export default function LoginForm({ next, initialError }: { next: string; initia
       </form>
       {google && (
         <>
-          <p className="text-center text-xs text-muted">{m.login.or}</p>
-          <button type="button" onClick={withGoogle} className="flex w-full items-center justify-center gap-3 rounded-button border border-ink/15 bg-card py-3.5 font-semibold active:scale-[0.99]">
+          <p className="text-center text-xs text-ink-soft">{m.login.or}</p>
+          <button type="button" onClick={withGoogle} className="flex w-full items-center justify-center gap-3 rounded-button border border-border bg-surface py-3.5 font-semibold active:scale-[0.99]">
             <svg viewBox="0 0 48 48" className="size-5" aria-hidden>
               <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.6 17.7 9.5 24 9.5z" />
               <path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.3-4 6.9-9.9 6.9-17z" />

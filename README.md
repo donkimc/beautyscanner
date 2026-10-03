@@ -82,10 +82,12 @@ In production, email login returns an error until `RESEND_API_KEY` and `EMAIL_FR
 
 ## Design
 
-**Sage & Clay**, chosen from 2026 beauty-web trends (muted luxury: warm neutrals, sage, clay/dusty rose; serif headlines with a clean sans body):
+The visual system is taken from the two original design pages (the survey-interaction page and the evening-routine page), so this site looks like them:
 
-- Colors and radii live in `design/tokens.json`; `npm run tokens` generates `app/tokens.css`, a Tailwind v4 `@theme` block (so `bg-bg`, `text-ink`, `text-brand`, `bg-sage-soft`, `text-grade-clinical`, `rounded-card`, … are utilities).
-- Fonts (all SIL Open Font License, free for commercial use): **Pretendard** (body, Korean + Latin), **Noto Serif KR** and **Fraunces** (headlines), self-hosted through npm packages.
+- **Colors** (OKLCH, in `design/tokens.json`): warm paper background `oklch(0.97 0.008 90)`, white surfaces, plum-tinted ink `oklch(0.22 0.03 320)`, **pink-magenta accent** `oklch(0.5 0.14 350)` with a soft pink `oklch(0.94 0.03 350)` for selected states, and an amber `warn` for notes. There is a matching **dark mode** (follows the phone/system setting). Evidence grades: green (clinical), pink-magenta (multiple studies), gray (brand's own test), amber (emerging).
+- **Fonts** (all SIL Open Font License, free for commercial use, self-hosted through npm): **Newsreader** for headlines, **Karla** for body text, **IBM Plex Mono** for small uppercase labels. These have no Korean glyphs, so Korean text falls back to **Pretendard** (body, labels) and **Noto Serif KR** (headlines).
+- **Shapes:** 1.5px bordered option cards that turn pink on hover/tap, a dark "next" button, a dashed amber note for warnings, large 36px rounded cards with a soft shadow and 1px ring.
+- `npm run tokens` generates `app/tokens.css` (light and dark CSS variables plus a Tailwind v4 `@theme inline` block), so utilities such as `bg-bg`, `text-ink-soft`, `border-border`, `bg-accent-soft`, `text-grade-clinical`, `rounded-card` follow the theme.
 - Animations (float, bob, scan, pop, rise, shimmer) are in `app/globals.css` and respect `prefers-reduced-motion`.
 
 ## Scripts

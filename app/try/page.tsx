@@ -110,41 +110,41 @@ export default function Try() {
 
   const warningText = (w: Warning) => (w.code === "missing" ? m.result.warnings.missing(w.n) : m.result.warnings[w.code]);
   const q = m.survey.questions[idx];
-  const card = "rounded-card border border-line bg-card p-6";
+  const card = "rounded-card bg-surface p-6 shadow-phone";
 
   return (
     <main className="mx-auto max-w-md px-4 pb-16">
       <header className="flex items-center justify-between gap-2 py-4">
-        <Link href="/" className="font-display text-xl font-bold tracking-tight">{m.brand}</Link>
+        <Link href="/" className="font-display text-xl font-semibold tracking-tight">{m.brand}</Link>
         <div className="flex items-center gap-2"><LanguageSwitch /><AuthButton /></div>
       </header>
 
-      <p className="mb-4 text-center"><span className="rounded-full bg-warn-bg px-3 py-1 text-xs text-warn-ink">{m.common.demo}</span></p>
+      <p className="mb-4 text-center"><span className="rounded-full bg-warn-soft border border-dashed border-warn px-3 py-1 text-xs text-ink">{m.common.demo}</span></p>
 
       {phase === "survey" && (
         <section className={card}>
-          <div className="mb-5 h-1 overflow-hidden rounded bg-line/70">
-            <span className="block h-full bg-sage transition-all duration-300" style={{ width: `${((idx + 1) / (m.survey.questions.length + 1)) * 100}%` }} />
+          <div className="mb-5 h-1 overflow-hidden rounded bg-border/70">
+            <span className="block h-full bg-accent transition-all duration-300" style={{ width: `${((idx + 1) / (m.survey.questions.length + 1)) * 100}%` }} />
           </div>
-          <p className="text-xs tracking-widest text-muted">{m.survey.step(idx + 1, m.survey.questions.length)}</p>
-          <h1 className="mb-4 mt-1 font-display text-xl font-bold">{q.title}</h1>
+          <p className="eyebrow-faint">{m.survey.step(idx + 1, m.survey.questions.length)}</p>
+          <h1 className="mb-4 mt-1 font-display text-xl font-semibold">{q.title}</h1>
           <div className="grid gap-2.5">
             {q.options.map((o) => (
               <button key={o.label} onClick={() => pick(q.key, o.value)}
-                className="rounded-2xl border-[1.5px] border-line bg-card p-4 text-left text-base transition hover:border-ink active:scale-[0.99]">{o.label}</button>
+                className="rounded-2xl border-[1.5px] border-border bg-surface p-4 text-left text-base transition hover:border-accent active:bg-accent-soft active:scale-[0.99]">{o.label}</button>
             ))}
           </div>
-          {notice && <p role="alert" className="mt-3 rounded-2xl bg-warn-bg p-3 text-sm text-warn-ink">{notice}</p>}
-          {idx > 0 && <button className="mt-3 text-sm text-muted" onClick={() => setIdx(idx - 1)}>{m.common.back}</button>}
+          {notice && <p role="alert" className="mt-3 rounded-2xl bg-warn-soft border border-dashed border-warn p-3 text-sm text-ink">{notice}</p>}
+          {idx > 0 && <button className="mt-3 text-sm text-ink-soft" onClick={() => setIdx(idx - 1)}>{m.common.back}</button>}
         </section>
       )}
 
       {phase === "note" && (
         <section className={card}>
-          <p className="text-xs tracking-widest text-muted">{m.survey.noteLabel}</p>
-          <h1 className="mb-4 mt-1 font-display text-xl font-bold">{m.survey.noteTitle}</h1>
+          <p className="eyebrow-faint">{m.survey.noteLabel}</p>
+          <h1 className="mb-4 mt-1 font-display text-xl font-semibold">{m.survey.noteTitle}</h1>
           <textarea
-            className="mb-3 min-h-24 w-full rounded-2xl border-[1.5px] border-line bg-bg p-3 text-base outline-none focus:border-ink"
+            className="mb-3 min-h-24 w-full rounded-2xl border-[1.5px] border-border bg-bg p-3 text-base outline-none focus:border-accent"
             placeholder={m.survey.notePlaceholder} value={ans.note} maxLength={200} onChange={(e) => setAns((a) => ({ ...a, note: e.target.value }))}
           />
           <button onClick={finish} className="w-full rounded-button bg-ink py-3.5 font-semibold text-bg active:scale-[0.99]">{m.survey.seeRoutine}</button>
@@ -153,62 +153,61 @@ export default function Try() {
 
       {phase === "loading" && (
         <section className={`${card} text-center`}>
-          <div className="mx-auto mb-3 size-8 animate-spin rounded-full border-2 border-line border-t-brand" />
-          <p className="text-sm text-muted">{m.survey.building}</p>
+          <div className="mx-auto mb-3 size-8 animate-spin rounded-full border-2 border-border border-t-accent" />
+          <p className="text-sm text-ink-soft">{m.survey.building}</p>
         </section>
       )}
 
       {phase === "result" && routine && (
         <section className={card}>
-          <p className="text-xs tracking-widest text-muted">{m.result.label(routine.items.length)}</p>
-          <h1 className="mt-1 font-display text-2xl font-bold">{m.result.title}</h1>
-          <p className="mt-1 text-sm text-muted">{m.result.budgetLine(Number(ans.budget).toLocaleString(), routine.total.toLocaleString(), aiUsed)}</p>
+          <p className="eyebrow">{m.result.label(routine.items.length)}</p>
+          <h1 className="mt-1 font-display text-2xl font-semibold">{m.result.title}</h1>
+          <p className="mt-1 text-sm text-ink-soft">{m.result.budgetLine(Number(ans.budget).toLocaleString(), routine.total.toLocaleString(), aiUsed)}</p>
 
-          {routine.warnings.map((w) => <p key={w.code} className="mt-3 rounded-2xl bg-warn-bg p-3 text-sm text-warn-ink">⚠ {warningText(w)}</p>)}
+          {routine.warnings.map((w) => <p key={w.code} className="mt-3 rounded-2xl bg-warn-soft border border-dashed border-warn p-3 text-sm text-ink">⚠ {warningText(w)}</p>)}
 
           {routine.items.map((p, i) => {
-            const g = GRADE_LABEL[p.grade];
             const isOpen = open === p.id;
             const text = localized(p, locale);
             return (
-              <article key={p.id} className="mt-3.5 animate-rise rounded-product border-[1.5px] border-line p-4" style={{ animationDelay: `${i * 80}ms` }}>
+              <article key={p.id} className="mt-3.5 animate-rise rounded-product border-[1.5px] border-border p-4" style={{ animationDelay: `${i * 80}ms` }}>
                 <button className="flex w-full items-start justify-between gap-2 text-left" onClick={() => setOpen(isOpen ? null : p.id)} aria-expanded={isOpen}>
                   <span>
-                    <span className="text-xs text-muted">{i + 1}. {m.result.steps[p.step]}</span>
+                    <span className="text-xs text-ink-soft">{i + 1}. {m.result.steps[p.step]}</span>
                     <span className="mt-0.5 block text-base font-bold">{text.name}</span>
                     <span className="mt-1 block text-sm font-semibold">
                       {p.price.toLocaleString()}{locale === "ko" ? m.common.won : " KRW"}
                       <span className={`ml-1.5 whitespace-nowrap rounded-full border px-2 py-0.5 text-xs font-medium ${GRADE_TEXT[p.grade]}`}>● {m.result.grades[p.grade]}</span>
                     </span>
                   </span>
-                  <span className="text-muted" aria-hidden>{isOpen ? "▲" : "▼"}</span>
+                  <span className="text-ink-soft" aria-hidden>{isOpen ? "▲" : "▼"}</span>
                 </button>
-                <p className="my-2.5 text-sm text-muted">{explain[p.id]}</p>
+                <p className="my-2.5 text-sm text-ink-soft">{explain[p.id]}</p>
                 {isOpen && <p className="rounded-xl bg-bg px-3 py-2.5 text-[13px]"><strong>{m.result.evidence}</strong> {text.evidence}</p>}
                 <div className="mt-2.5 flex items-center gap-2.5">
                   <a href={p.url} onClick={(e) => e.preventDefault()} className="rounded-xl bg-ink px-4 py-2.5 text-sm text-bg">{m.result.buy}</a>
-                  <span className="rounded-lg border border-line px-1.5 py-0.5 text-[11px] text-muted">{m.result.ad}</span>
+                  <span className="rounded-lg border border-border px-1.5 py-0.5 text-[11px] text-ink-soft">{m.result.ad}</span>
                 </div>
               </article>
             );
           })}
 
-          <div className="mt-5 flex flex-wrap gap-x-3.5 gap-y-1.5 text-xs text-muted">
+          <div className="mt-5 flex flex-wrap gap-x-3.5 gap-y-1.5 text-xs text-ink-soft">
             {(Object.keys(GRADE_LABEL) as Grade[]).map((k) => <span key={k} className="flex items-center gap-1.5"><i className={`size-2 rounded-full ${GRADE_DOT[k]}`} />{m.result.grades[k]}</span>)}
           </div>
-          <p className="mt-3.5 text-xs text-muted">{m.result.fine}</p>
+          <p className="mt-3.5 text-xs text-ink-soft">{m.result.fine}</p>
 
           <div className="mt-4">
             <button onClick={save} disabled={saved === "yes"} className="w-full rounded-button bg-ink py-3.5 font-semibold text-bg active:scale-[0.99] disabled:opacity-60">
               {saved === "yes" ? m.result.saved : email ? m.result.save : m.result.saveLogin}
             </button>
-            {saved === "yes" && <p className="mt-2 text-xs text-muted">{m.result.savedHint} <Link href="/account" className="underline">{m.nav.account}</Link></p>}
+            {saved === "yes" && <p className="mt-2 text-xs text-ink-soft">{m.result.savedHint} <Link href="/account" className="underline">{m.nav.account}</Link></p>}
             {saved === "error" && <p role="alert" className="mt-2 text-xs text-danger">{m.result.saveFailed}</p>}
-            <button className="mt-3 text-sm text-muted" onClick={restart}>{m.common.restart}</button>
+            <button className="mt-3 text-sm text-ink-soft" onClick={restart}>{m.common.restart}</button>
           </div>
         </section>
       )}
-      <p className="mt-8 text-center text-xs text-muted">
+      <p className="mt-8 text-center text-xs text-ink-soft">
         <Link href="/terms" className="underline">{m.nav.terms}</Link> · <Link href="/privacy" className="underline">{m.nav.privacy}</Link> · <Link href="/security" className="underline">{m.nav.security}</Link>
       </p>
     </main>

@@ -1,13 +1,20 @@
 @import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
-@import "@fontsource/noto-serif-kr/700.css";
-@import "@fontsource-variable/fraunces/index.css";
+@import "@fontsource-variable/karla/index.css";
+@import "@fontsource-variable/newsreader/index.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+@import "@fontsource/noto-serif-kr/600.css";
 @import "tailwindcss";
 @import "./tokens.css";
 
 @theme {
-  /* Pretendard (body) and Noto Serif KR + Fraunces (headlines): all SIL Open Font License, free for commercial use. */
-  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  --font-display: "Fraunces Variable", "Noto Serif KR", "Apple Myungjo", serif;
+  /* Same type system as the original pages: Newsreader (headlines), Karla (body), IBM Plex Mono (labels), all SIL OFL.
+     Karla/Newsreader/Plex Mono have no Hangul, so Korean falls back to Pretendard (sans/mono) and Noto Serif KR (headlines). */
+  --font-sans: "Karla Variable", Karla, "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-display: "Newsreader Variable", Newsreader, "Noto Serif KR", "Apple Myungjo", serif;
+  --font-mono: "IBM Plex Mono", "Pretendard Variable", Pretendard, ui-monospace, monospace;
+  --shadow-phone: 0 34px 64px -26px var(--shadow), 0 0 0 1px var(--border);
+  --shadow-lift: 0 18px 34px -18px var(--shadow);
 
   --animate-float: float 9s ease-in-out infinite;
   --animate-bob: bob 5s ease-in-out infinite;
@@ -51,6 +58,16 @@
 @layer base {
   html { -webkit-text-size-adjust: 100%; }
   body { @apply bg-bg text-ink font-sans antialiased; word-break: keep-all; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 600; text-wrap: balance; }
+  a { color: inherit; }
+  ::selection { background: var(--accent-soft); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+}
+
+@layer components {
+  /* Small uppercase monospace labels, as on the original pages. */
+  .eyebrow { @apply font-mono text-[11.5px] font-semibold uppercase tracking-[0.1em] text-accent; }
+  .eyebrow-faint { @apply font-mono text-[11.5px] font-semibold uppercase tracking-[0.08em] text-ink-faint; }
 }
 
 @media (prefers-reduced-motion: reduce) {

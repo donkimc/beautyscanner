@@ -12,7 +12,7 @@ export default function RotatingWord() {
     return () => clearInterval(t);
   }, [words.length]);
   return (
-    <span key={`${i}-${words[0]}`} className="inline-block animate-pop font-bold text-brand">
+    <span key={`${i}-${words[0]}`} className="inline-block animate-pop font-bold text-accent">
       {words[i % words.length]}
     </span>
   );

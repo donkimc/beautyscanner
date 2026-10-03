@@ -85,31 +85,31 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     <Ctx.Provider value={api}>
       {children}
       {pending && (
-        <div className="fixed inset-0 z-50 grid items-end bg-ink/50 p-0 sm:place-items-center sm:p-4" role="dialog" aria-modal="true" aria-labelledby="consent-title">
-          <div className="max-h-[92dvh] w-full overflow-y-auto rounded-t-card bg-card p-6 sm:max-w-md sm:rounded-card">
-            <h2 id="consent-title" className="font-display text-xl font-bold">{m.consent.title}</h2>
-            <p className="mt-1 text-sm text-muted">{m.consent.intro}</p>
+        <div className="fixed inset-0 z-50 grid items-end bg-black/50 p-0 sm:place-items-center sm:p-4" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+          <div className="max-h-[92dvh] w-full overflow-y-auto rounded-t-card bg-surface p-6 sm:max-w-md sm:rounded-card">
+            <h2 id="consent-title" className="font-display text-xl font-semibold">{m.consent.title}</h2>
+            <p className="mt-1 text-sm text-ink-soft">{m.consent.intro}</p>
             <div className="mt-4 space-y-3">
               {pending.map((p) => (
-                <label key={p} className="flex gap-3 rounded-2xl border border-line p-3">
-                  <input type="checkbox" className="mt-1 size-4 shrink-0 accent-sage" checked={Boolean(checked[p])} onChange={(e) => setChecked((c) => ({ ...c, [p]: e.target.checked }))} />
+                <label key={p} className="flex gap-3 rounded-2xl border border-border p-3">
+                  <input type="checkbox" className="mt-1 size-4 shrink-0 accent-accent" checked={Boolean(checked[p])} onChange={(e) => setChecked((c) => ({ ...c, [p]: e.target.checked }))} />
                   <span className="text-sm">
                     <span className="font-semibold">{m.consent.purposes[p].label}</span>
-                    <span className={`ml-2 rounded-full px-2 py-0.5 text-[11px] ${REQUIRED[p] ? "bg-brand-soft text-brand" : "bg-sage-soft text-sage"}`}>{REQUIRED[p] ? m.consent.required : m.consent.optional}</span>
-                    <span className="mt-1 block text-muted">{m.consent.purposes[p].body}</span>
+                    <span className={`ml-2 rounded-full px-2 py-0.5 text-[11px] ${REQUIRED[p] ? "bg-accent-soft text-accent" : "bg-surface-soft text-ink-soft"}`}>{REQUIRED[p] ? m.consent.required : m.consent.optional}</span>
+                    <span className="mt-1 block text-ink-soft">{m.consent.purposes[p].body}</span>
                     {p === "terms" && (
                       <span className="mt-1 block text-xs">
                         <Link href="/terms" target="_blank" className="underline">{m.nav.terms}</Link> · <Link href="/privacy" target="_blank" className="underline">{m.nav.privacy}</Link>
                       </span>
                     )}
-                    <span className="mt-1 block text-[11px] text-muted/80">{m.consent.version} {CONSENT_VERSIONS[p]}</span>
+                    <span className="mt-1 block text-[11px] text-ink-faint">{m.consent.version} {CONSENT_VERSIONS[p]}</span>
                   </span>
                 </label>
               ))}
             </div>
             <div className="mt-5 grid gap-2">
               <button disabled={!allChecked} onClick={() => finish(true)} className="rounded-button bg-ink py-3.5 font-semibold text-bg transition enabled:active:scale-[0.99] disabled:opacity-40">{m.consent.agree}</button>
-              <button onClick={() => finish(false)} className="py-2 text-sm text-muted">{m.consent.decline}</button>
+              <button onClick={() => finish(false)} className="py-2 text-sm text-ink-soft">{m.consent.decline}</button>
             </div>
           </div>
         </div>

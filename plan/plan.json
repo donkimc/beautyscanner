@@ -11,7 +11,7 @@
     "database": "Railway Postgres (users, login_tokens, consents, routines); in-memory PGlite for local dev and tests",
     "languages": "Korean and English, chosen from the browser/phone Accept-Language, with a manual switch (cookie)",
     "consent": "Popup whenever needed (terms at login, sensitive survey data at first answer, overseas AI transfer, marketing at newsletter), versioned and logged",
-    "design": "Sage & Clay: warm paper background, deep ink, clay accent, sage surfaces; Pretendard body with Noto Serif KR + Fraunces headlines (all SIL OFL, free for commercial use)",
+    "design": "Matches the original design pages: warm paper bg, plum ink, pink-magenta accent (OKLCH tokens, light + dark); Newsreader headlines, Karla body, IBM Plex Mono labels, Pretendard / Noto Serif KR for Korean (all SIL OFL)",
     "legal": "Terms, privacy policy and security pages in both languages (drafts) plus SECURITY.md"
   },
   "milestones": [
@@ -77,7 +77,7 @@
     },
     {
       "id": "m13",
-      "name": "Redesign: Sage & Clay palette and Pretendard/serif fonts",
+      "name": "Restyle to the original pages' palette and fonts (paper bg, plum ink, pink accent, dark mode)",
       "status": "done"
     },
     {

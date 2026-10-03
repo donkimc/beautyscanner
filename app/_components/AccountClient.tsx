@@ -34,10 +34,10 @@ export function AccountData() {
     <div className="space-y-5">
       <ul className="space-y-2">
         {PURPOSES.map((p) => (
-          <li key={p} className="flex items-start justify-between gap-3 rounded-2xl border border-line p-3 text-sm">
+          <li key={p} className="flex items-start justify-between gap-3 rounded-2xl border border-border p-3 text-sm">
             <span>
               <span className="font-semibold">{m.consent.purposes[p].label}</span>
-              <span className="mt-0.5 block text-xs text-muted">{has(p) ? "✓" : store[p] ? "✕" : "–"} {store[p]?.at?.slice(0, 10) ?? ""}</span>
+              <span className="mt-0.5 block text-xs text-ink-soft">{has(p) ? "✓" : store[p] ? "✕" : "–"} {store[p]?.at?.slice(0, 10) ?? ""}</span>
             </span>
             {has(p) ? (
               <button className="shrink-0 text-xs underline" onClick={() => withdraw(p)}>{m.consent.withdraw}</button>
@@ -48,9 +48,9 @@ export function AccountData() {
         ))}
       </ul>
       <div className="grid gap-2">
-        <a href="/api/account/export" className="rounded-button border border-ink/15 bg-card py-3 text-center font-semibold">{m.account.export}</a>
+        <a href="/api/account/export" className="rounded-button border border-border bg-surface py-3 text-center font-semibold">{m.account.export}</a>
         <button onClick={removeAccount} className="rounded-button border border-danger/40 py-3 font-semibold text-danger">{m.account.deleteAccount}</button>
-        <button onClick={async () => { await fetch("/api/auth/logout", { method: "POST" }); router.push("/"); router.refresh(); }} className="py-2 text-sm text-muted">{m.common.logout}</button>
+        <button onClick={async () => { await fetch("/api/auth/logout", { method: "POST" }); router.push("/"); router.refresh(); }} className="py-2 text-sm text-ink-soft">{m.common.logout}</button>
       </div>
     </div>
   );

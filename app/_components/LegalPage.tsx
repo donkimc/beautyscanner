@@ -9,14 +9,14 @@ export default async function LegalPage({ id }: { id: DocId }) {
   return (
     <main className="mx-auto max-w-2xl px-4 pb-12">
       <SiteHeader />
-      <article className="mt-4 rounded-card border border-line bg-card p-6">
-        <h1 className="font-display text-3xl font-bold">{doc.title}</h1>
-        <p className="mt-1 text-xs text-muted">{m.legal.updated}: {LEGAL_UPDATED}</p>
-        <p className="mt-3 rounded-2xl bg-warn-bg p-3 text-xs text-warn-ink">{m.legal.draft}</p>
+      <article className="mt-4 rounded-card bg-surface p-6 shadow-phone">
+        <h1 className="font-display text-3xl font-semibold">{doc.title}</h1>
+        <p className="mt-1 text-xs text-ink-soft">{m.legal.updated}: {LEGAL_UPDATED}</p>
+        <p className="mt-3 rounded-2xl bg-warn-soft border border-dashed border-warn p-3 text-xs text-ink">{m.legal.draft}</p>
         {doc.intro && <p className="mt-4 text-[15px]">{doc.intro}</p>}
         {doc.sections.map((s) => (
           <section key={s.h} className="mt-6">
-            <h2 className="font-display text-lg font-bold">{s.h}</h2>
+            <h2 className="font-display text-lg font-semibold">{s.h}</h2>
             {s.p?.map((t) => <p key={t} className="mt-2 text-[15px] leading-relaxed text-ink/90">{t}</p>)}
             {s.ul && (
               <ul className="mt-2 list-disc space-y-1.5 pl-5 text-[15px] leading-relaxed text-ink/90">

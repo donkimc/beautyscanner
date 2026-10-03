@@ -19,8 +19,8 @@ export default function VerifyButton({ token, next }: { token: string; next: str
   if (state === "invalid")
     return (
       <div className="space-y-3">
-        <p role="alert" className="rounded-2xl bg-warn-bg p-3 text-sm text-warn-ink">{m.verify.invalid}</p>
-        <Link href="/login" className="block rounded-button border border-ink/15 bg-card py-3 text-center font-semibold">{m.verify.back}</Link>
+        <p role="alert" className="rounded-2xl bg-warn-soft border border-dashed border-warn p-3 text-sm text-ink">{m.verify.invalid}</p>
+        <Link href="/login" className="block rounded-button border border-border bg-surface py-3 text-center font-semibold">{m.verify.back}</Link>
       </div>
     );
   return (

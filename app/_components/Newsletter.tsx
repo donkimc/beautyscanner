@@ -21,25 +21,25 @@ export default function Newsletter() {
   }
 
   return (
-    <section id="newsletter" className="rounded-card border border-line bg-card p-6">
-      <p className="text-xs tracking-widest text-muted">{m.newsletter.label}</p>
-      <h2 className="mt-1 font-display text-xl font-bold">{m.newsletter.title}</h2>
-      <p className="mt-1 text-sm text-muted">{m.newsletter.body}</p>
+    <section id="newsletter" className="rounded-card bg-surface p-6 shadow-phone">
+      <p className="eyebrow">{m.newsletter.label}</p>
+      <h2 className="mt-1 font-display text-xl font-semibold">{m.newsletter.title}</h2>
+      <p className="mt-1 text-sm text-ink-soft">{m.newsletter.body}</p>
 
-      <div className="mt-4 rounded-2xl bg-sage-soft p-4">
-        <p className="text-[11px] font-semibold text-sage">{m.newsletter.sampleLabel}</p>
+      <div className="mt-4 rounded-2xl bg-accent-soft p-4">
+        <p className="text-[11px] font-semibold text-accent">{m.newsletter.sampleLabel}</p>
         <p className="mt-1 text-sm font-semibold">{m.newsletter.sampleTitle}</p>
-        <p className="mt-1 text-xs text-muted">{m.newsletter.sampleBody}</p>
+        <p className="mt-1 text-xs text-ink-soft">{m.newsletter.sampleBody}</p>
       </div>
 
       {done ? (
-        <p role="status" className="mt-4 rounded-2xl bg-warn-bg p-4 text-sm text-warn-ink">{m.newsletter.done}</p>
+        <p role="status" className="mt-4 rounded-2xl bg-warn-soft border border-dashed border-warn p-4 text-sm text-ink">{m.newsletter.done}</p>
       ) : (
         <form onSubmit={submit} className="mt-4 space-y-3" noValidate>
           <input
             type="email" inputMode="email" autoComplete="email" placeholder={m.newsletter.placeholder} value={email}
             onChange={(e) => setEmail(e.target.value)} aria-label="email"
-            className="w-full rounded-button border-[1.5px] border-line bg-bg px-4 py-3 text-base outline-none focus:border-ink"
+            className="w-full rounded-button border-[1.5px] border-border bg-bg px-4 py-3 text-base outline-none focus:border-accent"
           />
           {error && <p role="alert" className="text-sm text-danger">{error}</p>}
           <button className="w-full rounded-button bg-ink py-3.5 font-semibold text-bg active:scale-[0.99]">{m.newsletter.submit}</button>
