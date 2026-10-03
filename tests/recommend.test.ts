@@ -51,7 +51,8 @@ test("multiple concerns: each ticked concern pulls in products that cover it", (
 
 test("top priority steers the pick: tone brings in the pigmentation serum", () => {
   assert.ok(picked({ ...base, concerns: ["pigmentation"], priority: "tone", skinType: "oily" }).includes("s2"));
-  assert.ok(picked({ ...base, concerns: ["dryness"], priority: "hydration" }).includes("s1"));
+  // For hydration the real Torriden hyaluronic serum (r3) is preferred over the sample one (s1).
+  assert.ok(picked({ ...base, concerns: ["dryness"], priority: "hydration" }).includes("r3"));
 });
 
 test("texture: fragrance-free and vegan are honored whenever options exist", () => {

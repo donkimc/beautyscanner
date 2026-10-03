@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { priceText, totalText } from "../../lib/price";
 import { PRODUCTS, hasBuyLink, localized } from "../../lib/products";
 import type { Answers } from "../../lib/recommend";
 import { notifyCartChanged } from "./cartClient";
 import { useI18n } from "./I18nProvider";
 import ProductImage from "./ProductImage";
+import RetailerLinks from "./RetailerLinks";
 
 const input = "w-full rounded-button border-[1.5px] border-border bg-bg px-4 py-3 text-base outline-none focus:border-accent";
 const primary = "rounded-button bg-ink px-5 py-3 text-sm font-semibold text-bg transition active:scale-[0.99] disabled:opacity-60";
@@ -165,8 +167,6 @@ export function CartList({ initial }: { initial: Item[] }) {
   const { m, locale } = useI18n();
   const [items, setItems] = useState(initial);
   const rows = items.flatMap((i) => { const p = PRODUCTS.find((x) => x.id === i.productId); return p ? [{ ...i, p }] : []; });
-  const total = rows.reduce((s, r) => s + r.p.price * r.qty, 0);
-  const won = (n: number) => `${n.toLocaleString()}${locale === "ko" ? m.common.won : " KRW"}`;
 
   async function change(productId: string, qty: number) {
     const q = Math.min(9, Math.max(1, qty));
@@ -206,7 +206,7 @@ export function CartList({ initial }: { initial: Item[] }) {
                 <div className="min-w-0 flex-1">
                   <p className="eyebrow-faint !text-[10.5px]">{m.result.steps[p.step]}{routine ? ` · ${m.cart.from[routine]}` : ""}</p>
                   <Link href={`/products/${p.id}`} className="mt-0.5 block text-sm font-bold leading-snug hover:text-accent">{text.name}</Link>
-                  <p className="mt-1 text-sm">{won(p.price)} <span className="text-ink-faint">× {qty}</span> <span className="font-semibold">= {won(p.price * qty)}</span></p>
+                  <p className="mt-1 text-sm">{priceText(p, locale)} <span className="text-ink-faint">× {qty}</span> <span className="font-semibold">= {priceText(p, locale, qty)}</span></p>
                 </div>
               </div>
               <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
@@ -219,6 +219,8 @@ export function CartList({ initial }: { initial: Item[] }) {
                   <Link href={`/products/${p.id}`} className="underline">{m.cart.viewProduct}</Link>
                   {hasBuyLink(p) ? (
                     <a href={p.url} target="_blank" rel="sponsored noopener noreferrer" className="font-semibold text-accent">{m.cart.buy}</a>
+                  ) : p.real ? (
+                    <RetailerLinks product={p} />
                   ) : (
                     <span className="text-xs text-ink-faint">{m.cart.noLink}</span>
                   )}
@@ -231,7 +233,7 @@ export function CartList({ initial }: { initial: Item[] }) {
       </ul>
       <p className="mt-4 flex items-baseline justify-between border-t border-border pt-3 text-sm">
         <span className="text-ink-soft">{m.cart.total}</span>
-        <span className="text-lg font-bold">{won(total)}</span>
+        <span className="text-lg font-bold">{totalText(rows.map((r) => ({ product: r.p, qty: r.qty })), locale)}</span>
       </p>
       <p className="mt-2 text-xs text-ink-soft">{m.cart.note}</p>
       <button className="mt-3 text-sm text-ink-soft underline" onClick={clear}>{m.cart.clear}</button>

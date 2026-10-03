@@ -23,7 +23,7 @@ test("the palette matches the original design pages (paper background, plum ink,
 
 test("evidence grade colors are distinct in both themes", () => {
   for (const theme of [tokens.light, tokens.dark]) {
-    const g = [theme["grade-clinical"], theme["grade-multiple"], theme["grade-brand"], theme["grade-emerging"]];
+    const g = [theme["grade-clinical"], theme["grade-multiple"], theme["grade-brand"], theme["grade-emerging"], theme["grade-unrated"]];
     assert.equal(new Set(g).size, g.length);
   }
 });

@@ -2,7 +2,7 @@
 
 An MVP demo of an evidence-based skincare recommender, in **Korean and English**. A mobile-first landing page leads to a short survey that produces a budget-aware routine. Each product shows an evidence grade, a reason, and an AD-labelled buy link. Users can sign up with an emailed confirmation link (or Google) to save routines.
 
-> **Demo status:** products and evidence notes in `lib/products.ts` are fictional sample data (names start with "[Sample]" / "[샘플]"), **buy links are placeholders (no retailer or Coupang integration exists yet) and product pictures are illustrations until real photos are added**, the newsletter is a mock, and the legal pages are draft templates that need a lawyer's review.
+> **Demo status:** products and evidence notes in `lib/products.ts` are fictional sample data (names start with "[Sample]" / "[샘플]"), **buy links are placeholders (no retailer or Coupang integration exists yet) and real product photos exist for three of the five real products, the rest use illustrations**, the newsletter is a mock, and the legal pages are draft templates that need a lawyer's review.
 
 Live demo (Railway): https://web-production-318ac.up.railway.app
 
@@ -69,10 +69,15 @@ The routine's products can be added to the shopping cart in one tap (recorded as
 - **Cart:** `cart_items` table; add from a recommendation card, the routine view or a product page; change quantity (1–9), remove, empty. The header shows a cart icon with the item count. A guest who taps "add to cart" is sent to log in and the products are added right after (the choice is remembered in the browser until then). The cart is a shopping list, not a checkout: nobody pays here; each item links to its **product page** and to the retailer's page (**the retailer links don't exist yet**, so the button says "buy link coming soon").
 - **Dashboard (`/account`):** the cart; **My skin profile** (the last saved survey answers, editable in place, with "get recommendations from this"); **My info** (editable name; the header updates immediately); saved routines (linked to product pages); consent management; data download and deletion. Saving a routine also saves the skin profile.
 
-### Product pictures
-Each recommendation, routine step, cart row and product page shows a picture through `ProductImage` (`app/_components/ProductImage.tsx`):
-- If a product has a photo (`image` in `lib/products.ts`: a file under `public/products/`, e.g. `"/products/s1.webp"`, or an https URL), it is shown (lazy-loaded, with the product name as alt text).
-- Otherwise a clean illustration of that kind of product (cleanser, toner, serum, moisturizer, sunscreen) is drawn. **These are placeholders**: the sample products are fictional, so no real photos exist for them. Real photos must be licensed for commercial use (own photography, brand-provided images, or a retailer API such as Coupang Partners, which returns product image URLs). Avoid photos with visible third-party brand names unless the brand is the product being sold.
+### Real products and product pictures
+The catalog has **5 real products** taken from the original evening-routine page (ids `r1`–`r5`: Beplain mung bean cleansing foam, S.Nature Aqua Oasis toner, Torriden DIVE-IN hyaluronic serum, Anua PDRN serum, TonyMoly ceramide mochi toner) plus **sample products** (`[샘플]`, fictional) that fill the gaps (moisturizer, sunscreen, more choices). Real products are preferred by the recommender when they fit.
+
+Pictures go through `ProductImage` (`app/_components/ProductImage.tsx`): the product's own photo (`image` in `lib/products.ts`, a file under `public/products/`) when it has one, otherwise a clean illustration of that kind of product.
+- Photos for **Beplain, S.Nature and TonyMoly** come from the original page's product photos (clean product shots).
+- **Torriden and Anua use the illustration for now**: the original page's images are retailer promo shots (Torriden's is an ad banner with a "No. 1 serum" claim; Anua's shows a celebrity model), which don't belong on an evidence-first site. Add a clean packshot as `public/products/<name>.jpg` and set `image` to switch.
+- Product photos belong to their brands/sellers: confirm you may use them commercially, or take images from the retailer's official API (Coupang Partners, Naver Shopping) once connected.
+
+Real products also show a **price note** (a "~" / "약" before estimated prices; only Torriden's price is quoted from the original page; the rest are estimates to verify), **retailer search links** (Coupang, Naver Shopping: plain search links, not affiliate links, so no AD label), and an evidence grade: S.Nature and Torriden carry the original page's "multiple studies" (ingredient-level, citations still to be added); the others are **"evidence under review"** (`unrated`) until reviewed.
 
 ### Routine rules and explanations
 Rules in `lib/recommend.ts` choose one product per step, swap in cheaper options to fit the price range, and warn about gaps (no cream, no sunscreen) or an unmet budget. The explainer agent (`agent/explainer.ts`) rewrites each product's curated evidence note into a short reason in the user's language. It never chooses products or grades, and its output must pass guardrails or a template is used.

@@ -47,10 +47,11 @@ export const isSensitive = (a: Answers) => a.skinType === "sensitive" || a.conce
 export const stepsFor = (a: Answers): Step[] =>
   a.budget <= 30000 ? ["cleanser", "moisturizer", "sunscreen"] : ["cleanser", "toner", "serum", "moisturizer", "sunscreen"];
 
-const GRADE_RANK = { clinical: 3, multiple: 2, emerging: 1, brand: 0 } as const;
+const GRADE_RANK = { clinical: 3, multiple: 2, emerging: 1, brand: 0, unrated: 0 } as const;
 
 function score(p: Product, a: Answers): number {
   let s = GRADE_RANK[p.grade];
+  if (p.real) s += 2; // prefer real products over sample data when they fit
   s += 2 * a.concerns.filter((c) => p.concerns.includes(c)).length;
   if (PRIORITY_TARGETS[a.priority].some((c) => p.concerns.includes(c))) s += 4;
   if (a.skinType !== "unsure" && p.skinTypes.includes(a.skinType)) s += 2;

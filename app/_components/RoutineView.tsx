@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { priceText, totalText } from "../../lib/price";
 import { localized, type Product } from "../../lib/products";
 import { DAY_TIMES, dailyRoutine, type DayTime } from "../../lib/routine";
 import AddToCart from "./AddToCart";
@@ -58,7 +59,7 @@ export default function RoutineView({
                 <p className="eyebrow-faint !text-[10.5px]">{m.result.steps[step]}</p>
                 <Link href={`/products/${product.id}`} className="mt-0.5 block text-sm font-bold leading-snug hover:text-accent">{text.name}</Link>
                 <p className="mt-1 text-xs leading-relaxed text-ink-soft">{m.routine.tips[step][time]}</p>
-                <p className="mt-1 text-xs font-semibold">{product.price.toLocaleString()}{locale === "ko" ? m.common.won : " KRW"}</p>
+                <p className="mt-1 text-xs font-semibold">{priceText(product, locale)}</p>
               </div>
             </li>
           );
@@ -78,7 +79,7 @@ export default function RoutineView({
       <div className="space-y-3 border-t border-border px-6 pb-6 pt-4">
         <p className="flex items-baseline justify-between text-sm">
           <span className="text-ink-soft">{m.routine.total}</span>
-          <span className="font-bold">{r.total.toLocaleString()}{locale === "ko" ? m.common.won : " KRW"}</span>
+          <span className="font-bold">{totalText(r.steps, locale)}</span>
         </p>
         {ids.length > 0 && (
           <AddToCart

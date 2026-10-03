@@ -1,7 +1,7 @@
 {
   "routines": [
     {
-      "name": "dry skin, hydration priority, 7-15만원: full 5 steps with the hydration serum",
+      "name": "dry skin, hydration priority, 7-15만원: full 5 steps with the real hydration serum",
       "answers": {
         "skinType": "dry",
         "concerns": [
@@ -23,7 +23,7 @@
         "withinBudget": true,
         "noWarnings": true,
         "includes": [
-          "s1"
+          "r3"
         ]
       }
     },

@@ -2,20 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getMessages } from "../../../i18n/server";
-import { PRODUCTS, hasBuyLink, localized, type Grade } from "../../../lib/products";
+import { priceText } from "../../../lib/price";
+import { PRODUCTS, hasBuyLink, localized } from "../../../lib/products";
 import AddToCart from "../../_components/AddToCart";
 import BackLink from "../../_components/BackLink";
 import ProductImage from "../../_components/ProductImage";
+import RetailerLinks from "../../_components/RetailerLinks";
+import { GRADE_TEXT } from "../../_components/grade";
 import SiteFooter from "../../_components/SiteFooter";
 import SiteHeader from "../../_components/SiteHeader";
-
-// Static class names so Tailwind can see them.
-const GRADE_TEXT: Record<Grade, string> = {
-  clinical: "text-grade-clinical border-grade-clinical",
-  multiple: "text-grade-multiple border-grade-multiple",
-  brand: "text-grade-brand border-grade-brand",
-  emerging: "text-grade-emerging border-grade-emerging",
-};
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -51,12 +46,12 @@ export default async function ProductPage({ params }: Props) {
             <p className="eyebrow">{m.result.steps[product.step]}</p>
             <h1 className="mt-1.5 font-display text-[1.65rem] font-semibold leading-tight">{text.name}</h1>
             <p className="mt-2 flex flex-wrap items-center gap-2.5">
-              <span className="text-lg font-bold">{product.price.toLocaleString()}{locale === "ko" ? m.common.won : " KRW"}</span>
+              <span className="text-lg font-bold">{priceText(product, locale)}</span>
               <span className={`whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-medium ${GRADE_TEXT[product.grade]}`}>● {m.result.grades[product.grade]}</span>
             </p>
           </div>
 
-          <p className="rounded-[14px] border border-dashed border-warn bg-warn-soft px-4 py-3 text-xs leading-relaxed text-ink">{m.product.sample}</p>
+          <p className="rounded-[14px] border border-dashed border-warn bg-warn-soft px-4 py-3 text-xs leading-relaxed text-ink">{product.real ? m.product.real : m.product.sample}</p>
 
           <section>
             <h2 className="eyebrow-faint">{m.product.details}</h2>
@@ -87,6 +82,12 @@ export default async function ProductPage({ params }: Props) {
               <div className="flex items-center gap-2.5">
                 <a href={product.url} target="_blank" rel="sponsored noopener noreferrer" className="flex-1 rounded-button border-[1.5px] border-ink py-3 text-center font-semibold">{m.product.buy}</a>
                 <span className="rounded-lg border border-border px-1.5 py-0.5 text-[11px] text-ink-soft">{m.product.ad}</span>
+              </div>
+            ) : product.real ? (
+              <div className="space-y-1.5 rounded-2xl bg-surface-soft p-3.5">
+                <p className="text-xs font-semibold">{m.product.findOn}</p>
+                <RetailerLinks product={product} />
+                <p className="text-[11px] text-ink-faint">{m.product.searchNote}</p>
               </div>
             ) : (
               <p className="text-center text-xs text-ink-faint">{m.product.linkSoon}</p>

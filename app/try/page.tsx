@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Locale } from "../../i18n/locale";
 import { GRADE_LABEL, hasBuyLink, localized, type Grade } from "../../lib/products";
+import { priceText, totalText } from "../../lib/price";
 import { budgetLabel, buildRoutine, parseAnswers, type Answers, type Routine, type Warning } from "../../lib/recommend";
 import AddToCart from "../_components/AddToCart";
 import AuthButton from "../_components/AuthButton";
@@ -12,16 +13,9 @@ import { useI18n } from "../_components/I18nProvider";
 import LanguageSwitch from "../_components/LanguageSwitch";
 import ProductImage from "../_components/ProductImage";
 import QIcon from "../_components/QIcon";
+import RetailerLinks from "../_components/RetailerLinks";
+import { GRADE_DOT, GRADE_TEXT } from "../_components/grade";
 import RoutineView from "../_components/RoutineView";
-
-// Static class names so Tailwind can see them.
-const GRADE_TEXT: Record<Grade, string> = {
-  clinical: "text-grade-clinical border-grade-clinical",
-  multiple: "text-grade-multiple border-grade-multiple",
-  brand: "text-grade-brand border-grade-brand",
-  emerging: "text-grade-emerging border-grade-emerging",
-};
-const GRADE_DOT: Record<Grade, string> = { clinical: "bg-grade-clinical", multiple: "bg-grade-multiple", brand: "bg-grade-brand", emerging: "bg-grade-emerging" };
 
 const ANSWERS_KEY = "bs_answers";
 type Phase = "survey" | "note" | "loading" | "result" | "routine";
@@ -218,7 +212,7 @@ export default function Try() {
         <section className={card}>
           <p className="eyebrow">{m.result.label(routine.items.length)}</p>
           <h1 className="mt-1 font-display text-2xl font-semibold">{m.result.title}</h1>
-          <p className="mt-1 text-sm text-ink-soft">{m.result.budgetLine(budgetLabel(Number(ans.budget), locale), routine.total.toLocaleString(), aiUsed)}</p>
+          <p className="mt-1 text-sm text-ink-soft">{m.result.budgetLine(budgetLabel(Number(ans.budget), locale), totalText(routine.items.map((product) => ({ product })), locale), aiUsed)}</p>
 
           {routine.warnings.map((w) => <p key={w.code} className="mt-3 rounded-2xl bg-warn-soft border border-dashed border-warn p-3 text-sm text-ink">⚠ {warningText(w)}</p>)}
 
@@ -236,7 +230,7 @@ export default function Try() {
                       <span className="text-xs text-ink-soft">{i + 1}. {m.result.steps[p.step]}</span>
                       <span className="mt-0.5 block text-base font-bold leading-snug">{text.name}</span>
                       <span className="mt-1 block text-sm font-semibold">
-                        {p.price.toLocaleString()}{locale === "ko" ? m.common.won : " KRW"}
+                        {priceText(p, locale)}
                       </span>
                       <span className={`mt-1 inline-block whitespace-nowrap rounded-full border px-2 py-0.5 text-xs font-medium ${GRADE_TEXT[p.grade]}`}>● {m.result.grades[p.grade]}</span>
                     </span>
@@ -253,6 +247,8 @@ export default function Try() {
                       <a href={p.url} target="_blank" rel="sponsored noopener noreferrer" className="rounded-xl bg-ink px-3.5 py-2 text-sm text-bg">{m.result.buy}</a>
                       <span className="rounded-lg border border-border px-1.5 py-0.5 text-[11px] text-ink-soft">{m.result.ad}</span>
                     </span>
+                  ) : p.real ? (
+                    <RetailerLinks product={p} />
                   ) : (
                     <span className="text-xs text-ink-faint">{m.product.linkSoon}</span>
                   )}
