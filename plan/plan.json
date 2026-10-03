@@ -81,11 +81,6 @@
       "status": "done"
     },
     {
-      "id": "m13b",
-      "name": "Hero: 5 SVG product illustrations in a 2-second auto-sliding carousel",
-      "status": "done"
-    },
-    {
       "id": "m14",
       "name": "Set RESEND_API_KEY and EMAIL_FROM (verified domain) on Railway, then test real email login",
       "status": "todo"
