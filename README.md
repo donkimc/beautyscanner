@@ -2,7 +2,7 @@
 
 An MVP demo of an evidence-based skincare recommender, in **Korean and English**. A mobile-first landing page leads to a short survey that produces a budget-aware routine. Each product shows an evidence grade, a reason, and an AD-labelled buy link. Users can sign up with an emailed confirmation link (or Google) to save routines.
 
-> **Demo status:** products and evidence notes in `lib/products.ts` are fictional sample data (names start with "[Sample]" / "[샘플]"), **buy links are placeholders (no retailer or Coupang integration exists yet)**, the newsletter is a mock, and the legal pages are draft templates that need a lawyer's review.
+> **Demo status:** products and evidence notes in `lib/products.ts` are fictional sample data (names start with "[Sample]" / "[샘플]"), **buy links are placeholders (no retailer or Coupang integration exists yet) and product pictures are illustrations until real photos are added**, the newsletter is a mock, and the legal pages are draft templates that need a lawyer's review.
 
 Live demo (Railway): https://web-production-318ac.up.railway.app
 
@@ -14,9 +14,10 @@ Live demo (Railway): https://web-production-318ac.up.railway.app
 | `/try` | The 5-question survey (same questions as the original page) and the result page. No account needed. |
 | `/login` | Sign up / log in: email confirmation link, plus Google if configured |
 | `/auth/verify` | Confirmation page the emailed link opens; a button press completes login |
-| `/account` | Saved routines, consent management, data download, account deletion |
+| `/account` | **Dashboard** for registered users: shopping cart, editable saved info (name and skin profile), saved routines, consent management, data download, account deletion |
+| `/products/[id]` | A product's own page: picture, price, evidence, attributes, add to cart, retailer link |
 | `/terms`, `/privacy`, `/security` | Legal and security pages (draft) in both languages |
-| `/api/*` | `auth/*`, `consent`, `routines`, `account`, `explain`, `config` |
+| `/api/*` | `auth/*`, `consent`, `routines`, `cart`, `profile`, `account`, `explain`, `config` |
 
 ## Features
 
@@ -57,7 +58,23 @@ How the answers drive the routine (`lib/recommend.ts`):
 - **Sensitivity is derived**, not asked: sensitive skin, a redness concern, or a low-irritation preference all exclude irritating products.
 - Answers are validated on the server (`parseAnswers`); answers saved in an older format are ignored.
 
-### Routine and explanations
+### From recommendation to a morning / evening routine
+After the recommendation, **"아침·저녁 루틴 만들기"** turns the recommended products into a personalized routine for the morning or the evening (tabs, same look as the original evening-routine page): numbered steps in application order, a picture per step, a short how-to tip, and a total. It follows simple rules in `lib/routine.ts`:
+- Every product has a time of day: sunscreen is morning-only; strong exfoliants and retinoids (the BHA toner and the retinal serum in the sample data) are evening-only; the rest suit both.
+- A product that suits the other time of day is left out, with the reason shown ("evening-only, so it's left out of the morning routine").
+- An amber note appears when the routine has no moisturizer, or a morning routine has no sunscreen.
+The routine's products can be added to the shopping cart in one tap (recorded as coming from the morning or evening routine), as can any single product or the whole recommendation.
+
+### Shopping cart and dashboard (registered users)
+- **Cart:** `cart_items` table; add from a recommendation card, the routine view or a product page; change quantity (1–9), remove, empty. The header shows a cart icon with the item count. A guest who taps "add to cart" is sent to log in and the products are added right after (the choice is remembered in the browser until then). The cart is a shopping list, not a checkout: nobody pays here; each item links to its **product page** and to the retailer's page (**the retailer links don't exist yet**, so the button says "buy link coming soon").
+- **Dashboard (`/account`):** the cart; **My skin profile** (the last saved survey answers, editable in place, with "get recommendations from this"); **My info** (editable name; the header updates immediately); saved routines (linked to product pages); consent management; data download and deletion. Saving a routine also saves the skin profile.
+
+### Product pictures
+Each recommendation, routine step, cart row and product page shows a picture through `ProductImage` (`app/_components/ProductImage.tsx`):
+- If a product has a photo (`image` in `lib/products.ts`: a file under `public/products/`, e.g. `"/products/s1.webp"`, or an https URL), it is shown (lazy-loaded, with the product name as alt text).
+- Otherwise a clean illustration of that kind of product (cleanser, toner, serum, moisturizer, sunscreen) is drawn. **These are placeholders**: the sample products are fictional, so no real photos exist for them. Real photos must be licensed for commercial use (own photography, brand-provided images, or a retailer API such as Coupang Partners, which returns product image URLs). Avoid photos with visible third-party brand names unless the brand is the product being sold.
+
+### Routine rules and explanations
 Rules in `lib/recommend.ts` choose one product per step, swap in cheaper options to fit the price range, and warn about gaps (no cream, no sunscreen) or an unmet budget. The explainer agent (`agent/explainer.ts`) rewrites each product's curated evidence note into a short reason in the user's language. It never chooses products or grades, and its output must pass guardrails or a template is used.
 
 ### Newsletter (mock)
@@ -124,14 +141,14 @@ The visual system is taken from the two original design pages (the survey-intera
 ## Project structure
 
 ```
-app/            Next.js UI, pages, API routes, shared components
+app/            Next.js UI, pages (incl. dashboard and product pages), API routes, shared components
 auth/           Signed-cookie sessions and Google OAuth (server-side)
 db/             Postgres access (Railway) or in-memory PGlite; schema, users, tokens, consents, routines
 email/          Login email templates and the Resend sender
 i18n/           Korean/English messages and language detection
 consent/        Consent purposes and versions
 content/        Terms, privacy and security text (both languages)
-lib/            Product data and the rules-based recommender
+lib/            Product data, the rules-based recommender and the morning/evening routine rules
 agent/          Explainer: prompt, guardrails, output validation
 design/         Design tokens -> app/tokens.css
 evals/          Scenario evals for the recommender and guardrails
@@ -145,7 +162,7 @@ Import directions between folders are defined in `architecture/rules.json` and e
 
 ## Database
 
-Tables are created automatically on first use (`db/schema.ts`): `users`, `login_tokens` (hashed, single use), `consents` (audit log), `routines`. Deleting a user cascades to routines and consents.
+Tables are created automatically on first use (`db/schema.ts`): `users`, `login_tokens` (hashed, single use), `consents` (audit log), `routines`, `profiles` (latest survey answers), `cart_items`. Deleting a user cascades to everything they own.
 
 ## Deployment
 

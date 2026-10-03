@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { getMessages } from "../i18n/server";
 import { ConsentProvider } from "./_components/ConsentProvider";
 import { I18nProvider } from "./_components/I18nProvider";
+import PendingCart from "./_components/PendingCart";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -27,7 +28,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale}>
       <body>
         <I18nProvider locale={locale}>
-          <ConsentProvider>{children}</ConsentProvider>
+          <ConsentProvider>
+            {children}
+            <PendingCart />
+          </ConsentProvider>
         </I18nProvider>
       </body>
     </html>

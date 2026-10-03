@@ -39,8 +39,9 @@ test("survey option values and types match across languages", () => {
 
 test("no message is empty", () => {
   const walk = (v: unknown, path: string) => {
-    // Korean puts nothing before the rotating word, so that one field is intentionally empty.
-    if (typeof v === "string") assert.ok(v.length > 0 || path === "messages.ko.landing.subPre", path);
+    // Intentionally empty: Korean puts nothing before the rotating word; sunscreen has no evening tip (it isn't used at night).
+    const allowedEmpty = path === "messages.ko.landing.subPre" || path.endsWith("routine.tips.sunscreen.evening");
+    if (typeof v === "string") assert.ok(v.length > 0 || allowedEmpty, path);
     else if (Array.isArray(v)) v.forEach((x, i) => walk(x, `${path}[${i}]`));
     else if (v && typeof v === "object") Object.entries(v).forEach(([k, x]) => walk(x, `${path}.${k}`));
   };

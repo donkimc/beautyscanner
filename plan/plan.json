@@ -86,6 +86,31 @@
       "status": "done"
     },
     {
+      "id": "m13e",
+      "name": "Personalized morning / evening routine view with add-to-cart",
+      "status": "done"
+    },
+    {
+      "id": "m13f",
+      "name": "Shopping cart (registered users) with header badge, and product pages",
+      "status": "done"
+    },
+    {
+      "id": "m13g",
+      "name": "Dashboard: editable saved info (name, skin profile), cart, routines",
+      "status": "done"
+    },
+    {
+      "id": "m13h",
+      "name": "Product pictures on every recommendation (illustration fallback; photo slot ready)",
+      "status": "done"
+    },
+    {
+      "id": "m18",
+      "name": "Real product photos and retailer links (licensed images; Coupang Partners / Naver / manual affiliate URLs)",
+      "status": "todo"
+    },
+    {
       "id": "m13d",
       "name": "Survey matches the original's five questions: multiple concerns, top priority, texture preference",
       "status": "done"
@@ -125,6 +150,7 @@
     "Affiliate income must not influence evidence grades",
     "Consents given before signup are logged under an anonymous ID and are not linked to the account afterwards",
     "Buy links are placeholders: no Coupang/Naver integration exists; products and prices are sample data, so the higher price bands (7만원+) can't be filled realistically yet",
-    "Product attributes (concerns, texture, fragrance-free, vegan, low-irritation) are invented sample data; they must come from real product data before launch"
+    "Product attributes (concerns, texture, fragrance-free, vegan, low-irritation) are invented sample data; they must come from real product data before launch",
+    "Product pictures are placeholder illustrations: real photos must be licensed for commercial use and added to public/products/ or Product.image"
   ]
 }

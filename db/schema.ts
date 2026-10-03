@@ -36,4 +36,17 @@ CREATE TABLE IF NOT EXISTS routines (
   created_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS routines_user_idx ON routines (user_id, created_at DESC);
+CREATE TABLE IF NOT EXISTS profiles (
+  user_id uuid PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+  answers jsonb,
+  updated_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS cart_items (
+  user_id uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  product_id text NOT NULL,
+  qty integer NOT NULL DEFAULT 1 CHECK (qty BETWEEN 1 AND 9),
+  routine text,
+  added_at timestamptz NOT NULL DEFAULT now(),
+  PRIMARY KEY (user_id, product_id)
+);
 `;

@@ -1,4 +1,5 @@
 import { sessionFrom } from "../../../auth/session";
+import { saveProfileAnswers } from "../../../db/profile";
 import { deleteRoutine, listRoutines, saveRoutine } from "../../../db/routines";
 import { PRODUCTS } from "../../../lib/products";
 import { parseAnswers } from "../../../lib/recommend";
@@ -20,6 +21,7 @@ export async function POST(req: Request) {
     return Response.json({ error: "bad_request" }, { status: 400 });
   }
   const row = await saveRoutine(user.uid, answers, productIds, Math.round(total));
+  await saveProfileAnswers(user.uid, answers); // the dashboard shows (and lets you edit) the latest answers
   return Response.json({ ok: true, id: row.id });
 }
 

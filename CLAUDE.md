@@ -11,5 +11,7 @@
 - Use parameterized SQL only (`db/`). Post-login redirects must go through `safeNext` in `auth/session.ts`.
 - Style with Tailwind utilities. Keep the look of the original design pages: paper background, plum ink, pink-magenta accent, Newsreader / Karla / IBM Plex Mono with Pretendard and Noto Serif KR as Korean fallbacks. Colors (light and dark) and radii come from `design/tokens.json`; run `npm run tokens` after editing it (a test checks `app/tokens.css` is in sync). Do not hardcode colors in components. Fonts must stay free for commercial use (SIL OFL).
 - Respect the layer rules in `architecture/rules.json` (enforced by `tests/architecture.test.ts`); declare a new top-level folder there before using it.
+- Show product pictures only through `ProductImage`. A photo goes in `Product.image` only if it is licensed for commercial use; never present an illustration as a real product photo, and never hotlink pictures you do not have rights to.
+- Cart and profile endpoints require a session and validate product ids against `PRODUCTS`; the cart is a shopping list, not a checkout (we do not take payment).
 - Keep the AD label next to every affiliate link and the "not a diagnosis" disclaimer on the result page.
 - Run `npm run verify` (typecheck, tests, evals, build) before pushing.

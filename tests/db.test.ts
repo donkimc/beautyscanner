@@ -40,3 +40,43 @@ test("routines are saved per user and deleted with the account", async () => {
   await deleteUser(u.id);
   assert.equal((await listRoutines(u.id)).length, 0);
 });
+
+import { addToCart, cartCount, clearCart, listCart, removeFromCart, setQty } from "../db/cart";
+import { getProfileAnswers, saveProfileAnswers, updateName } from "../db/profile";
+
+test("the profile keeps the latest answers and an editable name", async () => {
+  const u = await upsertUser("profile@x.co");
+  assert.equal(await getProfileAnswers(u.id), null);
+  await saveProfileAnswers(u.id, { skinType: "dry" });
+  await saveProfileAnswers(u.id, { skinType: "oily" });
+  assert.deepEqual(await getProfileAnswers(u.id), { skinType: "oily" });
+  await updateName(u.id, "Mina");
+  assert.equal((await upsertUser("profile@x.co")).name, "Mina");
+});
+
+test("the cart adds once per product, clamps quantity, removes and clears", async () => {
+  const u = await upsertUser("cart@x.co");
+  await addToCart(u.id, ["c1", "t1", "c1"], "morning");
+  await addToCart(u.id, ["c1"], "evening"); // already there: untouched
+  assert.deepEqual((await listCart(u.id)).map((r) => [r.product_id, r.qty, r.routine]).sort(), [["c1", 1, "morning"], ["t1", 1, "morning"]]);
+  await setQty(u.id, "c1", 4);
+  await setQty(u.id, "t1", 99);
+  assert.deepEqual((await listCart(u.id)).map((r) => [r.product_id, r.qty]).sort(), [["c1", 4], ["t1", 9]]);
+  assert.equal(await cartCount(u.id), 13);
+  await removeFromCart(u.id, "c1");
+  assert.equal((await listCart(u.id)).length, 1);
+  await clearCart(u.id);
+  assert.equal(await cartCount(u.id), 0);
+});
+
+test("a cart and profile belong to one user and are deleted with the account", async () => {
+  const a = await upsertUser("own-a@x.co");
+  const b = await upsertUser("own-b@x.co");
+  await addToCart(a.id, ["c1"], null);
+  await saveProfileAnswers(a.id, { x: 1 });
+  assert.equal((await listCart(b.id)).length, 0);
+  assert.equal(await getProfileAnswers(b.id), null);
+  await deleteUser(a.id);
+  assert.equal((await listCart(a.id)).length, 0);
+  assert.equal(await getProfileAnswers(a.id), null);
+});
