@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getMessages } from "../i18n/server";
 import Newsletter from "./_components/Newsletter";
 import RotatingWord from "./_components/RotatingWord";
-import ScanCard from "./_components/ScanCard";
+import HeroCarousel from "./_components/HeroCarousel";
 import SiteFooter from "./_components/SiteFooter";
 import SiteHeader from "./_components/SiteHeader";
 
@@ -36,7 +36,7 @@ export default async function Home() {
             {m.landing.sub2}
           </p>
 
-          <div className="mt-6 animate-rise [animation-delay:360ms]"><ScanCard /></div>
+          <div className="mt-6 animate-rise [animation-delay:360ms]"><HeroCarousel /></div>
 
           <div className="mt-6 grid animate-rise gap-2.5 [animation-delay:480ms]">
             <Link href="/try" className="rounded-button bg-ink py-3.5 text-base font-bold text-bg shadow-lg shadow-ink/20 active:scale-[0.99]">{m.landing.try}</Link>

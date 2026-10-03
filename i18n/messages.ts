@@ -9,6 +9,7 @@ const ko = {
     title1: "광고 말고,", titleAccent: "근거", title2: "로 고르는 내 스킨케어",
     words: ["건조함", "트러블", "색소·잡티", "주름·탄력"],
     subPre: "", subPost: " 고민에 맞는 루틴을", sub2: "예산 안에서, 이유까지 알려드려요.",
+    carouselLabel: "스킨케어 루틴 제품 일러스트", slideLabel: (i: number, n: number) => `${n}개 중 ${i}번째 보기`,
     try: "무료로 체험하기 →", hint: "설문 5문항 · 가입 없이 결과 확인",
     features: [
       { title: "근거 등급 표시", body: "임상 검증부터 브랜드 자체 시험까지, 신뢰도가 다르면 다르다고 표시해요." },
@@ -87,6 +88,7 @@ const en: Messages = {
     title1: "Skip the ads.", titleAccent: "Evidence", title2: " picks your skincare.",
     words: ["dryness", "breakouts", "dark spots", "fine lines"],
     subPre: "A routine for ", subPost: ",", sub2: "within your budget, with the reasons.",
+    carouselLabel: "Skincare routine product illustrations", slideLabel: (i: number, n: number) => `Show slide ${i} of ${n}`,
     try: "Try it free →", hint: "5 questions · results without signing up",
     features: [
       { title: "Evidence grades", body: "From clinical trials to a brand's own tests, we label how strong each claim really is." },

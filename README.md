@@ -10,7 +10,7 @@ Live demo (Railway): https://web-production-318ac.up.railway.app
 
 | Route | What it is |
 |---|---|
-| `/` | Mobile-first landing page: catch phrase, animated hero, **Try it free** and **Log in** buttons, feature cards, mock newsletter |
+| `/` | Mobile-first landing page: catch phrase, an auto-sliding illustrated product carousel, **Try it free** and **Log in** buttons, feature cards, mock newsletter |
 | `/try` | Survey and result page. No account needed. |
 | `/login` | Sign up / log in: email confirmation link, plus Google if configured |
 | `/auth/verify` | Confirmation page the emailed link opens; a button press completes login |
@@ -40,6 +40,9 @@ Each decision is stored in the browser and logged server-side (`consents` table)
 
 ### Routine and explanations
 Rules in `lib/recommend.ts` choose one product per step, swap in cheaper options to fit the budget, and warn about gaps (no cream, no sunscreen) or an unmet budget. The explainer agent (`agent/explainer.ts`) rewrites each product's curated evidence note into a short reason in the user's language. It never chooses products or grades, and its output must pass guardrails or a template is used.
+
+### Hero carousel
+Five hand-drawn, unbranded SVG product illustrations (cleanser, toner, serum, moisturizer, sunscreen: one per routine step) slide every 2 seconds with a 0.7 s ease. The loop is seamless, it pauses while a finger or mouse is on it, supports swipe and tappable dots, and stops auto-sliding for users who prefer reduced motion. Art is in `app/_components/hero/ProductArt.tsx` and uses only design-token colors; the carousel is `app/_components/HeroCarousel.tsx`.
 
 ### Newsletter (mock)
 Validates the email and asks for marketing consent, then shows a confirmation. It **stores and sends nothing**.
