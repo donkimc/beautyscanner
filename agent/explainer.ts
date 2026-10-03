@@ -1,7 +1,7 @@
 import type { Locale } from "../i18n/locale";
 import { messages } from "../i18n/messages";
 import { localized, type Product } from "../lib/products";
-import type { Answers } from "../lib/recommend";
+import { budgetLabel, type Answers } from "../lib/recommend";
 
 // The explainer agent only rephrases data it is given. It never chooses products or evidence grades.
 
@@ -20,7 +20,7 @@ export function concernLabel(c: Answers["concern"], locale: Locale): string {
 
 export function buildPrompt(a: Answers, products: Product[], locale: Locale = "ko"): string {
   const data = products.map((p) => ({ id: p.id, ...localized(p, locale), step: p.step, grade: p.grade }));
-  const profile = `skinType=${a.skinType}, concern=${a.concern}, sensitive=${a.sensitive}, budget=${a.budget} KRW, note="${a.note.slice(0, 200)}"`;
+  const profile = `skinType=${a.skinType}, concern=${a.concern}, sensitive=${a.sensitive}, price_range="${budgetLabel(a.budget, locale)}", note="${a.note.slice(0, 200)}"`;
   if (locale === "en") {
     return `User survey: ${profile}
 Products (JSON): ${JSON.stringify(data)}
@@ -39,7 +39,7 @@ JSON만 출력: {"<id>": "설명", ...}`;
 
 export function templateExplanation(a: Answers, p: Product, locale: Locale = "ko"): string {
   const m = messages[locale].result;
-  return `${m.why(m.concerns[a.concern], a.budget.toLocaleString())} ${localized(p, locale).evidence}`;
+  return `${m.why(m.concerns[a.concern], budgetLabel(a.budget, locale))} ${localized(p, locale).evidence}`;
 }
 
 // A model sentence is accepted only if it passes every guardrail.

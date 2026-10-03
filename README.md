@@ -2,7 +2,7 @@
 
 An MVP demo of an evidence-based skincare recommender, in **Korean and English**. A mobile-first landing page leads to a short survey that produces a budget-aware routine. Each product shows an evidence grade, a reason, and an AD-labelled buy link. Users can sign up with an emailed confirmation link (or Google) to save routines.
 
-> **Demo status:** products and evidence notes in `lib/products.ts` are fictional sample data (names start with "[Sample]" / "[샘플]"), buy links go nowhere, the newsletter is a mock, and the legal pages are draft templates that need a lawyer's review.
+> **Demo status:** products and evidence notes in `lib/products.ts` are fictional sample data (names start with "[Sample]" / "[샘플]"), **buy links are placeholders (no retailer or Coupang integration exists yet)**, the newsletter is a mock, and the legal pages are draft templates that need a lawyer's review.
 
 Live demo (Railway): https://web-production-318ac.up.railway.app
 
@@ -38,8 +38,11 @@ A bottom-sheet popup appears **whenever consent is needed**, listing only what i
 
 Each decision is stored in the browser and logged server-side (`consents` table) with a version. Bump the version in `consent/purposes.ts` when the wording changes and users are asked again. Users can withdraw consent in `/account`.
 
+### Price range
+The price question matches the original survey page: **"선호하는 예산대는?" with 3만원 이하 / 3~7만원 / 7~15만원 / 15만원 이상** (in English: Under ₩30,000 / ₩30,000–70,000 / ₩70,000–150,000 / Over ₩150,000). The stored value is the band's upper limit (30000, 70000, 150000, 1000000 for "no upper limit"); the routine's total price must fit under it, and the result shows the band the user picked. A test locks the labels to the original wording.
+
 ### Routine and explanations
-Rules in `lib/recommend.ts` choose one product per step, swap in cheaper options to fit the budget, and warn about gaps (no cream, no sunscreen) or an unmet budget. The explainer agent (`agent/explainer.ts`) rewrites each product's curated evidence note into a short reason in the user's language. It never chooses products or grades, and its output must pass guardrails or a template is used.
+Rules in `lib/recommend.ts` choose one product per step, swap in cheaper options to fit the price range, and warn about gaps (no cream, no sunscreen) or an unmet budget. The explainer agent (`agent/explainer.ts`) rewrites each product's curated evidence note into a short reason in the user's language. It never chooses products or grades, and its output must pass guardrails or a template is used.
 
 ### Newsletter (mock)
 Validates the email and asks for marketing consent, then shows a confirmation. It **stores and sends nothing**.

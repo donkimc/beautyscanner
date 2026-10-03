@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Locale } from "../../i18n/locale";
 import { GRADE_LABEL, localized, type Grade } from "../../lib/products";
-import { buildRoutine, type Answers, type Routine, type Warning } from "../../lib/recommend";
+import { budgetLabel, buildRoutine, type Answers, type Routine, type Warning } from "../../lib/recommend";
 import AuthButton from "../_components/AuthButton";
 import { useConsent } from "../_components/ConsentProvider";
 import { useI18n } from "../_components/I18nProvider";
@@ -127,7 +127,8 @@ export default function Try() {
             <span className="block h-full bg-accent transition-all duration-300" style={{ width: `${((idx + 1) / (m.survey.questions.length + 1)) * 100}%` }} />
           </div>
           <p className="eyebrow-faint">{m.survey.step(idx + 1, m.survey.questions.length)}</p>
-          <h1 className="mb-4 mt-1 font-display text-xl font-semibold">{q.title}</h1>
+          <h1 className="mt-1 whitespace-pre-line font-display text-2xl font-semibold leading-tight">{q.title}</h1>
+          <p className="mb-5 mt-2 text-sm text-ink-soft">{q.sub}</p>
           <div className="grid gap-2.5">
             {q.options.map((o) => (
               <button key={o.label} onClick={() => pick(q.key, o.value)}
@@ -162,7 +163,7 @@ export default function Try() {
         <section className={card}>
           <p className="eyebrow">{m.result.label(routine.items.length)}</p>
           <h1 className="mt-1 font-display text-2xl font-semibold">{m.result.title}</h1>
-          <p className="mt-1 text-sm text-ink-soft">{m.result.budgetLine(Number(ans.budget).toLocaleString(), routine.total.toLocaleString(), aiUsed)}</p>
+          <p className="mt-1 text-sm text-ink-soft">{m.result.budgetLine(budgetLabel(Number(ans.budget), locale), routine.total.toLocaleString(), aiUsed)}</p>
 
           {routine.warnings.map((w) => <p key={w.code} className="mt-3 rounded-2xl bg-warn-soft border border-dashed border-warn p-3 text-sm text-ink">⚠ {warningText(w)}</p>)}
 

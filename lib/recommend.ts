@@ -1,3 +1,5 @@
+import type { Locale } from "../i18n/locale";
+import { messages } from "../i18n/messages";
 import { PRODUCTS, type Concern, type Product, type SkinType, type Step } from "./products";
 
 export interface Answers {
@@ -64,4 +66,10 @@ export function buildRoutine(a: Answers): Routine {
   const missing = steps.length - items.length;
   if (missing > 0) warnings.push({ code: "missing", n: missing });
   return { items, total: sum, warnings };
+}
+
+// The price-range label shown to the user for a stored budget value (the upper limit of the chosen band).
+export function budgetLabel(budget: number, locale: Locale): string {
+  const q = messages[locale].survey.questions.find((x) => x.key === "budget");
+  return q?.options.find((o) => o.value === budget)?.label ?? `${budget.toLocaleString()}`;
 }

@@ -66,3 +66,11 @@ test("privacy policy discloses every processor the app uses", () => {
   const text = JSON.stringify(DOCS.privacy.en);
   for (const name of ["Railway", "Resend", "Google", "DeepSeek"]) assert.ok(text.includes(name), name);
 });
+
+test("price bands match the original survey page exactly", () => {
+  const q = (l: "ko" | "en") => messages[l].survey.questions.find((x) => x.key === "budget")!;
+  assert.deepEqual(q("ko").options.map((o) => o.label), ["3만원 이하", "3~7만원", "7~15만원", "15만원 이상"]);
+  assert.equal(q("ko").title.replace("\n", " "), "선호하는 예산대는?");
+  assert.equal(q("ko").sub, "제품 구매 시 기준이 되는 가격대예요");
+  assert.deepEqual(q("ko").options.map((o) => o.value), [30000, 70000, 150000, 1000000]);
+});

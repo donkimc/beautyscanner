@@ -1,10 +1,10 @@
 {
   "routines": [
-    { "name": "dry skin, 5 steps, 80k budget",
-      "answers": { "skinType": "dry", "concern": "dryness", "sensitive": false, "budget": 80000, "steps": 5, "note": "" },
+    { "name": "dry skin, 5 steps, 7-15만원 band",
+      "answers": { "skinType": "dry", "concern": "dryness", "sensitive": false, "budget": 150000, "steps": 5, "note": "" },
       "expect": { "steps": ["cleanser", "toner", "serum", "moisturizer", "sunscreen"], "withinBudget": true, "noWarnings": true } },
     { "name": "sensitive skin never gets irritant-flagged products",
-      "answers": { "skinType": "sensitive", "concern": "acne", "sensitive": true, "budget": 80000, "steps": 5, "note": "" },
+      "answers": { "skinType": "sensitive", "concern": "acne", "sensitive": true, "budget": 150000, "steps": 5, "note": "" },
       "expect": { "allSensitiveSafe": true } },
     { "name": "3-step routine under 30k includes sunscreen",
       "answers": { "skinType": "oily", "concern": "acne", "sensitive": false, "budget": 30000, "steps": 3, "note": "" },

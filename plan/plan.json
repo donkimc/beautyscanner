@@ -81,6 +81,11 @@
       "status": "done"
     },
     {
+      "id": "m13c",
+      "name": "Price question matches the original survey (4 bands: 3만원 이하 / 3~7만원 / 7~15만원 / 15만원 이상)",
+      "status": "done"
+    },
+    {
       "id": "m14",
       "name": "Set RESEND_API_KEY and EMAIL_FROM (verified domain) on Railway, then test real email login",
       "status": "todo"
@@ -97,7 +102,7 @@
     },
     {
       "id": "m17",
-      "name": "Retailer adapter (Coupang Partners / Naver)",
+      "name": "Real product links: retailer adapter (Coupang Partners / Naver) or manual affiliate URLs per product. Buy buttons are placeholders today.",
       "status": "todo"
     }
   ],
@@ -113,6 +118,7 @@
     "Survey answers are sensitive; legal pages are drafts and need a lawyer's review, including the DeepSeek overseas transfer",
     "Email login cannot work in production until a Resend API key and a verified sender domain are set",
     "Affiliate income must not influence evidence grades",
-    "Consents given before signup are logged under an anonymous ID and are not linked to the account afterwards"
+    "Consents given before signup are logged under an anonymous ID and are not linked to the account afterwards",
+    "Buy links are placeholders: no Coupang/Naver integration exists; products and prices are sample data, so the higher price bands (7만원+) can't be filled realistically yet"
   ]
 }
