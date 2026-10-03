@@ -1,15 +1,16 @@
 import { readFileSync } from "node:fs";
 import { isSafe } from "../agent/explainer";
-import { buildRoutine, type Answers } from "../lib/recommend";
+import { buildRoutine, parseAnswers, type Answers } from "../lib/recommend";
 
 // Scenario evals: run the real recommender and guardrails against evals/cases.json.
-interface RoutineCase { name: string; answers: Answers; expect: { steps?: string[]; withinBudget?: boolean; noWarnings?: boolean; hasWarning?: boolean; allSensitiveSafe?: boolean } }
+interface RoutineCase { name: string; answers: Answers; expect: { steps?: string[]; withinBudget?: boolean; noWarnings?: boolean; hasWarning?: boolean; allSensitiveSafe?: boolean; allFragranceFree?: boolean; allVegan?: boolean; includes?: string[] } }
 interface GuardCase { name: string; text: string; repeat?: number; evidence: string; safe: boolean }
 const cases = JSON.parse(readFileSync(new URL("./cases.json", import.meta.url), "utf8")) as { routines: RoutineCase[]; guardrails: GuardCase[] };
 
 const results: { name: string; ok: boolean; why: string }[] = [];
 
 for (const c of cases.routines) {
+  if (!parseAnswers(c.answers)) { results.push({ name: c.name, ok: false, why: "invalid answers in case" }); continue; }
   const r = buildRoutine(c.answers);
   const failures: string[] = [];
   const e = c.expect;
@@ -18,6 +19,9 @@ for (const c of cases.routines) {
   if (e.noWarnings && r.warnings.length) failures.push(`warnings ${r.warnings}`);
   if (e.hasWarning && !r.warnings.length) failures.push("expected a warning");
   if (e.allSensitiveSafe && r.items.some((p) => !p.sensitiveSafe)) failures.push("unsafe product for sensitive skin");
+  if (e.allFragranceFree && r.items.some((p) => !p.fragranceFree)) failures.push("a product has fragrance");
+  if (e.allVegan && r.items.some((p) => !p.vegan)) failures.push("a product is not vegan");
+  for (const id of e.includes ?? []) if (!r.items.some((p) => p.id === id)) failures.push(`missing ${id} (got ${r.items.map((p) => p.id)})`);
   results.push({ name: c.name, ok: !failures.length, why: failures.join("; ") });
 }
 for (const g of cases.guardrails) {

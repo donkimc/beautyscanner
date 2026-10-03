@@ -14,13 +14,14 @@ export const EXPLAINER = {
   bannedTerms: ["진단", "치료", "완치", "처방", "치유", "의학적으로 입증", "cure", "cures", "treat ", "treats", "treatment", "diagnos", "heals", "clinically proven", "guarantee", "prescri"],
 } as const;
 
-export function concernLabel(c: Answers["concern"], locale: Locale): string {
-  return messages[locale].result.concerns[c];
+// "dryness, redness" in the user's language (at most three, in the order they were ticked).
+export function concernsText(a: Answers, locale: Locale): string {
+  return a.concerns.slice(0, 3).map((c) => messages[locale].result.concerns[c]).join(locale === "ko" ? ", " : ", ");
 }
 
 export function buildPrompt(a: Answers, products: Product[], locale: Locale = "ko"): string {
   const data = products.map((p) => ({ id: p.id, ...localized(p, locale), step: p.step, grade: p.grade }));
-  const profile = `skinType=${a.skinType}, concern=${a.concern}, sensitive=${a.sensitive}, price_range="${budgetLabel(a.budget, locale)}", note="${a.note.slice(0, 200)}"`;
+  const profile = `skinType=${a.skinType}, concerns=[${a.concerns.join(", ")}], top_priority=${a.priority}, texture_preference=${a.texture}, price_range="${budgetLabel(a.budget, locale)}", note="${a.note.slice(0, 200)}"`;
   if (locale === "en") {
     return `User survey: ${profile}
 Products (JSON): ${JSON.stringify(data)}
@@ -39,7 +40,7 @@ JSON만 출력: {"<id>": "설명", ...}`;
 
 export function templateExplanation(a: Answers, p: Product, locale: Locale = "ko"): string {
   const m = messages[locale].result;
-  return `${m.why(m.concerns[a.concern], budgetLabel(a.budget, locale))} ${localized(p, locale).evidence}`;
+  return `${m.why(concernsText(a, locale), m.priorities[a.priority], budgetLabel(a.budget, locale))} ${localized(p, locale).evidence}`;
 }
 
 // A model sentence is accepted only if it passes every guardrail.

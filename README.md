@@ -11,7 +11,7 @@ Live demo (Railway): https://web-production-318ac.up.railway.app
 | Route | What it is |
 |---|---|
 | `/` | Mobile-first landing page: catch phrase, animated hero, **Try it free** and **Log in** buttons, feature cards, mock newsletter |
-| `/try` | Survey and result page. No account needed. |
+| `/try` | The 5-question survey (same questions as the original page) and the result page. No account needed. |
 | `/login` | Sign up / log in: email confirmation link, plus Google if configured |
 | `/auth/verify` | Confirmation page the emailed link opens; a button press completes login |
 | `/account` | Saved routines, consent management, data download, account deletion |
@@ -38,8 +38,24 @@ A bottom-sheet popup appears **whenever consent is needed**, listing only what i
 
 Each decision is stored in the browser and logged server-side (`consents` table) with a version. Bump the version in `consent/purposes.ts` when the wording changes and users are asked again. Users can withdraw consent in `/account`.
 
-### Price range
-The price question matches the original survey page: **"선호하는 예산대는?" with 3만원 이하 / 3~7만원 / 7~15만원 / 15만원 이상** (in English: Under ₩30,000 / ₩30,000–70,000 / ₩70,000–150,000 / Over ₩150,000). The stored value is the band's upper limit (30000, 70000, 150000, 1000000 for "no upper limit"); the routine's total price must fit under it, and the result shows the band the user picked. A test locks the labels to the original wording.
+### The survey (same five questions as the original page)
+| # | Question | Type | Options |
+|---|---|---|---|
+| 1 | 피부 타입은 무엇인가요? / What's your skin type? | single | 건성, 지성, 복합성, 민감성, 잘 모르겠음 |
+| 2 | 가장 신경 쓰이는 피부 고민은? / Which concerns bother you most? | **multiple** (Next button) | 여드름·트러블, 모공, 색소침착, 주름·탄력, 홍조, 건조함 |
+| 3 | 가장 먼저 개선하고 싶은 것은? / What to improve first? | single (**top priority**) | 피부 톤 개선, 수분 채우기, 트러블 진정, 탄력 케어, 모공 관리 |
+| 4 | 선호하는 예산대는? / Preferred price range? | single | 3만원 이하, 3~7만원, 7~15만원, 15만원 이상 |
+| 5 | 선호하는 제형이 있나요? / Texture preference? | single (**texture preference**) | 가벼운 제형, 리치한 제형, 무향 제품, 저자극 제품, 비건·클린뷰티 |
+
+Wording, subtitles, options and icons follow the original page (tests lock the Korean text). An optional free-text note follows question 5.
+
+How the answers drive the routine (`lib/recommend.ts`):
+- **Concerns (multiple):** each ticked concern adds to a product's score if the product covers it.
+- **Top priority:** the products that address it (tone → pigmentation, hydration → dryness, soothing → acne/redness, firmness → aging, pores → pores) get the largest bonus.
+- **Price range:** the band's upper limit caps the routine total (30000 / 70000 / 150000 / 1000000 = no limit); the result shows the band picked. Up to 3만원 gives the short 3-step routine, anything above the full 5 steps.
+- **Texture:** lightweight / rich favors products with that feel; fragrance-free and vegan restrict choices whenever such products exist for the step; low-irritation excludes products that may irritate.
+- **Sensitivity is derived**, not asked: sensitive skin, a redness concern, or a low-irritation preference all exclude irritating products.
+- Answers are validated on the server (`parseAnswers`); answers saved in an older format are ignored.
 
 ### Routine and explanations
 Rules in `lib/recommend.ts` choose one product per step, swap in cheaper options to fit the price range, and warn about gaps (no cream, no sunscreen) or an unmet budget. The explainer agent (`agent/explainer.ts`) rewrites each product's curated evidence note into a short reason in the user's language. It never chooses products or grades, and its output must pass guardrails or a template is used.

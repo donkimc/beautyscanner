@@ -4,7 +4,7 @@ import { buildPrompt, isSafe, parseExplanations, templateExplanation } from "../
 import { PRODUCTS } from "../lib/products";
 import type { Answers } from "../lib/recommend";
 
-const a: Answers = { skinType: "dry", concern: "dryness", sensitive: false, budget: 30000, steps: 3, note: "" };
+const a: Answers = { skinType: "dry", concerns: ["dryness", "redness"], priority: "hydration", budget: 30000, texture: "light", note: "" };
 const products = PRODUCTS.slice(0, 2);
 
 test("prompt forbids invented evidence and includes only supplied products", () => {
@@ -29,4 +29,14 @@ test("unsafe model sentences are replaced, safe ones kept", () => {
   const out = parseExplanations(raw, a, products);
   assert.equal(out[products[0].id], templateExplanation(a, products[0]));
   assert.equal(out[products[1].id], "건조한 피부에 어울려요.");
+});
+
+test("the prompt describes every new survey answer", () => {
+  const p = buildPrompt(a, products, "en");
+  for (const part of ["concerns=[dryness, redness]", "top_priority=hydration", "texture_preference=light", "price_range=\"Under ₩30,000\""]) assert.ok(p.includes(part), part);
+});
+
+test("the template explanation names the ticked concerns and the top priority", () => {
+  assert.match(templateExplanation(a, products[0], "en"), /dryness, redness[\s\S]*add hydration/);
+  assert.match(templateExplanation(a, products[0], "ko"), /건조함, 홍조[\s\S]*수분 채우기/);
 });

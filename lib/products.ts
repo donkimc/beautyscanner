@@ -5,8 +5,24 @@ import type { Locale } from "../i18n/locale";
 
 export type Step = "cleanser" | "toner" | "serum" | "moisturizer" | "sunscreen";
 export type Grade = "clinical" | "multiple" | "brand" | "emerging";
-export type Concern = "dryness" | "acne" | "pigmentation" | "aging";
-export type SkinType = "dry" | "oily" | "combo" | "sensitive";
+// Survey vocabularies (the values stored in answers; labels live in i18n/messages.ts).
+export const SKIN_TYPES = ["dry", "oily", "combo", "sensitive", "unsure"] as const;
+export const CONCERNS = ["acne", "pores", "pigmentation", "aging", "redness", "dryness"] as const;
+export const PRIORITIES = ["tone", "hydration", "soothing", "firmness", "pores"] as const;
+export const TEXTURES = ["light", "rich", "fragrance_free", "low_irritation", "vegan_clean"] as const;
+export type SkinType = (typeof SKIN_TYPES)[number];
+export type Concern = (typeof CONCERNS)[number];
+export type Priority = (typeof PRIORITIES)[number];
+export type Texture = (typeof TEXTURES)[number];
+
+// What each "top priority" answer is trying to improve.
+export const PRIORITY_TARGETS: Record<Priority, Concern[]> = {
+  tone: ["pigmentation"],
+  hydration: ["dryness"],
+  soothing: ["acne", "redness"],
+  firmness: ["aging"],
+  pores: ["pores"],
+};
 
 export interface Product {
   id: string;
@@ -15,6 +31,11 @@ export interface Product {
   price: number;
   concerns: Concern[];
   skinTypes: SkinType[];
+  /** Feel on the skin: used for the lightweight / rich texture preference. */
+  texture: "light" | "rich";
+  fragranceFree: boolean;
+  vegan: boolean;
+  /** Low-irritation: suitable for sensitive skin. */
   sensitiveSafe: boolean;
   grade: Grade;
   evidence: string;
@@ -38,20 +59,22 @@ export const GRADE_LABEL: Record<Grade, { label: string }> = {
   emerging: { label: "근거 신흥 단계" },
 };
 
-const all: SkinType[] = ["dry", "oily", "combo", "sensitive"];
+const all: SkinType[] = ["dry", "oily", "combo", "sensitive", "unsure"];
 
 export const PRODUCTS: Product[] = [
-  { id: "c1", name: "[샘플] 약산성 젤 클렌저", step: "cleanser", price: 6900, concerns: ["dryness", "acne"], skinTypes: all, sensitiveSafe: true, grade: "brand", evidence: "브랜드 자체 피부자극 시험 결과(샘플 문구).", en: { name: "[Sample] Mild-acid gel cleanser", evidence: "Brand's own skin-irritation test (sample text)." }, url: "#" },
-  { id: "c2", name: "[샘플] 세라마이드 크림 클렌저", step: "cleanser", price: 8900, concerns: ["dryness", "aging"], skinTypes: ["dry", "sensitive"], sensitiveSafe: true, grade: "emerging", evidence: "소규모 연구에서 세정 후 수분 손실 감소 경향(샘플 문구).", en: { name: "[Sample] Ceramide cream cleanser", evidence: "A small study suggests less water loss after cleansing (sample text)." }, url: "#" },
-  { id: "t1", name: "[샘플] 히알루론산 토너", step: "toner", price: 12900, concerns: ["dryness", "aging"], skinTypes: all, sensitiveSafe: true, grade: "multiple", evidence: "히알루론산의 보습 효과는 여러 연구에서 보고됨. 성분 수준의 근거이며 제품 단독 시험은 아님(샘플 문구).", en: { name: "[Sample] Hyaluronic acid toner", evidence: "Hyaluronic acid's hydrating effect is reported in several studies. This is ingredient-level evidence, not a test of this product (sample text)." }, url: "#" },
-  { id: "t2", name: "[샘플] BHA 스무딩 토너", step: "toner", price: 9900, concerns: ["acne", "pigmentation"], skinTypes: ["oily", "combo"], sensitiveSafe: false, grade: "multiple", evidence: "살리실산(BHA)의 여드름 개선은 다수 연구 보고. 성분 수준 근거(샘플 문구).", en: { name: "[Sample] BHA smoothing toner", evidence: "Salicylic acid (BHA) is reported to improve acne in multiple studies. Ingredient-level evidence (sample text)." }, url: "#" },
-  { id: "s1", name: "[샘플] 저분자 히알루론산 세럼", step: "serum", price: 12900, concerns: ["dryness"], skinTypes: all, sensitiveSafe: true, grade: "multiple", evidence: "다수 연구가 히알루론산의 피부 수분 개선을 보고(성분 수준, 샘플 문구).", en: { name: "[Sample] Low-molecular hyaluronic acid serum", evidence: "Multiple studies report improved skin hydration from hyaluronic acid (ingredient-level, sample text)." }, url: "#" },
-  { id: "s2", name: "[샘플] 나이아신아마이드 10% 세럼", step: "serum", price: 15000, concerns: ["pigmentation", "acne"], skinTypes: ["oily", "combo", "dry"], sensitiveSafe: false, grade: "clinical", evidence: "나이아신아마이드는 RCT·메타분석에서 색소 및 피지 개선 보고(성분 수준, 샘플 문구).", en: { name: "[Sample] Niacinamide 10% serum", evidence: "Niacinamide shows improvements in pigmentation and oil in RCTs and meta-analyses (ingredient-level, sample text)." }, url: "#" },
-  { id: "s3", name: "[샘플] 레티날 0.1% 세럼", step: "serum", price: 19000, concerns: ["aging", "pigmentation"], skinTypes: ["dry", "oily", "combo"], sensitiveSafe: false, grade: "clinical", evidence: "레티노이드 계열은 노화 징후 개선에 대한 RCT 근거가 풍부(성분 수준, 샘플 문구). 자극 가능성 있음.", en: { name: "[Sample] Retinal 0.1% serum", evidence: "Retinoids have substantial RCT evidence for signs of aging (ingredient-level, sample text). May cause irritation." }, url: "#" },
-  { id: "m1", name: "[샘플] 세라마이드 장벽 크림", step: "moisturizer", price: 14900, concerns: ["dryness", "aging"], skinTypes: ["dry", "sensitive", "combo"], sensitiveSafe: true, grade: "multiple", evidence: "세라마이드 함유 보습제는 장벽 회복 연구 다수(성분 수준, 샘플 문구).", en: { name: "[Sample] Ceramide barrier cream", evidence: "Ceramide-containing moisturizers have many barrier-repair studies (ingredient-level, sample text)." }, url: "#" },
-  { id: "m2", name: "[샘플] 가벼운 수분 젤크림", step: "moisturizer", price: 9900, concerns: ["acne", "dryness"], skinTypes: ["oily", "combo"], sensitiveSafe: true, grade: "brand", evidence: "브랜드 자체 사용자 평가(샘플 문구). 독립 연구 아님.", en: { name: "[Sample] Light hydrating gel cream", evidence: "Brand's own user rating (sample text). Not independent research." }, url: "#" },
-  { id: "f1", name: "[샘플] 무기자차 선크림 SPF50+", step: "sunscreen", price: 12000, concerns: ["pigmentation", "aging", "dryness", "acne"], skinTypes: all, sensitiveSafe: true, grade: "clinical", evidence: "자외선 차단은 색소·광노화 예방에 대한 근거가 확립됨. 제품 SPF/PA는 공인 시험 표기 기준(샘플 문구).", en: { name: "[Sample] Mineral sunscreen SPF50+", evidence: "Sun protection against pigmentation and photoaging is well established. Product SPF/PA follows certified test labelling (sample text)." }, url: "#" },
-  { id: "f2", name: "[샘플] 유기자차 선에센스 SPF50+", step: "sunscreen", price: 9500, concerns: ["pigmentation", "aging", "acne"], skinTypes: ["oily", "combo", "dry"], sensitiveSafe: false, grade: "clinical", evidence: "자외선 차단 일반 근거 확립. 일부 민감 피부에는 자극 가능(샘플 문구).", en: { name: "[Sample] Chemical sun essence SPF50+", evidence: "General sun-protection evidence is established. May irritate some sensitive skin (sample text)." }, url: "#" },
+  { id: "c1", name: "[샘플] 약산성 젤 클렌저", step: "cleanser", price: 6900, concerns: ["dryness", "acne", "redness"], skinTypes: all, texture: "light", fragranceFree: true, vegan: true, sensitiveSafe: true, grade: "brand", evidence: "브랜드 자체 피부자극 시험 결과(샘플 문구).", en: { name: "[Sample] Mild-acid gel cleanser", evidence: "Brand's own skin-irritation test (sample text)." }, url: "#" },
+  { id: "c2", name: "[샘플] 세라마이드 크림 클렌저", step: "cleanser", price: 8900, concerns: ["dryness", "aging", "redness"], skinTypes: ["dry", "sensitive", "unsure"], texture: "rich", fragranceFree: true, vegan: false, sensitiveSafe: true, grade: "emerging", evidence: "소규모 연구에서 세정 후 수분 손실 감소 경향(샘플 문구).", en: { name: "[Sample] Ceramide cream cleanser", evidence: "A small study suggests less water loss after cleansing (sample text)." }, url: "#" },
+  { id: "t1", name: "[샘플] 히알루론산 토너", step: "toner", price: 12900, concerns: ["dryness", "aging"], skinTypes: all, texture: "light", fragranceFree: true, vegan: true, sensitiveSafe: true, grade: "multiple", evidence: "히알루론산의 보습 효과는 여러 연구에서 보고됨. 성분 수준의 근거이며 제품 단독 시험은 아님(샘플 문구).", en: { name: "[Sample] Hyaluronic acid toner", evidence: "Hyaluronic acid's hydrating effect is reported in several studies. This is ingredient-level evidence, not a test of this product (sample text)." }, url: "#" },
+  { id: "t2", name: "[샘플] BHA 스무딩 토너", step: "toner", price: 9900, concerns: ["acne", "pores", "pigmentation"], skinTypes: ["oily", "combo", "unsure"], texture: "light", fragranceFree: false, vegan: true, sensitiveSafe: false, grade: "multiple", evidence: "살리실산(BHA)의 여드름 개선은 다수 연구 보고. 성분 수준 근거(샘플 문구).", en: { name: "[Sample] BHA smoothing toner", evidence: "Salicylic acid (BHA) is reported to improve acne in multiple studies. Ingredient-level evidence (sample text)." }, url: "#" },
+  { id: "s1", name: "[샘플] 저분자 히알루론산 세럼", step: "serum", price: 12900, concerns: ["dryness"], skinTypes: all, texture: "light", fragranceFree: true, vegan: true, sensitiveSafe: true, grade: "multiple", evidence: "다수 연구가 히알루론산의 피부 수분 개선을 보고(성분 수준, 샘플 문구).", en: { name: "[Sample] Low-molecular hyaluronic acid serum", evidence: "Multiple studies report improved skin hydration from hyaluronic acid (ingredient-level, sample text)." }, url: "#" },
+  { id: "s2", name: "[샘플] 나이아신아마이드 10% 세럼", step: "serum", price: 15000, concerns: ["pigmentation", "acne", "pores"], skinTypes: ["oily", "combo", "dry", "unsure"], texture: "light", fragranceFree: true, vegan: true, sensitiveSafe: false, grade: "clinical", evidence: "나이아신아마이드는 RCT·메타분석에서 색소 및 피지 개선 보고(성분 수준, 샘플 문구).", en: { name: "[Sample] Niacinamide 10% serum", evidence: "Niacinamide shows improvements in pigmentation and oil in RCTs and meta-analyses (ingredient-level, sample text)." }, url: "#" },
+  { id: "s3", name: "[샘플] 레티날 0.1% 세럼", step: "serum", price: 19000, concerns: ["aging", "pigmentation"], skinTypes: ["dry", "oily", "combo", "unsure"], texture: "rich", fragranceFree: false, vegan: false, sensitiveSafe: false, grade: "clinical", evidence: "레티노이드 계열은 노화 징후 개선에 대한 RCT 근거가 풍부(성분 수준, 샘플 문구). 자극 가능성 있음.", en: { name: "[Sample] Retinal 0.1% serum", evidence: "Retinoids have substantial RCT evidence for signs of aging (ingredient-level, sample text). May cause irritation." }, url: "#" },
+  { id: "m1", name: "[샘플] 세라마이드 장벽 크림", step: "moisturizer", price: 14900, concerns: ["dryness", "aging", "redness"], skinTypes: ["dry", "sensitive", "combo", "unsure"], texture: "rich", fragranceFree: true, vegan: false, sensitiveSafe: true, grade: "multiple", evidence: "세라마이드 함유 보습제는 장벽 회복 연구 다수(성분 수준, 샘플 문구).", en: { name: "[Sample] Ceramide barrier cream", evidence: "Ceramide-containing moisturizers have many barrier-repair studies (ingredient-level, sample text)." }, url: "#" },
+  { id: "m2", name: "[샘플] 가벼운 수분 젤크림", step: "moisturizer", price: 9900, concerns: ["acne", "dryness", "pores"], skinTypes: ["oily", "combo", "unsure"], texture: "light", fragranceFree: false, vegan: true, sensitiveSafe: true, grade: "brand", evidence: "브랜드 자체 사용자 평가(샘플 문구). 독립 연구 아님.", en: { name: "[Sample] Light hydrating gel cream", evidence: "Brand's own user rating (sample text). Not independent research." }, url: "#" },
+  { id: "f1", name: "[샘플] 무기자차 선크림 SPF50+", step: "sunscreen", price: 12000, concerns: ["pigmentation", "aging", "dryness", "acne", "redness"], skinTypes: all, texture: "rich", fragranceFree: true, vegan: true, sensitiveSafe: true, grade: "clinical", evidence: "자외선 차단은 색소·광노화 예방에 대한 근거가 확립됨. 제품 SPF/PA는 공인 시험 표기 기준(샘플 문구).", en: { name: "[Sample] Mineral sunscreen SPF50+", evidence: "Sun protection against pigmentation and photoaging is well established. Product SPF/PA follows certified test labelling (sample text)." }, url: "#" },
+  { id: "f2", name: "[샘플] 유기자차 선에센스 SPF50+", step: "sunscreen", price: 9500, concerns: ["pigmentation", "aging", "acne"], skinTypes: ["oily", "combo", "dry", "unsure"], texture: "light", fragranceFree: false, vegan: true, sensitiveSafe: false, grade: "clinical", evidence: "자외선 차단 일반 근거 확립. 일부 민감 피부에는 자극 가능(샘플 문구).", en: { name: "[Sample] Chemical sun essence SPF50+", evidence: "General sun-protection evidence is established. May irritate some sensitive skin (sample text)." }, url: "#" },
+  { id: "t3", name: "[샘플] 병풀 진정 토너", step: "toner", price: 13900, concerns: ["redness", "acne", "dryness"], skinTypes: all, texture: "light", fragranceFree: true, vegan: true, sensitiveSafe: true, grade: "emerging", evidence: "병풀 추출물의 진정 효과는 소규모 연구 단계(성분 수준, 샘플 문구).", en: { name: "[Sample] Centella calming toner", evidence: "Centella extract's soothing effect is at the small-study stage (ingredient-level, sample text)." }, url: "#" },
+  { id: "s4", name: "[샘플] 병풀 시카 진정 세럼", step: "serum", price: 16900, concerns: ["redness", "acne"], skinTypes: all, texture: "light", fragranceFree: true, vegan: true, sensitiveSafe: true, grade: "emerging", evidence: "병풀 성분의 홍조 완화는 초기 연구 단계(성분 수준, 샘플 문구).", en: { name: "[Sample] Centella calming serum", evidence: "Centella's effect on redness is at an early research stage (ingredient-level, sample text)." }, url: "#" },
 ];
 
 // Display text in the viewer's language (Korean is the base record).

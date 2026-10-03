@@ -1,6 +1,7 @@
 import { sessionFrom } from "../../../auth/session";
 import { deleteRoutine, listRoutines, saveRoutine } from "../../../db/routines";
 import { PRODUCTS } from "../../../lib/products";
+import { parseAnswers } from "../../../lib/recommend";
 
 export async function GET(req: Request) {
   const user = sessionFrom(req);
@@ -11,7 +12,9 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   const user = sessionFrom(req);
   if (!user) return Response.json({ error: "unauthorized" }, { status: 401 });
-  const { answers, productIds, total } = (await req.json().catch(() => ({}))) as { answers?: unknown; productIds?: string[]; total?: number };
+  const body = (await req.json().catch(() => ({}))) as { answers?: unknown; productIds?: string[]; total?: number };
+  const answers = parseAnswers(body.answers);
+  const { productIds, total } = body;
   const known = new Set(PRODUCTS.map((p) => p.id));
   if (!answers || !Array.isArray(productIds) || !productIds.length || productIds.length > 10 || !productIds.every((id) => known.has(id)) || typeof total !== "number") {
     return Response.json({ error: "bad_request" }, { status: 400 });

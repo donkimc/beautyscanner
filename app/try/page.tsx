@@ -4,11 +4,12 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Locale } from "../../i18n/locale";
 import { GRADE_LABEL, localized, type Grade } from "../../lib/products";
-import { budgetLabel, buildRoutine, type Answers, type Routine, type Warning } from "../../lib/recommend";
+import { budgetLabel, buildRoutine, parseAnswers, type Answers, type Routine, type Warning } from "../../lib/recommend";
 import AuthButton from "../_components/AuthButton";
 import { useConsent } from "../_components/ConsentProvider";
 import { useI18n } from "../_components/I18nProvider";
 import LanguageSwitch from "../_components/LanguageSwitch";
+import QIcon from "../_components/QIcon";
 
 // Static class names so Tailwind can see them.
 const GRADE_TEXT: Record<Grade, string> = {
@@ -39,6 +40,7 @@ export default function Try() {
   const [saved, setSaved] = useState<"no" | "yes" | "error">("no");
   const [notice, setNotice] = useState("");
   const allowAi = useRef(false);
+  const busy = useRef(false);
 
   const explainFor = useCallback(async (answers: Answers, r: Routine, loc: Locale) => {
     try {
@@ -66,7 +68,7 @@ export default function Try() {
   useEffect(() => {
     fetch("/api/auth/me").then((r) => r.json()).then((d) => setEmail(d.user?.email ?? null)).catch(() => {});
     if (new URLSearchParams(window.location.search).get("resume")) {
-      const a = load<Answers>(ANSWERS_KEY);
+      const a = parseAnswers(load<unknown>(ANSWERS_KEY)); // answers saved in an older format are ignored
       if (a) { setAns(a); run(a); }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,42 +76,68 @@ export default function Try() {
 
   // Re-write explanations when the language is switched on the result page.
   useEffect(() => {
-    if (phase === "result" && routine) explainFor(ans as Answers, routine, locale);
+    const a = parseAnswers(ans);
+    if (phase === "result" && routine && a) explainFor(a, routine, locale);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locale]);
 
-  async function pick(key: string, value: string | number | boolean) {
-    // Consent for sensitive survey data is requested right before the first answer is recorded.
-    if (!(await ensure(["sensitive"]))) return setNotice(m.survey.consentDeclined);
+  const total = m.survey.questions.length;
+  const advance = () => (idx + 1 < total ? setIdx(idx + 1) : setPhase("note"));
+
+  // Consent for sensitive survey data is requested right before the first answer is recorded.
+  async function consentOk() {
+    if (!(await ensure(["sensitive"]))) { setNotice(m.survey.consentDeclined); return false; }
     setNotice("");
+    return true;
+  }
+
+  // Single choice: highlight the pick briefly, then move on (like the original page).
+  async function pick(key: string, value: string | number | boolean) {
+    if (busy.current || !(await consentOk())) return;
+    busy.current = true;
     setAns((a) => ({ ...a, [key]: value }));
-    if (idx + 1 < m.survey.questions.length) setIdx(idx + 1);
-    else setPhase("note");
+    setTimeout(() => { busy.current = false; advance(); }, 260);
+  }
+
+  // Multiple choice: toggle; the user continues with the Next button.
+  async function toggle(key: string, value: string) {
+    if (!(await consentOk())) return;
+    setAns((a) => {
+      const cur = (a as Record<string, unknown>)[key];
+      const list = Array.isArray(cur) ? (cur as string[]) : [];
+      return { ...a, [key]: list.includes(value) ? list.filter((x) => x !== value) : [...list, value] };
+    });
   }
 
   function finish() {
-    const answers = ans as Answers;
+    const answers = parseAnswers(ans);
+    if (!answers) return restart();
     store(ANSWERS_KEY, answers);
     run(answers);
   }
 
   async function save() {
-    if (!email || !routine) {
-      store(ANSWERS_KEY, ans);
+    const answers = parseAnswers(ans);
+    if (!email || !routine || !answers) {
+      if (answers) store(ANSWERS_KEY, answers);
       window.location.assign(`/login?next=${encodeURIComponent("/try?resume=1")}`);
       return;
     }
     const res = await fetch("/api/routines", {
       method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ answers: ans, productIds: routine.items.map((p) => p.id), total: routine.total }),
+      body: JSON.stringify({ answers, productIds: routine.items.map((p) => p.id), total: routine.total }),
     }).catch(() => null);
     setSaved(res?.ok ? "yes" : "error");
   }
 
-  function restart() { setPhase("survey"); setIdx(0); setAns({ note: "" }); setRoutine(null); setSaved("no"); setNotice(""); }
+  function restart() { busy.current = false; setPhase("survey"); setIdx(0); setAns({ note: "" }); setRoutine(null); setSaved("no"); setNotice(""); }
 
   const warningText = (w: Warning) => (w.code === "missing" ? m.result.warnings.missing(w.n) : m.result.warnings[w.code]);
   const q = m.survey.questions[idx];
+  const isMulti = q.type === "multi";
+  const cur = (ans as Record<string, unknown>)[q.key];
+  const isOn = (v: string | number | boolean) => (isMulti ? Array.isArray(cur) && cur.includes(v) : cur === v);
+  const hasPick = Array.isArray(cur) && cur.length > 0;
   const card = "rounded-card bg-surface p-6 shadow-phone";
 
   return (
@@ -126,15 +154,33 @@ export default function Try() {
           <div className="mb-5 h-1 overflow-hidden rounded bg-border/70">
             <span className="block h-full bg-accent transition-all duration-300" style={{ width: `${((idx + 1) / (m.survey.questions.length + 1)) * 100}%` }} />
           </div>
-          <p className="eyebrow-faint">{m.survey.step(idx + 1, m.survey.questions.length)}</p>
-          <h1 className="mt-1 whitespace-pre-line font-display text-2xl font-semibold leading-tight">{q.title}</h1>
+          <div className="mb-5 flex size-[52px] items-center justify-center rounded-full bg-accent-soft text-accent"><QIcon name={q.icon} /></div>
+          <p className="eyebrow-faint">{m.survey.step(idx + 1, total)}</p>
+          <h1 className="mt-1 whitespace-pre-line font-display text-[1.7rem] font-semibold leading-tight">{q.title}</h1>
           <p className="mb-5 mt-2 text-sm text-ink-soft">{q.sub}</p>
-          <div className="grid gap-2.5">
-            {q.options.map((o) => (
-              <button key={o.label} onClick={() => pick(q.key, o.value)}
-                className="rounded-2xl border-[1.5px] border-border bg-surface p-4 text-left text-base transition hover:border-accent active:bg-accent-soft active:scale-[0.99]">{o.label}</button>
-            ))}
+          <div className="grid gap-2.5" role={isMulti ? "group" : undefined}>
+            {q.options.map((o) => {
+              const on = isOn(o.value);
+              return (
+                <button
+                  key={o.label} aria-pressed={on}
+                  onClick={() => (isMulti ? toggle(q.key, String(o.value)) : pick(q.key, o.value))}
+                  className={`flex min-h-11 items-center justify-between gap-3 rounded-2xl border-[1.5px] p-4 text-left text-base transition active:scale-[0.99] ${on ? "border-accent bg-accent-soft" : "border-border bg-surface hover:border-accent"}`}
+                >
+                  <span>{o.label}</span>
+                  <span aria-hidden className={`flex size-5 shrink-0 items-center justify-center rounded-full border-[1.5px] text-[11px] ${on ? "border-accent bg-accent text-accent-ink" : "border-border"}`}>{on ? "✓" : ""}</span>
+                </button>
+              );
+            })}
           </div>
+          {isMulti && (
+            <div className="mt-4">
+              <button disabled={!hasPick} onClick={advance} className="flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-ink py-3.5 font-bold text-bg transition active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-35">
+                {m.survey.next}{hasPick ? ` · ${m.survey.selectedCount(Array.isArray(cur) ? cur.length : 0)}` : ""}
+              </button>
+              {!hasPick && <p className="mt-2 text-center text-xs text-ink-faint">{m.survey.pickAtLeastOne}</p>}
+            </div>
+          )}
           {notice && <p role="alert" className="mt-3 rounded-2xl bg-warn-soft border border-dashed border-warn p-3 text-sm text-ink">{notice}</p>}
           {idx > 0 && <button className="mt-3 text-sm text-ink-soft" onClick={() => setIdx(idx - 1)}>{m.common.back}</button>}
         </section>

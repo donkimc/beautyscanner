@@ -32,8 +32,8 @@ test("English and Korean messages have identical structure", () => {
   assert.deepEqual(shape(messages.en), shape(messages.ko));
 });
 
-test("survey option values match across languages", () => {
-  const values = (l: "ko" | "en") => messages[l].survey.questions.map((q) => q.options.map((o) => o.value));
+test("survey option values and types match across languages", () => {
+  const values = (l: "ko" | "en") => messages[l].survey.questions.map((q) => [q.key, q.type, q.icon, q.options.map((o) => o.value)]);
   assert.deepEqual(values("en"), values("ko"));
 });
 
@@ -73,4 +73,16 @@ test("price bands match the original survey page exactly", () => {
   assert.equal(q("ko").title.replace("\n", " "), "선호하는 예산대는?");
   assert.equal(q("ko").sub, "제품 구매 시 기준이 되는 가격대예요");
   assert.deepEqual(q("ko").options.map((o) => o.value), [30000, 70000, 150000, 1000000]);
+});
+
+test("the five survey questions match the original page's wording", () => {
+  const ko = messages.ko.survey.questions;
+  assert.deepEqual(ko.map((q) => q.key), ["skinType", "concerns", "priority", "budget", "texture"]);
+  assert.deepEqual(ko.map((q) => q.type), ["single", "multi", "single", "single", "single"]);
+  assert.deepEqual(ko.map((q) => q.title.replace("\n", " ")), ["피부 타입은 무엇인가요?", "가장 신경 쓰이는 피부 고민은?", "가장 먼저 개선하고 싶은 것은?", "선호하는 예산대는?", "선호하는 제형이 있나요?"]);
+  assert.deepEqual(ko[0].options.map((o) => o.label), ["건성", "지성", "복합성", "민감성", "잘 모르겠음"]);
+  assert.deepEqual(ko[1].options.map((o) => o.label), ["여드름·트러블", "모공", "색소침착", "주름·탄력", "홍조", "건조함"]);
+  assert.deepEqual(ko[2].options.map((o) => o.label), ["피부 톤 개선", "수분 채우기", "트러블 진정", "탄력 케어", "모공 관리"]);
+  assert.deepEqual(ko[4].options.map((o) => o.label), ["가벼운 제형", "리치한 제형", "무향 제품", "저자극 제품", "비건·클린뷰티"]);
+  assert.deepEqual(ko.map((q) => q.sub), ["가장 가깝다고 느끼는 타입을 선택해주세요", "해당하는 항목을 모두 선택해주세요", "우선순위 하나만 골라주세요", "제품 구매 시 기준이 되는 가격대예요", "사용감을 기준으로 골라주세요"]);
 });

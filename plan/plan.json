@@ -86,6 +86,11 @@
       "status": "done"
     },
     {
+      "id": "m13d",
+      "name": "Survey matches the original's five questions: multiple concerns, top priority, texture preference",
+      "status": "done"
+    },
+    {
       "id": "m14",
       "name": "Set RESEND_API_KEY and EMAIL_FROM (verified domain) on Railway, then test real email login",
       "status": "todo"
@@ -119,6 +124,7 @@
     "Email login cannot work in production until a Resend API key and a verified sender domain are set",
     "Affiliate income must not influence evidence grades",
     "Consents given before signup are logged under an anonymous ID and are not linked to the account afterwards",
-    "Buy links are placeholders: no Coupang/Naver integration exists; products and prices are sample data, so the higher price bands (7만원+) can't be filled realistically yet"
+    "Buy links are placeholders: no Coupang/Naver integration exists; products and prices are sample data, so the higher price bands (7만원+) can't be filled realistically yet",
+    "Product attributes (concerns, texture, fragrance-free, vegan, low-irritation) are invented sample data; they must come from real product data before launch"
   ]
 }

@@ -1,23 +1,216 @@
 {
   "routines": [
-    { "name": "dry skin, 5 steps, 7-15만원 band",
-      "answers": { "skinType": "dry", "concern": "dryness", "sensitive": false, "budget": 150000, "steps": 5, "note": "" },
-      "expect": { "steps": ["cleanser", "toner", "serum", "moisturizer", "sunscreen"], "withinBudget": true, "noWarnings": true } },
-    { "name": "sensitive skin never gets irritant-flagged products",
-      "answers": { "skinType": "sensitive", "concern": "acne", "sensitive": true, "budget": 150000, "steps": 5, "note": "" },
-      "expect": { "allSensitiveSafe": true } },
-    { "name": "3-step routine under 30k includes sunscreen",
-      "answers": { "skinType": "oily", "concern": "acne", "sensitive": false, "budget": 30000, "steps": 3, "note": "" },
-      "expect": { "steps": ["cleanser", "moisturizer", "sunscreen"], "withinBudget": true } },
-    { "name": "impossible budget is reported, not hidden",
-      "answers": { "skinType": "dry", "concern": "dryness", "sensitive": true, "budget": 10000, "steps": 5, "note": "" },
-      "expect": { "hasWarning": true } }
+    {
+      "name": "dry skin, hydration priority, 7-15만원: full 5 steps with the hydration serum",
+      "answers": {
+        "skinType": "dry",
+        "concerns": [
+          "dryness"
+        ],
+        "priority": "hydration",
+        "budget": 150000,
+        "texture": "light",
+        "note": ""
+      },
+      "expect": {
+        "steps": [
+          "cleanser",
+          "toner",
+          "serum",
+          "moisturizer",
+          "sunscreen"
+        ],
+        "withinBudget": true,
+        "noWarnings": true,
+        "includes": [
+          "s1"
+        ]
+      }
+    },
+    {
+      "name": "redness is treated as sensitive: only low-irritation products",
+      "answers": {
+        "skinType": "combo",
+        "concerns": [
+          "redness",
+          "acne"
+        ],
+        "priority": "soothing",
+        "budget": 150000,
+        "texture": "light",
+        "note": ""
+      },
+      "expect": {
+        "allSensitiveSafe": true,
+        "includes": [
+          "s4"
+        ]
+      }
+    },
+    {
+      "name": "low-irritation texture preference: only low-irritation products",
+      "answers": {
+        "skinType": "oily",
+        "concerns": [
+          "acne"
+        ],
+        "priority": "soothing",
+        "budget": 70000,
+        "texture": "low_irritation",
+        "note": ""
+      },
+      "expect": {
+        "allSensitiveSafe": true
+      }
+    },
+    {
+      "name": "under 3만원: short 3-step routine including sunscreen",
+      "answers": {
+        "skinType": "oily",
+        "concerns": [
+          "acne",
+          "pores"
+        ],
+        "priority": "pores",
+        "budget": 30000,
+        "texture": "light",
+        "note": ""
+      },
+      "expect": {
+        "steps": [
+          "cleanser",
+          "moisturizer",
+          "sunscreen"
+        ],
+        "withinBudget": true
+      }
+    },
+    {
+      "name": "tone priority with pigmentation brings in the niacinamide serum",
+      "answers": {
+        "skinType": "oily",
+        "concerns": [
+          "pigmentation"
+        ],
+        "priority": "tone",
+        "budget": 150000,
+        "texture": "light",
+        "note": ""
+      },
+      "expect": {
+        "includes": [
+          "s2"
+        ]
+      }
+    },
+    {
+      "name": "multiple concerns (acne + pores): the BHA toner covers both",
+      "answers": {
+        "skinType": "oily",
+        "concerns": [
+          "acne",
+          "pores"
+        ],
+        "priority": "pores",
+        "budget": 70000,
+        "texture": "light",
+        "note": ""
+      },
+      "expect": {
+        "includes": [
+          "t2"
+        ]
+      }
+    },
+    {
+      "name": "fragrance-free texture: every product is fragrance-free",
+      "answers": {
+        "skinType": "dry",
+        "concerns": [
+          "dryness",
+          "aging"
+        ],
+        "priority": "firmness",
+        "budget": 150000,
+        "texture": "fragrance_free",
+        "note": ""
+      },
+      "expect": {
+        "allFragranceFree": true
+      }
+    },
+    {
+      "name": "vegan & clean texture: every product is vegan",
+      "answers": {
+        "skinType": "unsure",
+        "concerns": [
+          "pigmentation",
+          "aging"
+        ],
+        "priority": "tone",
+        "budget": 150000,
+        "texture": "vegan_clean",
+        "note": ""
+      },
+      "expect": {
+        "allVegan": true
+      }
+    },
+    {
+      "name": "skin type 'not sure' still builds a complete routine",
+      "answers": {
+        "skinType": "unsure",
+        "concerns": [
+          "dryness"
+        ],
+        "priority": "hydration",
+        "budget": 70000,
+        "texture": "rich",
+        "note": ""
+      },
+      "expect": {
+        "steps": [
+          "cleanser",
+          "toner",
+          "serum",
+          "moisturizer",
+          "sunscreen"
+        ],
+        "noWarnings": true
+      }
+    }
   ],
   "guardrails": [
-    { "name": "plain rephrase is accepted", "text": "건조함 고민에 맞는 보습 성분이에요.", "evidence": "보습 효과 보고(성분 수준)", "safe": true },
-    { "name": "diagnosis wording is rejected", "text": "이 제품은 아토피를 치료해요.", "evidence": "보습 효과 보고", "safe": false },
-    { "name": "invented percentage is rejected", "text": "임상에서 87% 개선됐어요.", "evidence": "보습 효과 보고", "safe": false },
-    { "name": "percentage present in evidence is accepted", "text": "시험에서 12% 개선이 보고됐어요.", "evidence": "브랜드 시험 12% 개선", "safe": true },
-    { "name": "overlong text is rejected", "text": "가", "repeat": 300, "evidence": "", "safe": false }
+    {
+      "name": "plain rephrase is accepted",
+      "text": "건조함 고민에 맞는 보습 성분이에요.",
+      "evidence": "보습 효과 보고(성분 수준)",
+      "safe": true
+    },
+    {
+      "name": "diagnosis wording is rejected",
+      "text": "이 제품은 아토피를 치료해요.",
+      "evidence": "보습 효과 보고",
+      "safe": false
+    },
+    {
+      "name": "invented percentage is rejected",
+      "text": "임상에서 87% 개선됐어요.",
+      "evidence": "보습 효과 보고",
+      "safe": false
+    },
+    {
+      "name": "percentage present in evidence is accepted",
+      "text": "시험에서 12% 개선이 보고됐어요.",
+      "evidence": "브랜드 시험 12% 개선",
+      "safe": true
+    },
+    {
+      "name": "overlong text is rejected",
+      "text": "가",
+      "repeat": 300,
+      "evidence": "",
+      "safe": false
+    }
   ]
 }
