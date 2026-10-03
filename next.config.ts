@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Database drivers are loaded at runtime on the server only.
+  serverExternalPackages: ["pg", "@electric-sql/pglite"],
 };
 
 export default nextConfig;

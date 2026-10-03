@@ -7,11 +7,18 @@ export const OAUTH_COOKIE = "bs_oauth";
 export const SESSION_TTL_SECONDS = 60 * 60 * 24 * 7;
 
 export interface SessionUser {
-  sub: string;
+  uid: string;
   email: string;
   name: string;
   picture?: string;
 }
+
+// Reads and verifies the session cookie from a request.
+export function sessionFromHeader(cookie: string | null): SessionUser | null {
+  return verifyToken<SessionUser>(readCookie(cookie, SESSION_COOKIE), authSecret());
+}
+
+export const sessionFrom = (req: Request): SessionUser | null => sessionFromHeader(req.headers.get("cookie"));
 
 const b64 = (s: string | Buffer) => Buffer.from(s).toString("base64url");
 
@@ -61,6 +68,10 @@ export function safeNext(next: string | null | undefined): string {
   return next && next.startsWith("/") && !next.startsWith("//") && !next.includes("\\") ? next : "/";
 }
 
+// Production must set AUTH_SECRET. In development a random per-process secret is used so login works out of the box.
 export function authSecret(): string {
-  return process.env.AUTH_SECRET ?? "";
+  if (process.env.AUTH_SECRET) return process.env.AUTH_SECRET;
+  if (process.env.NODE_ENV === "production") return "";
+  const g = globalThis as unknown as { __bsDevSecret?: string };
+  return (g.__bsDevSecret ??= randomString(32));
 }

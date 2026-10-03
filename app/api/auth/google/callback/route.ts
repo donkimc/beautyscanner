@@ -1,4 +1,5 @@
 import { fetchProfile, isConfigured, originOf } from "../../../../../auth/google";
+import { upsertUser } from "../../../../../db/users";
 import {
   OAUTH_COOKIE, SESSION_COOKIE, SESSION_TTL_SECONDS, authSecret, cookieHeader, createToken, readCookie, verifyToken,
   type SessionUser,
@@ -33,7 +34,8 @@ export async function GET(req: Request) {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     });
     if (!p.email || p.email_verified === false) return fail("unverified_email");
-    const user: SessionUser = { sub: p.sub, email: p.email, name: p.name ?? p.email, picture: p.picture };
+    const dbUser = await upsertUser(p.email, p.name ?? null, null);
+    const user: SessionUser = { uid: dbUser.id, email: dbUser.email, name: dbUser.name ?? p.name ?? p.email.split("@")[0], picture: p.picture };
     const headers = new Headers({ location: `${origin}${saved.next}` });
     headers.append("set-cookie", cookieHeader(SESSION_COOKIE, createToken(user, authSecret(), SESSION_TTL_SECONDS), SESSION_TTL_SECONDS, secure));
     headers.append("set-cookie", cookieHeader(OAUTH_COOKIE, "", 0, secure));

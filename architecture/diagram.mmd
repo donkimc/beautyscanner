@@ -1,12 +1,23 @@
 flowchart LR
-  user([User]) --> landing["app/ (landing, /try survey, /login)"]
-  landing --> lib["lib/ (products, recommend rules)"]
-  landing --> agent["agent/ (explainer: prompt + guardrails)"]
-  landing --> design["design/ (tokens.json -> app/tokens.css -> Tailwind @theme)"]
-  landing --> authlayer["auth/ (Google OAuth + signed session cookie)"]
-  authlayer -. "code flow + PKCE" .-> google[(Google OAuth)]
+  user([User]) --> app["app/ (landing, /try, /login, /account, legal pages, API routes)"]
+  app --> i18n["i18n/ (ko/en messages, language detection)"]
+  app --> consent["consent/ (purposes + versions)"]
+  app --> content["content/ (terms, privacy, security text)"]
+  app --> lib["lib/ (products, recommend rules)"]
+  app --> agent["agent/ (explainer: prompt + guardrails)"]
+  app --> authlayer["auth/ (session cookie, Google OAuth)"]
+  app --> db["db/ (users, tokens, consents, routines)"]
+  app --> email["email/ (templates + Resend sender)"]
+  app --> design["design/ (tokens.json -> app/tokens.css -> Tailwind @theme)"]
+  authlayer --> db
+  authlayer --> email
   agent --> lib
-  agent -. "optional, server-side key" .-> deepseek[(DeepSeek API)]
   lib --> design
+  lib --> i18n
+  db -. "DATABASE_URL" .-> pg[(Railway Postgres)]
+  db -. "dev/test only" .-> pglite[(PGlite in memory)]
+  email -. "RESEND_API_KEY" .-> resend[(Resend)]
+  authlayer -. "code flow + PKCE" .-> google[(Google OAuth)]
+  agent -. "optional, consent, server-side key" .-> deepseek[(DeepSeek API)]
   evals["evals/ (scenario checks)"] --> lib
   evals --> agent

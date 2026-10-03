@@ -1,13 +1,16 @@
 import { EXPLAINER, buildPrompt, parseExplanations, templateExplanation } from "../../../agent/explainer";
+import { isLocale, type Locale } from "../../../i18n/locale";
 import { PRODUCTS } from "../../../lib/products";
 import type { Answers } from "../../../lib/recommend";
 
+// `allowAi` is true only if the user consented to the overseas AI transfer.
 export async function POST(req: Request) {
-  const { answers, productIds } = (await req.json()) as { answers: Answers; productIds: string[] };
-  const products = PRODUCTS.filter((p) => productIds.includes(p.id));
-  const templates = Object.fromEntries(products.map((p) => [p.id, templateExplanation(answers, p)]));
+  const body = (await req.json()) as { answers: Answers; productIds: string[]; locale?: string; allowAi?: boolean };
+  const locale: Locale = isLocale(body.locale) ? body.locale : "ko";
+  const products = PRODUCTS.filter((p) => body.productIds.includes(p.id));
+  const templates = Object.fromEntries(products.map((p) => [p.id, templateExplanation(body.answers, p, locale)]));
   const key = process.env.DEEPSEEK_API_KEY;
-  if (!key) return Response.json({ ai: false, explanations: templates });
+  if (!key || !body.allowAi) return Response.json({ ai: false, explanations: templates });
 
   try {
     const res = await fetch(EXPLAINER.endpoint, {
@@ -17,13 +20,13 @@ export async function POST(req: Request) {
         model: process.env.DEEPSEEK_MODEL ?? EXPLAINER.defaultModel,
         max_tokens: EXPLAINER.maxTokens,
         response_format: { type: "json_object" },
-        messages: [{ role: "user", content: buildPrompt(answers, products) }],
+        messages: [{ role: "user", content: buildPrompt(body.answers, products, locale) }],
       }),
     });
     if (!res.ok) throw new Error(`API ${res.status}`);
     const data = await res.json();
     const text: string = data.choices?.[0]?.message?.content ?? "{}";
-    return Response.json({ ai: true, explanations: parseExplanations(text, answers, products) });
+    return Response.json({ ai: true, explanations: parseExplanations(text, body.answers, products, locale) });
   } catch {
     return Response.json({ ai: false, explanations: templates });
   }

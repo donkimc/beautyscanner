@@ -1,7 +1,7 @@
 // Decorative phone mockup: a scan beam sweeps down while evidence dots pop in.
 const ROWS = [
   { dot: "bg-grade-clinical", delay: "0.6s", w: "w-16" },
-  { dot: "bg-grade-multiple", delay: "1.4s", w: "w-20" },
+  { dot: "bg-grade-multiple", delay: "1.4s", w: "w-16" },
   { dot: "bg-grade-brand", delay: "2.2s", w: "w-14" },
   { dot: "bg-grade-emerging", delay: "3s", w: "w-16" },
 ];

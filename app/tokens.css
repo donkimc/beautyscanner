@@ -1,18 +1,21 @@
 /* Generated from design/tokens.json. Do not edit. */
 @theme {
-  --color-bg: #f6f4ef;
-  --color-ink: #1f1b24;
-  --color-muted: #6b6872;
-  --color-line: #dedad0;
+  --color-bg: #f4f1ea;
+  --color-ink: #16211c;
+  --color-muted: #55645b;
+  --color-line: #d9d5c8;
   --color-card: #ffffff;
-  --color-warn-bg: #fff3d6;
-  --color-warn-ink: #8a5a00;
-  --color-brand: #8f3a62;
-  --color-brand-soft: #f5e6ee;
-  --color-grade-clinical: #2f6f4e;
-  --color-grade-multiple: #8f3a62;
-  --color-grade-brand: #5f5f5f;
-  --color-grade-emerging: #b07a1f;
+  --color-brand: #b4532f;
+  --color-brand-soft: #f3e1d8;
+  --color-sage: #2f5d4b;
+  --color-sage-soft: #e2ebe0;
+  --color-warn-bg: #fbefd2;
+  --color-warn-ink: #7a4f00;
+  --color-danger: #b42318;
+  --color-grade-clinical: #1d7a5f;
+  --color-grade-multiple: #3f5ba9;
+  --color-grade-brand: #6a6f6c;
+  --color-grade-emerging: #b7791f;
   --radius-card: 1.75rem;
   --radius-product: 1.4rem;
   --radius-button: 0.9rem;

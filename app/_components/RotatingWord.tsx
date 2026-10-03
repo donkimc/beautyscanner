@@ -1,18 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-const WORDS = ["건조함", "트러블", "색소·잡티", "주름·탄력"];
+import { useI18n } from "./I18nProvider";
 
 export default function RotatingWord() {
+  const { m } = useI18n();
+  const words = m.landing.words;
   const [i, setI] = useState(0);
   useEffect(() => {
-    const t = setInterval(() => setI((n) => (n + 1) % WORDS.length), 2200);
+    const t = setInterval(() => setI((n) => (n + 1) % words.length), 2200);
     return () => clearInterval(t);
-  }, []);
+  }, [words.length]);
   return (
-    <span key={i} className="inline-block animate-pop font-bold text-brand">
-      {WORDS[i]}
+    <span key={`${i}-${words[0]}`} className="inline-block animate-pop font-bold text-brand">
+      {words[i % words.length]}
     </span>
   );
 }

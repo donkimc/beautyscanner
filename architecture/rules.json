@@ -2,29 +2,53 @@
   "description": "Allowed import directions between top-level folders. Enforced by tests/architecture.test.ts.",
   "layers": {
     "design": [],
+    "i18n": [],
+    "db": [],
+    "consent": [
+      "i18n"
+    ],
+    "content": [
+      "i18n"
+    ],
+    "email": [
+      "i18n"
+    ],
     "lib": [
-      "design"
+      "design",
+      "i18n"
     ],
     "agent": [
       "lib",
-      "design"
+      "design",
+      "i18n"
+    ],
+    "auth": [
+      "db",
+      "email",
+      "i18n",
+      "consent"
     ],
     "app": [
       "lib",
       "agent",
       "design",
-      "auth"
+      "auth",
+      "db",
+      "email",
+      "i18n",
+      "consent",
+      "content"
     ],
     "evals": [
       "lib",
       "agent",
-      "design"
+      "design",
+      "i18n"
     ],
     "scripts": [
       "lib",
       "agent",
       "design"
-    ],
-    "auth": []
+    ]
   }
 }

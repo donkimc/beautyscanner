@@ -1,8 +1,13 @@
+@import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
+@import "@fontsource/noto-serif-kr/700.css";
+@import "@fontsource-variable/fraunces/index.css";
 @import "tailwindcss";
 @import "./tokens.css";
 
 @theme {
-  --font-sans: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  /* Pretendard (body) and Noto Serif KR + Fraunces (headlines): all SIL Open Font License, free for commercial use. */
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-display: "Fraunces Variable", "Noto Serif KR", "Apple Myungjo", serif;
 
   --animate-float: float 9s ease-in-out infinite;
   --animate-bob: bob 5s ease-in-out infinite;

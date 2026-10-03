@@ -1,4 +1,6 @@
-import type { Product } from "../lib/products";
+import type { Locale } from "../i18n/locale";
+import { messages } from "../i18n/messages";
+import { localized, type Product } from "../lib/products";
 import type { Answers } from "../lib/recommend";
 
 // The explainer agent only rephrases data it is given. It never chooses products or evidence grades.
@@ -8,24 +10,26 @@ export const EXPLAINER = {
   endpoint: "https://api.deepseek.com/chat/completions",
   defaultModel: "deepseek-chat",
   maxTokens: 800,
-  maxChars: 220,
-  bannedTerms: ["진단", "치료", "완치", "처방", "치유", "의학적으로 입증"],
+  maxChars: 240,
+  bannedTerms: ["진단", "치료", "완치", "처방", "치유", "의학적으로 입증", "cure", "cures", "treat ", "treats", "treatment", "diagnos", "heals", "clinically proven", "guarantee", "prescri"],
 } as const;
 
-const CONCERN: Record<Answers["concern"], string> = {
-  dryness: "건조함",
-  acne: "트러블",
-  pigmentation: "색소·잡티",
-  aging: "노화 징후",
-};
-
-export function concernLabel(c: Answers["concern"]): string {
-  return CONCERN[c];
+export function concernLabel(c: Answers["concern"], locale: Locale): string {
+  return messages[locale].result.concerns[c];
 }
 
-export function buildPrompt(a: Answers, products: Product[]): string {
-  const data = products.map((p) => ({ id: p.id, name: p.name, step: p.step, grade: p.grade, evidence: p.evidence }));
-  return `사용자 설문: 피부타입=${a.skinType}, 고민=${a.concern}, 민감성=${a.sensitive}, 예산=${a.budget}원, 추가메모="${a.note.slice(0, 200)}"
+export function buildPrompt(a: Answers, products: Product[], locale: Locale = "ko"): string {
+  const data = products.map((p) => ({ id: p.id, ...localized(p, locale), step: p.step, grade: p.grade }));
+  const profile = `skinType=${a.skinType}, concern=${a.concern}, sensitive=${a.sensitive}, budget=${a.budget} KRW, note="${a.note.slice(0, 200)}"`;
+  if (locale === "en") {
+    return `User survey: ${profile}
+Products (JSON): ${JSON.stringify(data)}
+
+For each product, explain in 1-2 English sentences why it suits this user.
+Rules: never invent studies or numbers beyond the supplied evidence. No diagnosis or treatment wording. If the evidence is ingredient-level, say so.
+Output JSON only: {"<id>": "explanation", ...}`;
+  }
+  return `사용자 설문: ${profile}
 제품 목록(JSON): ${JSON.stringify(data)}
 
 각 제품이 이 사용자에게 왜 맞는지 한국어 1~2문장으로 설명하세요.
@@ -33,19 +37,21 @@ export function buildPrompt(a: Answers, products: Product[]): string {
 JSON만 출력: {"<id>": "설명", ...}`;
 }
 
-export function templateExplanation(a: Answers, p: Pick<Product, "evidence">): string {
-  return `'${CONCERN[a.concern]}' 고민과 예산 ${a.budget.toLocaleString()}원 이하 조건에 맞춰 골랐어요. ${p.evidence}`;
+export function templateExplanation(a: Answers, p: Product, locale: Locale = "ko"): string {
+  const m = messages[locale].result;
+  return `${m.why(m.concerns[a.concern], a.budget.toLocaleString())} ${localized(p, locale).evidence}`;
 }
 
 // A model sentence is accepted only if it passes every guardrail.
 export function isSafe(text: string, evidence: string): boolean {
   if (text.length === 0 || text.length > EXPLAINER.maxChars) return false;
-  if (EXPLAINER.bannedTerms.some((t) => text.includes(t))) return false;
+  const lower = text.toLowerCase();
+  if (EXPLAINER.bannedTerms.some((t) => lower.includes(t))) return false;
   const figures = text.match(/\d+(\.\d+)?\s*%/g) ?? [];
   return figures.every((f) => evidence.includes(f.replace(/\s/g, "")));
 }
 
-export function parseExplanations(raw: string, a: Answers, products: Product[]): Record<string, string> {
+export function parseExplanations(raw: string, a: Answers, products: Product[], locale: Locale = "ko"): Record<string, string> {
   let parsed: Record<string, unknown> = {};
   try {
     parsed = JSON.parse(raw.slice(raw.indexOf("{"), raw.lastIndexOf("}") + 1));
@@ -55,7 +61,7 @@ export function parseExplanations(raw: string, a: Answers, products: Product[]):
   return Object.fromEntries(
     products.map((p) => {
       const t = parsed[p.id];
-      return [p.id, typeof t === "string" && isSafe(t, p.evidence) ? t : templateExplanation(a, p)];
+      return [p.id, typeof t === "string" && isSafe(t, localized(p, locale).evidence) ? t : templateExplanation(a, p, locale)];
     }),
   );
 }

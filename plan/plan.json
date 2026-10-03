@@ -4,10 +4,15 @@
   "decisions": {
     "stack": "Next.js + TypeScript on Railway",
     "recommendation": "Rules over curated data decide products; AI only explains them",
-    "signup": "After the survey; real Google login (own OAuth + signed cookie, no DB) now; saved routines in a database later",
+    "signup": "Passwordless email confirmation link (single use, 15 min) plus optional Google login; sessions are signed cookies",
     "ai_provider": "DeepSeek (server-side key, optional; template fallback)",
     "styling": "Tailwind CSS v4; design tokens in design/tokens.json generate the @theme block",
-    "newsletter": "Mock only: validates and confirms, stores and sends nothing"
+    "newsletter": "Mock only: validates and confirms, stores and sends nothing",
+    "database": "Railway Postgres (users, login_tokens, consents, routines); in-memory PGlite for local dev and tests",
+    "languages": "Korean and English, chosen from the browser/phone Accept-Language, with a manual switch (cookie)",
+    "consent": "Popup whenever needed (terms at login, sensitive survey data at first answer, overseas AI transfer, marketing at newsletter), versioned and logged",
+    "design": "Sage & Clay: warm paper background, deep ink, clay accent, sage surfaces; Pretendard body with Noto Serif KR + Fraunces headlines (all SIL OFL, free for commercial use)",
+    "legal": "Terms, privacy policy and security pages in both languages (drafts) plus SECURITY.md"
   },
   "milestones": [
     {
@@ -17,7 +22,7 @@
     },
     {
       "id": "m2",
-      "name": "Result page with evidence badges, AD labels, consent",
+      "name": "Result page with evidence badges, AD labels",
       "status": "done"
     },
     {
@@ -32,37 +37,67 @@
     },
     {
       "id": "m5",
-      "name": "Tailwind redesign",
+      "name": "Tailwind v4 with design tokens",
       "status": "done"
     },
     {
       "id": "m6",
-      "name": "Google login (code flow + PKCE, signed session cookie)",
-      "status": "done"
-    },
-    {
-      "id": "m7",
       "name": "Mock newsletter section",
       "status": "done"
     },
     {
+      "id": "m7",
+      "name": "Railway Postgres: users, tokens, consents, routines",
+      "status": "done"
+    },
+    {
       "id": "m8",
-      "name": "Set Google OAuth credentials on Railway and test real sign-in",
-      "status": "todo"
+      "name": "Email confirmation-link login and Google login",
+      "status": "done"
     },
     {
       "id": "m9",
-      "name": "Real product and evidence data with citations",
-      "status": "todo"
+      "name": "Korean/English from phone/browser language, with switch",
+      "status": "done"
     },
     {
       "id": "m10",
-      "name": "Save routines to the account (Railway Postgres)",
-      "status": "todo"
+      "name": "Consent popups with versioned audit log",
+      "status": "done"
     },
     {
       "id": "m11",
-      "name": "Coupang Partners / Naver adapter behind a retailer interface",
+      "name": "Terms, privacy and security pages, SECURITY.md",
+      "status": "done"
+    },
+    {
+      "id": "m12",
+      "name": "Saved routines, account page, data export and deletion",
+      "status": "done"
+    },
+    {
+      "id": "m13",
+      "name": "Redesign: Sage & Clay palette and Pretendard/serif fonts",
+      "status": "done"
+    },
+    {
+      "id": "m14",
+      "name": "Set RESEND_API_KEY and EMAIL_FROM (verified domain) on Railway, then test real email login",
+      "status": "todo"
+    },
+    {
+      "id": "m15",
+      "name": "Optional: Google OAuth credentials on Railway",
+      "status": "todo"
+    },
+    {
+      "id": "m16",
+      "name": "Replace sample products with cited evidence; lawyer review of legal pages; real contact address",
+      "status": "todo"
+    },
+    {
+      "id": "m17",
+      "name": "Retailer adapter (Coupang Partners / Naver)",
       "status": "todo"
     }
   ],
@@ -75,8 +110,9 @@
   "risks": [
     "Sample data must be replaced with cited evidence before launch",
     "Ingredient-level evidence must not be presented as product-level",
-    "Survey answers are sensitive; overseas AI transfer needs explicit consent and legal review",
+    "Survey answers are sensitive; legal pages are drafts and need a lawyer's review, including the DeepSeek overseas transfer",
+    "Email login cannot work in production until a Resend API key and a verified sender domain are set",
     "Affiliate income must not influence evidence grades",
-    "Google login cannot be verified end to end until real OAuth credentials are configured"
+    "Consents given before signup are logged under an anonymous ID and are not linked to the account afterwards"
   ]
 }

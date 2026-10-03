@@ -43,3 +43,21 @@ test("secrets are read only on the server", () => {
     assert.ok(!readFileSync(file, "utf8").includes("process.env"), `${file.slice(root.length)} reads env in a client file`);
   }
 });
+
+test("every top-level source folder is declared in architecture/rules.json", () => {
+  const declared = new Set(Object.keys(rules.layers));
+  const ignore = new Set(["node_modules", "public", "architecture", "plan", "tests"]);
+  for (const d of readdirSync(root)) {
+    if (d.startsWith(".") || ignore.has(d) || !statSync(join(root, d)).isDirectory()) continue;
+    assert.ok(declared.has(d), `folder ${d}/ is not in architecture/rules.json`);
+  }
+});
+
+test("client components never import server-only modules", () => {
+  for (const file of files(join(root, "app")).filter((f) => /\.tsx$/.test(f))) {
+    const src = readFileSync(file, "utf8");
+    if (!src.startsWith('"use client"')) continue;
+    const specs = [...src.matchAll(/from\s+["']([^"']+)["']/g)].map((m) => m[1]);
+    assert.ok(!specs.some((x) => /\/(db|email)\/|i18n\/server|auth\/google/.test(x)), `${file.slice(root.length)} imports server-only code`);
+  }
+});

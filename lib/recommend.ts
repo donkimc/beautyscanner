@@ -9,10 +9,12 @@ export interface Answers {
   note: string;
 }
 
+export type Warning = { code: "budget" | "noCream" | "noSunscreen" } | { code: "missing"; n: number };
+
 export interface Routine {
   items: Product[];
   total: number;
-  warnings: string[];
+  warnings: Warning[];
 }
 
 const GRADE_RANK = { clinical: 3, multiple: 2, emerging: 1, brand: 0 } as const;
@@ -35,7 +37,7 @@ export function buildRoutine(a: Answers): Routine {
       .sort((x, y) => score(y, a) - score(x, a) || x.price - y.price),
   );
   const picks = candidates.map((c) => 0);
-  const warnings: string[] = [];
+  const warnings: Warning[] = [];
   const total = () => picks.reduce((sum, i, k) => sum + (candidates[k][i]?.price ?? 0), 0);
 
   // Swap in cheaper alternatives (largest saving first) until within budget.
@@ -56,10 +58,10 @@ export function buildRoutine(a: Answers): Routine {
 
   const items = candidates.flatMap((c, k) => (c[picks[k]] ? [c[picks[k]]] : []));
   const sum = items.reduce((s, p) => s + p.price, 0);
-  if (sum > a.budget) warnings.push("예산 내에서 구성하기 어려워 일부 제품이 예산을 넘어요.");
-  if (!items.some((p) => p.step === "moisturizer")) warnings.push("크림이 빠져 있어 밀봉력이 약할 수 있어요.");
-  if (!items.some((p) => p.step === "sunscreen")) warnings.push("선크림이 없어요. 낮 루틴에는 꼭 필요해요.");
+  if (sum > a.budget) warnings.push({ code: "budget" });
+  if (!items.some((p) => p.step === "moisturizer")) warnings.push({ code: "noCream" });
+  if (!items.some((p) => p.step === "sunscreen")) warnings.push({ code: "noSunscreen" });
   const missing = steps.length - items.length;
-  if (missing > 0) warnings.push(`조건에 맞는 제품이 없어 ${missing}단계를 채우지 못했어요.`);
+  if (missing > 0) warnings.push({ code: "missing", n: missing });
   return { items, total: sum, warnings };
 }

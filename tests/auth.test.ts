@@ -58,3 +58,22 @@ test("public origin comes from AUTH_URL, else forwarded headers", () => {
   assert.equal(originOf(req, {} as never), "https://app.up.railway.app");
   assert.equal(originOf(req, { AUTH_URL: "https://custom.kr/" } as never), "https://custom.kr");
 });
+
+test("production without AUTH_SECRET has no usable secret; development gets a stable per-process one", async () => {
+  const { authSecret } = await import("../auth/session");
+  const env = process.env as Record<string, string | undefined>;
+  const saved = { s: env.AUTH_SECRET, n: env.NODE_ENV };
+  try {
+    delete env.AUTH_SECRET;
+    env.NODE_ENV = "production";
+    assert.equal(authSecret(), "");
+    env.NODE_ENV = "development";
+    assert.ok(authSecret().length >= 32);
+    assert.equal(authSecret(), authSecret());
+    env.AUTH_SECRET = "explicit";
+    assert.equal(authSecret(), "explicit");
+  } finally {
+    if (saved.s === undefined) delete env.AUTH_SECRET; else env.AUTH_SECRET = saved.s;
+    env.NODE_ENV = saved.n;
+  }
+});
