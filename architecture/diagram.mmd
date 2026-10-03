@@ -1,0 +1,10 @@
+flowchart LR
+  user([User]) --> app["app/ (survey UI, /api/explain)"]
+  app --> lib["lib/ (products, recommend rules)"]
+  app --> agent["agent/ (explainer: prompt + guardrails)"]
+  agent --> lib
+  agent -. "optional, server-side key" .-> deepseek[(DeepSeek API)]
+  app --> design["design/ (tokens.json -> app/tokens.css)"]
+  lib --> design
+  evals["evals/ (scenario checks)"] --> lib
+  evals --> agent

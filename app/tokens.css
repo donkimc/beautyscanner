@@ -1,0 +1,17 @@
+/* Generated from design/tokens.json. Do not edit. */
+:root {
+  --color-bg: #f6f4ef;
+  --color-ink: #1f1b24;
+  --color-muted: #6b6872;
+  --color-line: #dedad0;
+  --color-card: #ffffff;
+  --color-warn-bg: #fff3d6;
+  --color-warn-ink: #8a5a00;
+  --grade-clinical: #2f6f4e;
+  --grade-multiple: #8f3a62;
+  --grade-brand: #5f5f5f;
+  --grade-emerging: #b07a1f;
+  --radius-card: 28px;
+  --radius-product: 22px;
+  --radius-button: 14px;
+}

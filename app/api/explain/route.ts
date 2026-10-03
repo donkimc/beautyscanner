@@ -1,57 +1,30 @@
-import { PRODUCTS } from "@/lib/products";
-import type { Answers } from "@/lib/recommend";
-
-// Explains already-chosen products. The model only rephrases the supplied
-// data; it never chooses products or evidence grades.
-
-const CONCERN: Record<string, string> = { dryness: "건조함", acne: "트러블", pigmentation: "색소·잡티", aging: "노화 징후" };
-
-function fallback(a: Answers, name: string, evidence: string) {
-  return `'${CONCERN[a.concern]}' 고민과 예산 ${a.budget.toLocaleString()}원 이하 조건에 맞춰 골랐어요. ${evidence}`;
-}
+import { EXPLAINER, buildPrompt, parseExplanations, templateExplanation } from "../../../agent/explainer";
+import { PRODUCTS } from "../../../lib/products";
+import type { Answers } from "../../../lib/recommend";
 
 export async function POST(req: Request) {
   const { answers, productIds } = (await req.json()) as { answers: Answers; productIds: string[] };
   const products = PRODUCTS.filter((p) => productIds.includes(p.id));
+  const templates = Object.fromEntries(products.map((p) => [p.id, templateExplanation(answers, p)]));
   const key = process.env.DEEPSEEK_API_KEY;
-
-  if (!key) {
-    return Response.json({
-      ai: false,
-      explanations: Object.fromEntries(products.map((p) => [p.id, fallback(answers, p.name, p.evidence)])),
-    });
-  }
-
-  const prompt = `사용자 설문: 피부타입=${answers.skinType}, 고민=${answers.concern}, 민감성=${answers.sensitive}, 예산=${answers.budget}원, 추가메모="${answers.note.slice(0, 200)}"
-제품 목록(JSON): ${JSON.stringify(products.map((p) => ({ id: p.id, name: p.name, step: p.step, grade: p.grade, evidence: p.evidence })))}
-
-각 제품이 이 사용자에게 왜 맞는지 한국어 1~2문장으로 설명하세요.
-규칙: 제공된 evidence 외의 연구·수치를 지어내지 말 것. 진단·치료 표현 금지. 근거가 성분 수준이면 그렇게 밝힐 것.
-JSON만 출력: {"<id>": "설명", ...}`;
+  if (!key) return Response.json({ ai: false, explanations: templates });
 
   try {
-    const res = await fetch("https://api.deepseek.com/chat/completions", {
+    const res = await fetch(EXPLAINER.endpoint, {
       method: "POST",
       headers: { authorization: `Bearer ${key}`, "content-type": "application/json" },
       body: JSON.stringify({
-        model: process.env.DEEPSEEK_MODEL ?? "deepseek-chat",
-        max_tokens: 800,
+        model: process.env.DEEPSEEK_MODEL ?? EXPLAINER.defaultModel,
+        max_tokens: EXPLAINER.maxTokens,
         response_format: { type: "json_object" },
-        messages: [{ role: "user", content: prompt }],
+        messages: [{ role: "user", content: buildPrompt(answers, products) }],
       }),
     });
     if (!res.ok) throw new Error(`API ${res.status}`);
     const data = await res.json();
     const text: string = data.choices?.[0]?.message?.content ?? "{}";
-    const parsed = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
-    const explanations = Object.fromEntries(
-      products.map((p) => [p.id, typeof parsed[p.id] === "string" ? parsed[p.id] : fallback(answers, p.name, p.evidence)]),
-    );
-    return Response.json({ ai: true, explanations });
+    return Response.json({ ai: true, explanations: parseExplanations(text, answers, products) });
   } catch {
-    return Response.json({
-      ai: false,
-      explanations: Object.fromEntries(products.map((p) => [p.id, fallback(answers, p.name, p.evidence)])),
-    });
+    return Response.json({ ai: false, explanations: templates });
   }
 }

@@ -1,3 +1,5 @@
+import tokens from "../design/tokens.json";
+
 // DEMO DATA ONLY: fictional products and placeholder evidence notes.
 // Replace with curated, cited records before any real launch.
 
@@ -28,10 +30,10 @@ export const STEP_LABEL: Record<Step, string> = {
 };
 
 export const GRADE_LABEL: Record<Grade, { label: string; color: string }> = {
-  clinical: { label: "임상적으로 검증됨", color: "#2f6f4e" },
-  multiple: { label: "다수 연구 뒷받침", color: "#8f3a62" },
-  brand: { label: "브랜드 자체 시험", color: "#5f5f5f" },
-  emerging: { label: "근거 신흥 단계", color: "#b07a1f" },
+  clinical: { label: "임상적으로 검증됨", color: tokens.grade.clinical },
+  multiple: { label: "다수 연구 뒷받침", color: tokens.grade.multiple },
+  brand: { label: "브랜드 자체 시험", color: tokens.grade.brand },
+  emerging: { label: "근거 신흥 단계", color: tokens.grade.emerging },
 };
 
 const all: SkinType[] = ["dry", "oily", "combo", "sensitive"];
