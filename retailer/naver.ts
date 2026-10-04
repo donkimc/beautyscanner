@@ -26,7 +26,10 @@ export class NaverError extends Error {
 
 type Env = Record<string, string | undefined>;
 
-export const naverConfigured = (env: Env = process.env) => Boolean(env.NAVER_CLIENT_ID && env.NAVER_CLIENT_SECRET);
+// Pasted keys often carry stray spaces, newlines or quotes; header values with those are rejected as bad credentials.
+const clean = (v: string | undefined) => (v ?? "").trim().replace(/^["']|["']$/g, "").trim();
+
+export const naverConfigured = (env: Env = process.env) => Boolean(clean(env.NAVER_CLIENT_ID) && clean(env.NAVER_CLIENT_SECRET));
 
 const ENTITIES: Record<string, string> = { "&amp;": "&", "&lt;": "<", "&gt;": ">", "&quot;": '"', "&#39;": "'", "&apos;": "'", "&nbsp;": " " };
 
@@ -83,7 +86,7 @@ export async function searchNaver(query: string, opts: SearchOptions = {}): Prom
   let res: Response;
   try {
     res = await (opts.fetchImpl ?? fetch)(url, {
-      headers: { "X-Naver-Client-Id": env.NAVER_CLIENT_ID!, "X-Naver-Client-Secret": env.NAVER_CLIENT_SECRET! },
+      headers: { "X-Naver-Client-Id": clean(env.NAVER_CLIENT_ID), "X-Naver-Client-Secret": clean(env.NAVER_CLIENT_SECRET) },
       signal: AbortSignal.timeout(8000),
     });
   } catch {
