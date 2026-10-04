@@ -26,12 +26,16 @@ export function isAllowedImage(url: string, extraHosts = ""): boolean {
   }
 }
 
+// A photo the owner supplied: a file committed under public/products/ (never a third-party address).
+export const isOwnImage = (path: string) => /^\/products\/[A-Za-z0-9._-]+\.(jpe?g|png|webp)$/i.test(path);
+
 export const isHttpUrl = (url: string) => /^https?:\/\//i.test(url) && (() => { try { return Boolean(new URL(url)); } catch { return false; } })();
 
 // An approved listing supplies the real photo, price and link (a plain retailer link, so no AD label).
 export function applyListing(p: Product, l: Listing): Product {
   if (!l.approved) return p;
-  return { ...p, image: l.imageUrl, url: l.link, urlKind: "retailer", retailer: "네이버쇼핑", price: l.price, approxPrice: false, priceSource: "naver", priceDate: l.fetchedAt };
+  const naver = Boolean(l.naverProductId);
+  return { ...p, image: l.imageUrl || p.image, url: l.link, urlKind: "retailer", retailer: naver ? "네이버쇼핑" : l.mall || "쇼핑몰", price: l.price, approxPrice: false, priceSource: naver ? "naver" : "manual", priceDate: l.fetchedAt };
 }
 
 export function mergeCatalog(extra: Product[], listings: Listing[], opts: { hideSamples?: boolean } = {}): Product[] {

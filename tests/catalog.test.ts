@@ -11,7 +11,7 @@ import { isAdminEmail } from "../auth/admin";
 import { invalidateCatalog, loadCatalog } from "../catalog/load";
 import { refreshListings } from "../catalog/refresh";
 import { listListings } from "../db/catalog";
-import { applyListing, isAllowedImage, mergeCatalog, parseNewProduct, type Listing } from "../lib/catalog";
+import { applyListing, isAllowedImage, isOwnImage, mergeCatalog, parseNewProduct, type Listing } from "../lib/catalog";
 import { PRODUCTS } from "../lib/products";
 import { buildRoutine } from "../lib/recommend";
 
@@ -171,4 +171,16 @@ test("the cron endpoint needs the secret", async () => {
   assert.equal((await call("Bearer ")).status, 404);
   process.env.CRON_SECRET = "s3cret";
   assert.equal((await call("Bearer s3cret")).status, 200);
+});
+
+test("manual listings: only own photos, keep the existing photo when none is given", () => {
+  assert.ok(isOwnImage("/products/beplain.jpg"));
+  assert.ok(!isOwnImage("https://example.com/a.jpg"));
+  assert.ok(!isOwnImage("/products/../secret.jpg"));
+  const base = PRODUCTS.find((p) => p.real)!;
+  const out = applyListing(base, { productId: base.id, naverProductId: null, title: base.name, imageUrl: "", link: "https://shop.example/p/1", price: 15000, mall: "내 스토어", approved: true, fetchedAt: "2026-10-04T00:00:00.000Z" });
+  assert.equal(out.image, base.image);
+  assert.equal(out.price, 15000);
+  assert.equal(out.retailer, "내 스토어");
+  assert.equal(out.priceSource, "manual");
 });

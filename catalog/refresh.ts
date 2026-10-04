@@ -7,7 +7,7 @@ export interface RefreshSummary { updated: string[]; missing: string[]; errors: 
 // Naver has no "get by id" call, so we search by the listing's title and pick the same productId.
 export async function refreshListings(only?: string, search: typeof searchNaver = searchNaver): Promise<RefreshSummary> {
   const out: RefreshSummary = { updated: [], missing: [], errors: [] };
-  const rows = (await listListings()).filter((l) => l.approved && (!only || l.product_id === only));
+  const rows = (await listListings()).filter((l) => l.approved && l.naver_product_id && (!only || l.product_id === only));
   for (const l of rows) {
     let found: Candidate | undefined;
     try {

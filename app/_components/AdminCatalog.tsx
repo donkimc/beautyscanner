@@ -67,6 +67,8 @@ function Row({ p, info, naverReady }: { p: Product; info?: Info[string]; naverRe
   const { m, locale } = useI18n();
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [manualOpen, setManualOpen] = useState(false);
+  const [mf, setMf] = useState({ link: "", price: String(p.price), image: "", mall: "" });
   const [msg, setMsg] = useState("");
   const linked = info?.approved;
   const name = locale === "en" ? p.en.name : p.name;
@@ -80,6 +82,12 @@ function Row({ p, info, naverReady }: { p: Product; info?: Info[string]; naverRe
     const r = await call("/api/admin/listings", { method: "POST", body: JSON.stringify({ productId: p.id, candidate: c }) });
     setMsg(r.ok ? m.admin.saved : (m.admin.errors as Record<string, string>)[r.data?.error] ?? m.admin.failed);
     if (r.ok) { setOpen(false); router.refresh(); }
+  }
+
+  async function saveManual() {
+    const r = await call("/api/admin/listings", { method: "POST", body: JSON.stringify({ productId: p.id, manual: { ...mf, price: Number(mf.price) } }) });
+    setMsg(r.ok ? m.admin.saved : (m.admin.errors as Record<string, string>)[r.data?.error] ?? m.admin.failed);
+    if (r.ok) { setManualOpen(false); router.refresh(); }
   }
 
   return (
@@ -97,11 +105,24 @@ function Row({ p, info, naverReady }: { p: Product; info?: Info[string]; naverRe
       </div>
       <div className="mt-2.5 flex flex-wrap items-center gap-2">
         <button className={btn} disabled={!naverReady} onClick={() => setOpen((o) => !o)}>{m.admin.find}</button>
+        <button className={btn} onClick={() => setManualOpen((o) => !o)}>{m.admin.manual}</button>
         {linked && <button className={btn} onClick={async () => { const r = await call("/api/admin/listings/refresh", { method: "POST", body: JSON.stringify({ productId: p.id }) }); setMsg(r.ok ? m.admin.refreshed(r.data.updated.length, r.data.missing.length) : m.admin.failed); router.refresh(); }}>{m.admin.refresh}</button>}
         {linked && <button className={btn} onClick={async () => { await call(`/api/admin/listings?productId=${p.id}`, { method: "DELETE" }); router.refresh(); }}>{m.admin.unlink}</button>}
         {/^n[a-z0-9]{3,12}$/.test(p.id) && <button className="text-xs text-danger underline" onClick={async () => { if (window.confirm(m.admin.removeConfirm)) { await call(`/api/admin/products?id=${p.id}`, { method: "DELETE" }); router.refresh(); } }}>{m.admin.remove}</button>}
         {msg && <span role="status" className="text-xs text-accent">{msg}</span>}
       </div>
+      {manualOpen && (
+        <form onSubmit={(e) => { e.preventDefault(); saveManual(); }} className="mt-3 space-y-2.5 rounded-2xl bg-surface-soft p-3.5">
+          <p className="text-xs text-ink-soft">{m.admin.manualHint}</p>
+          <input className={input} type="url" required placeholder={m.admin.link} aria-label={m.admin.link} value={mf.link} onChange={(e) => setMf({ ...mf, link: e.target.value })} />
+          <div className="grid grid-cols-2 gap-2.5">
+            <input className={input} type="number" required placeholder={m.admin.priceWon} aria-label={m.admin.priceWon} value={mf.price} onChange={(e) => setMf({ ...mf, price: e.target.value })} />
+            <input className={input} placeholder={m.admin.shop} aria-label={m.admin.shop} value={mf.mall} onChange={(e) => setMf({ ...mf, mall: e.target.value })} />
+          </div>
+          <input className={input} placeholder={m.admin.image} aria-label={m.admin.image} value={mf.image} onChange={(e) => setMf({ ...mf, image: e.target.value })} />
+          <button className={btnPrimary}>{m.admin.form.save}</button>
+        </form>
+      )}
       {open && <SearchPanel initialQuery={p.name} brand={p.brand} pickLabel={m.admin.use} onPick={pick} onClose={() => setOpen(false)} />}
     </li>
   );

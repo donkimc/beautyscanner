@@ -56,7 +56,7 @@ export interface Product {
   retailer?: string;
   brand?: string;
   /** Where the price comes from and when it was fetched (e.g. Naver Shopping lowest price). */
-  priceSource?: "naver";
+  priceSource?: "naver" | "manual";
   priceDate?: string;
 }
 
