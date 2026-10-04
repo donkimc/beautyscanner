@@ -1,5 +1,7 @@
+import { headers } from "next/headers";
 import Link from "next/link";
-import { safeNext } from "../../auth/session";
+import { redirect } from "next/navigation";
+import { safeNext, sessionFromHeader } from "../../auth/session";
 import { getMessages } from "../../i18n/server";
 import LoginForm from "../_components/LoginForm";
 import SiteFooter from "../_components/SiteFooter";
@@ -10,6 +12,8 @@ export default async function LoginPage(props: { searchParams: Promise<Record<st
   const sp = await props.searchParams;
   const error = typeof sp.error === "string" ? sp.error : undefined;
   const next = safeNext(typeof sp.next === "string" ? sp.next : "/try?resume=1");
+  // Already signed in: skip the form and go where the user was headed.
+  if (!error && sessionFromHeader((await headers()).get("cookie"))) redirect(typeof sp.next === "string" ? next : "/account");
 
   return (
     <main className="mx-auto max-w-md px-4 pb-12">

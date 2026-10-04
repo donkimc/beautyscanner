@@ -1,4 +1,6 @@
+import { headers } from "next/headers";
 import Link from "next/link";
+import { sessionFromHeader } from "../auth/session";
 import { getMessages } from "../i18n/server";
 import Newsletter from "./_components/Newsletter";
 import RotatingWord from "./_components/RotatingWord";
@@ -10,6 +12,7 @@ const DOTS = ["bg-grade-clinical", "bg-grade-multiple", "bg-grade-emerging"];
 
 export default async function Home() {
   const { m } = await getMessages();
+  const signedIn = Boolean(sessionFromHeader((await headers()).get("cookie")));
   return (
     <div className="relative overflow-hidden">
       {/* animated background glows: pink accent, amber, soft green */}
@@ -40,7 +43,11 @@ export default async function Home() {
 
           <div className="mt-6 grid animate-rise gap-2.5 [animation-delay:480ms]">
             <Link href="/try" className="rounded-button bg-ink py-3.5 text-base font-bold text-bg shadow-lg shadow-ink/20 active:scale-[0.99]">{m.landing.try}</Link>
-            <Link href="/login" className="rounded-button border border-border bg-surface py-3.5 text-base font-semibold active:scale-[0.99]">{m.common.login}</Link>
+            {signedIn ? (
+              <Link href="/account" className="rounded-button border border-border bg-surface py-3.5 text-base font-semibold active:scale-[0.99]">{m.nav.dashboard}</Link>
+            ) : (
+              <Link href="/login" className="rounded-button border border-border bg-surface py-3.5 text-base font-semibold active:scale-[0.99]">{m.common.login}</Link>
+            )}
           </div>
           <p className="mt-3 text-xs text-ink-soft">{m.landing.hint}</p>
         </section>
