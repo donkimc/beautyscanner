@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Locale } from "../../i18n/locale";
-import { GRADE_LABEL, hasBuyLink, localized, type Grade } from "../../lib/products";
+import { GRADE_LABEL, PRODUCTS, hasBuyLink, isAffiliate, localized, type Grade, type Product } from "../../lib/products";
 import { priceText, totalText } from "../../lib/price";
 import { budgetLabel, buildRoutine, parseAnswers, type Answers, type Routine, type Warning } from "../../lib/recommend";
 import AddToCart from "../_components/AddToCart";
 import AuthButton from "../_components/AuthButton";
+import { loadClientCatalog } from "../_components/catalogClient";
 import { useConsent } from "../_components/ConsentProvider";
 import { useI18n } from "../_components/I18nProvider";
 import LanguageSwitch from "../_components/LanguageSwitch";
@@ -38,6 +39,7 @@ export default function Try() {
   const [notice, setNotice] = useState("");
   const allowAi = useRef(false);
   const busy = useRef(false);
+  const catalog = useRef<Product[]>(PRODUCTS);
 
   const explainFor = useCallback(async (answers: Answers, r: Routine, loc: Locale) => {
     try {
@@ -53,7 +55,9 @@ export default function Try() {
 
   const run = useCallback(async (answers: Answers) => {
     setPhase("loading");
-    const r = buildRoutine(answers);
+    const live = await loadClientCatalog(); // make sure the live catalog (real photos and prices) is used, even when resuming right after load
+    if (live) catalog.current = live;
+    const r = buildRoutine(answers, catalog.current);
     setRoutine(r);
     const cfg = await fetch("/api/config").then((x) => x.json()).catch(() => ({ ai: false }));
     // Only ask about the overseas AI transfer if AI is actually enabled on the server.
@@ -63,6 +67,7 @@ export default function Try() {
   }, [ensure, explainFor, locale]);
 
   useEffect(() => {
+    loadClientCatalog().then((c) => { if (c) catalog.current = c; });
     fetch("/api/auth/me").then((r) => r.json()).then((d) => setEmail(d.user?.email ?? null)).catch(() => {});
     if (new URLSearchParams(window.location.search).get("resume")) {
       const a = parseAnswers(load<unknown>(ANSWERS_KEY)); // answers saved in an older format are ignored
@@ -135,6 +140,7 @@ export default function Try() {
 
   function restart() { busy.current = false; setPhase("survey"); setIdx(0); setAns({ note: "" }); setRoutine(null); setSaved("no"); setNotice(""); }
 
+  const retailerName = (p: Product) => (p.priceSource === "naver" ? m.product.naver : p.retailer ?? "");
   const warningText = (w: Warning) => (w.code === "missing" ? m.result.warnings.missing(w.n) : m.result.warnings[w.code]);
   const q = m.survey.questions[idx];
   const isMulti = q.type === "multi";
@@ -244,8 +250,10 @@ export default function Try() {
                   <Link href={`/products/${p.id}`} className="text-sm text-ink-soft underline">{m.shop.viewProduct}</Link>
                   {hasBuyLink(p) ? (
                     <span className="flex items-center gap-2">
-                      <a href={p.url} target="_blank" rel="sponsored noopener noreferrer" className="rounded-xl bg-ink px-3.5 py-2 text-sm text-bg">{m.result.buy}</a>
-                      <span className="rounded-lg border border-border px-1.5 py-0.5 text-[11px] text-ink-soft">{m.result.ad}</span>
+                      <a href={p.url} target="_blank" rel={isAffiliate(p) ? "sponsored noopener noreferrer" : "noopener noreferrer nofollow"} className="rounded-xl bg-ink px-3.5 py-2 text-sm text-bg">
+                        {isAffiliate(p) ? m.result.buy : m.product.viewAt(retailerName(p))}
+                      </a>
+                      {isAffiliate(p) && <span className="rounded-lg border border-border px-1.5 py-0.5 text-[11px] text-ink-soft">{m.result.ad}</span>}
                     </span>
                   ) : p.real ? (
                     <RetailerLinks product={p} />

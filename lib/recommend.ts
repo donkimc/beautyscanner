@@ -63,12 +63,12 @@ function score(p: Product, a: Answers): number {
 // Keep only candidates that satisfy a preference, but never leave a step empty because of a mere preference.
 const prefer = (list: Product[], ok: (p: Product) => boolean) => (list.some(ok) ? list.filter(ok) : list);
 
-export function buildRoutine(a: Answers): Routine {
+export function buildRoutine(a: Answers, catalog: Product[] = PRODUCTS): Routine {
   const steps = stepsFor(a);
   const sensitive = isSensitive(a);
 
   const candidates = steps.map((step) => {
-    let c = PRODUCTS.filter((p) => p.step === step && (!sensitive || p.sensitiveSafe));
+    let c = catalog.filter((p) => p.step === step && (!sensitive || p.sensitiveSafe));
     if (a.texture === "fragrance_free") c = prefer(c, (p) => p.fragranceFree);
     if (a.texture === "vegan_clean") c = prefer(c, (p) => p.vegan);
     return c.sort((x, y) => score(y, a) - score(x, a) || x.price - y.price);

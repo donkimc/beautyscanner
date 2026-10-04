@@ -1,7 +1,7 @@
 import { sessionFrom } from "../../../auth/session";
 import { saveProfileAnswers } from "../../../db/profile";
 import { deleteRoutine, listRoutines, saveRoutine } from "../../../db/routines";
-import { PRODUCTS } from "../../../lib/products";
+import { loadCatalog } from "../../../catalog/load";
 import { parseAnswers } from "../../../lib/recommend";
 
 export async function GET(req: Request) {
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
   const body = (await req.json().catch(() => ({}))) as { answers?: unknown; productIds?: string[]; total?: number };
   const answers = parseAnswers(body.answers);
   const { productIds, total } = body;
-  const known = new Set(PRODUCTS.map((p) => p.id));
+  const known = new Set((await loadCatalog()).map((p) => p.id));
   if (!answers || !Array.isArray(productIds) || !productIds.length || productIds.length > 10 || !productIds.every((id) => known.has(id)) || typeof total !== "number") {
     return Response.json({ error: "bad_request" }, { status: 400 });
   }

@@ -51,9 +51,19 @@ export interface Product {
   image?: string;
   /** Retailer / affiliate link. "#" means no link yet. */
   url: string;
+  /** "affiliate" links carry the AD label; a plain "retailer" link (e.g. the Naver Shopping page) does not. */
+  urlKind?: "affiliate" | "retailer";
+  retailer?: string;
+  brand?: string;
+  /** Where the price comes from and when it was fetched (e.g. Naver Shopping lowest price). */
+  priceSource?: "naver";
+  priceDate?: string;
 }
 
 export const hasBuyLink = (p: Product) => p.url !== "" && p.url !== "#";
+
+// Only affiliate links carry the AD label; a plain retailer link (e.g. the Naver Shopping page) does not.
+export const isAffiliate = (p: Product) => hasBuyLink(p) && p.urlKind !== "retailer";
 
 // Plain search links on the retailer sites (no affiliate tracking, so not ads). Only for real products.
 export function retailerSearchLinks(p: Product): { naver: string; coupang: string } | null {

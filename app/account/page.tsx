@@ -7,7 +7,8 @@ import { getProfileAnswers } from "../../db/profile";
 import { listRoutines } from "../../db/routines";
 import { getUser } from "../../db/users";
 import { getMessages } from "../../i18n/server";
-import { PRODUCTS, localized } from "../../lib/products";
+import { loadCatalog } from "../../catalog/load";
+import { localized } from "../../lib/products";
 import { parseAnswers } from "../../lib/recommend";
 import { AccountData, DeleteRoutine } from "../_components/AccountClient";
 import { CartList, ProfileCard, SkinProfile } from "../_components/Dashboard";
@@ -24,7 +25,8 @@ export default async function Dashboard() {
 
   const [rawAnswers, cart, routines] = await Promise.all([getProfileAnswers(user.id), listCart(user.id), listRoutines(user.id)]);
   const answers = parseAnswers(rawAnswers);
-  const byId = new Map(PRODUCTS.map((p) => [p.id, p]));
+  const catalog = await loadCatalog();
+  const byId = new Map(catalog.map((p) => [p.id, p]));
   const name = user.name ?? user.email.split("@")[0];
 
   return (
@@ -37,7 +39,7 @@ export default async function Dashboard() {
 
       <section id="cart" className={`${card} scroll-mt-4`}>
         <h2 className="mb-4 font-display text-xl font-semibold">{m.dashboard.cart}</h2>
-        <CartList initial={cart.filter((c) => byId.has(c.product_id)).map((c) => ({ productId: c.product_id, qty: c.qty, routine: c.routine }))} />
+        <CartList products={catalog} initial={cart.filter((c) => byId.has(c.product_id)).map((c) => ({ productId: c.product_id, qty: c.qty, routine: c.routine }))} />
       </section>
 
       <section className={card}>

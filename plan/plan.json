@@ -86,6 +86,16 @@
       "status": "done"
     },
     {
+      "id": "m13j",
+      "name": "Naver Shopping pipeline: search, match, admin approval, add real products, price refresh (tested against a mock API)",
+      "status": "done"
+    },
+    {
+      "id": "m19",
+      "name": "Set NAVER_CLIENT_ID/SECRET, ADMIN_EMAILS and CRON_SECRET on Railway; link the real products on /admin/catalog; schedule the daily refresh",
+      "status": "todo"
+    },
+    {
       "id": "m13i",
       "name": "5 real products from the original page with 3 clean photos, retailer search links, price notes, 'unrated' evidence state",
       "status": "done"
@@ -158,6 +168,7 @@
     "Product attributes (concerns, texture, fragrance-free, vegan, low-irritation) are invented sample data; they must come from real product data before launch",
     "Product pictures are placeholder illustrations: real photos must be licensed for commercial use and added to public/products/ or Product.image",
     "Real-product prices (except Torriden) are estimates, and attributes (concerns, texture, sensitivity flags) were assigned from the original page's descriptions: verify before launch",
-    "Product photos are the brands' / sellers' property: confirm commercial-use rights or switch to official retailer API images"
+    "Product photos are the brands' / sellers' property: confirm commercial-use rights or switch to official retailer API images",
+    "The Naver integration is tested only against a mock of the API; the first real call happens when keys are added. Naver's usage terms for displaying images/prices should be read before launch"
   ]
 }

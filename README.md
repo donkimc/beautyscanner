@@ -15,9 +15,10 @@ Live demo (Railway): https://web-production-318ac.up.railway.app
 | `/login` | Sign up / log in: email confirmation link, plus Google if configured |
 | `/auth/verify` | Confirmation page the emailed link opens; a button press completes login |
 | `/account` | **Dashboard** for registered users: shopping cart, editable saved info (name and skin profile), saved routines, consent management, data download, account deletion |
+| `/admin/catalog` | **Admin** (only the emails in `ADMIN_EMAILS`; 404 for everyone else): find a product on Naver Shopping, approve its listing, add real products, refresh prices |
 | `/products/[id]` | A product's own page: picture, price, evidence, attributes, add to cart, retailer link |
 | `/terms`, `/privacy`, `/security` | Legal and security pages (draft) in both languages |
-| `/api/*` | `auth/*`, `consent`, `routines`, `cart`, `profile`, `account`, `explain`, `config` |
+| `/api/*` | `auth/*`, `consent`, `routines`, `cart`, `profile`, `account`, `explain`, `config`, `catalog`, `admin/*`, `cron/*` |
 
 ## Features
 
@@ -79,6 +80,18 @@ Pictures go through `ProductImage` (`app/_components/ProductImage.tsx`): the pro
 
 Real products also show a **price note** (a "~" / "약" before estimated prices; only Torriden's price is quoted from the original page; the rest are estimates to verify), **retailer search links** (Coupang, Naver Shopping: plain search links, not affiliate links, so no AD label), and an evidence grade: S.Nature and Torriden carry the original page's "multiple studies" (ingredient-level, citations still to be added); the others are **"evidence under review"** (`unrated`) until reviewed.
 
+### Real product data from Naver Shopping
+Photos, prices and links for real products come from the **Naver Shopping search API** (the official API, no scraping), reviewed by a person:
+1. **Search** (`/admin/catalog`, admins only): the admin searches Naver for a product; `retailer/match.ts` ranks the results (name-token match, brand, penalizes bundles/refills/minis and non-cosmetics) and marks the best as "suggested", but never links anything on its own.
+2. **Approve:** picking a result stores it in `product_listings` (`approved`). From then on the product shows Naver's **photo** (hotlinked from Naver's image CDN; only `pstatic.net` / `naver.net` hosts are accepted), its **quoted lowest price** (no more "~") with the date, and a **"네이버쇼핑에서 보기"** link. It is a plain retailer link, so it carries **no AD label**; affiliate links (`urlKind: "affiliate"`) do.
+3. **Add real products:** from a chosen Naver result the admin fills in the details the recommender needs (step, concerns, texture, time of day, fragrance-free / vegan / low-irritation, evidence grade and note). They are saved in `catalog_products` and join the catalog immediately. Built-in products can be linked but not deleted from the page.
+4. **Keep prices current:** "refresh" re-reads each approved listing (Naver has no lookup by id, so it searches by the listing's title and matches the same product id). Run it daily with a scheduler, e.g. a Railway cron job: `curl -X POST -H "Authorization: Bearer $CRON_SECRET" https://<site>/api/cron/refresh-listings`.
+5. **Retire the samples:** once real products cover every step, set `HIDE_SAMPLES=1`.
+
+The catalog the site uses = built-in products + admin-added products + approved listings (`lib/catalog.ts`, loaded server-side by `catalog/load.ts`, served to the browser at `/api/catalog`; the recommender runs on it). Naver gives shop data only: **evidence grades, ingredient lists and studies still come from your own research** (use `unrated` until reviewed).
+
+To try the admin page without keys: `npm run mock:naver` (a local stand-in for the API) and start the app with `NAVER_API_BASE=http://localhost:4010 NAVER_IMAGE_HOSTS=localhost NAVER_CLIENT_ID=x NAVER_CLIENT_SECRET=y ADMIN_EMAILS=you@example.com`.
+
 ### Routine rules and explanations
 Rules in `lib/recommend.ts` choose one product per step, swap in cheaper options to fit the price range, and warn about gaps (no cream, no sunscreen) or an unmet budget. The explainer agent (`agent/explainer.ts`) rewrites each product's curated evidence note into a short reason in the user's language. It never chooses products or grades, and its output must pass guardrails or a template is used.
 
@@ -117,6 +130,10 @@ Copy `.env.example` to `.env.local`. Secrets are read on the server only; never 
 | `RESEND_API_KEY`, `EMAIL_FROM` | Email login in production | [Resend](https://resend.com) API key and a sender on a domain you verified there |
 | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | Google login (optional) | OAuth client; redirect URI `<origin>/api/auth/google/callback` |
 | `DEEPSEEK_API_KEY`, `DEEPSEEK_MODEL` | AI explanations (optional) | Without a key, template text is used |
+| `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET` | Real product data | Naver Developers app with the Search API |
+| `ADMIN_EMAILS` | Admin page | Comma-separated login emails allowed into `/admin/catalog` |
+| `CRON_SECRET` | Daily price refresh | Bearer secret for `/api/cron/refresh-listings` |
+| `HIDE_SAMPLES` | Optional | `1` hides the fictional sample products |
 | `AUTH_URL` | Optional | Public site URL; derived from the request when unset |
 
 In production, email login returns an error until `RESEND_API_KEY` and `EMAIL_FROM` are set. There is deliberately no "show the link on screen" fallback in production, because that would let anyone log in as any email address. (Resend's `onboarding@resend.dev` test sender can only mail the account owner, which is enough for trying it yourself.)
@@ -153,7 +170,9 @@ email/          Login email templates and the Resend sender
 i18n/           Korean/English messages and language detection
 consent/        Consent purposes and versions
 content/        Terms, privacy and security text (both languages)
-lib/            Product data, the rules-based recommender and the morning/evening routine rules
+lib/            Product data, the rules-based recommender, the morning/evening routine rules, catalog merge and price formatting
+catalog/        Server-side catalog loader (built-in + admin products + approved listings) and the price refresh
+retailer/       Naver Shopping API client and the listing matcher
 agent/          Explainer: prompt, guardrails, output validation
 design/         Design tokens -> app/tokens.css
 evals/          Scenario evals for the recommender and guardrails

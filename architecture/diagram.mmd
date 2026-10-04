@@ -21,3 +21,8 @@ flowchart LR
   agent -. "optional, consent, server-side key" .-> deepseek[(DeepSeek API)]
   evals["evals/ (scenario checks)"] --> lib
   evals --> agent
+  app --> catalog["catalog/ (catalog loader, price refresh)"]
+  catalog --> db
+  catalog --> lib
+  catalog --> retailer["retailer/ (Naver client + matcher)"]
+  retailer -. "NAVER_CLIENT_ID/SECRET" .-> naver[(Naver Shopping API)]

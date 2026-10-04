@@ -29,15 +29,17 @@
       "consent"
     ],
     "app": [
-      "lib",
       "agent",
-      "design",
       "auth",
+      "catalog",
+      "consent",
+      "content",
       "db",
+      "design",
       "email",
       "i18n",
-      "consent",
-      "content"
+      "lib",
+      "retailer"
     ],
     "evals": [
       "lib",
@@ -46,9 +48,19 @@
       "i18n"
     ],
     "scripts": [
-      "lib",
       "agent",
-      "design"
+      "catalog",
+      "db",
+      "design",
+      "lib",
+      "retailer"
+    ],
+    "retailer": [],
+    "catalog": [
+      "lib",
+      "db",
+      "retailer",
+      "i18n"
     ]
   }
 }

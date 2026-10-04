@@ -10,7 +10,8 @@
     "test": "tsx --test tests/*.test.ts",
     "eval": "tsx evals/run.ts",
     "tokens": "tsx scripts/gen-tokens.ts",
-    "verify": "npm run typecheck && npm test && npm run eval && npm run build"
+    "verify": "npm run typecheck && npm test && npm run eval && npm run build",
+    "mock:naver": "tsx scripts/mock-naver.ts"
   },
   "dependencies": {
     "@fontsource-variable/karla": "^5.3.0",

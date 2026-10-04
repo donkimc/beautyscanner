@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getMessages } from "../../../i18n/server";
 import { priceText } from "../../../lib/price";
-import { PRODUCTS, hasBuyLink, localized } from "../../../lib/products";
+import { findProduct } from "../../../catalog/load";
+import { hasBuyLink, isAffiliate, localized } from "../../../lib/products";
 import AddToCart from "../../_components/AddToCart";
 import BackLink from "../../_components/BackLink";
 import ProductImage from "../../_components/ProductImage";
@@ -16,14 +17,14 @@ type Props = { params: Promise<{ id: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const p = PRODUCTS.find((x) => x.id === id);
+  const p = await findProduct(id);
   const { locale, m } = await getMessages();
   return { title: p ? `${localized(p, locale).name} · ${m.brand}` : m.brand };
 }
 
 export default async function ProductPage({ params }: Props) {
   const { id } = await params;
-  const product = PRODUCTS.find((p) => p.id === id);
+  const product = await findProduct(id);
   if (!product) notFound();
   const { locale, m } = await getMessages();
   const text = localized(product, locale);
@@ -52,6 +53,9 @@ export default async function ProductPage({ params }: Props) {
           </div>
 
           <p className="rounded-[14px] border border-dashed border-warn bg-warn-soft px-4 py-3 text-xs leading-relaxed text-ink">{product.real ? m.product.real : m.product.sample}</p>
+          {product.priceSource === "naver" && product.priceDate && (
+            <p className="-mt-2 text-xs text-ink-soft">{m.product.listingNote(m.product.naver, product.priceDate.slice(0, 10))}</p>
+          )}
 
           <section>
             <h2 className="eyebrow-faint">{m.product.details}</h2>
@@ -80,8 +84,10 @@ export default async function ProductPage({ params }: Props) {
             />
             {hasBuyLink(product) ? (
               <div className="flex items-center gap-2.5">
-                <a href={product.url} target="_blank" rel="sponsored noopener noreferrer" className="flex-1 rounded-button border-[1.5px] border-ink py-3 text-center font-semibold">{m.product.buy}</a>
-                <span className="rounded-lg border border-border px-1.5 py-0.5 text-[11px] text-ink-soft">{m.product.ad}</span>
+                <a href={product.url} target="_blank" rel={isAffiliate(product) ? "sponsored noopener noreferrer" : "noopener noreferrer nofollow"} className="flex-1 rounded-button border-[1.5px] border-ink py-3 text-center font-semibold">
+                  {isAffiliate(product) ? m.product.buy : m.product.viewAt(m.product.naver)}
+                </a>
+                {isAffiliate(product) && <span className="rounded-lg border border-border px-1.5 py-0.5 text-[11px] text-ink-soft">{m.product.ad}</span>}
               </div>
             ) : product.real ? (
               <div className="space-y-1.5 rounded-2xl bg-surface-soft p-3.5">

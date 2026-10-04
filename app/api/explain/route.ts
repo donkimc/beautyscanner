@@ -1,6 +1,6 @@
 import { EXPLAINER, buildPrompt, parseExplanations, templateExplanation } from "../../../agent/explainer";
 import { isLocale, type Locale } from "../../../i18n/locale";
-import { PRODUCTS } from "../../../lib/products";
+import { loadCatalog } from "../../../catalog/load";
 import { parseAnswers } from "../../../lib/recommend";
 
 // `allowAi` is true only if the user consented to the overseas AI transfer.
@@ -9,7 +9,7 @@ export async function POST(req: Request) {
   const answers = parseAnswers(body.answers);
   if (!answers || !Array.isArray(body.productIds)) return Response.json({ error: "bad_request" }, { status: 400 });
   const locale: Locale = isLocale(body.locale) ? body.locale : "ko";
-  const products = PRODUCTS.filter((p) => body.productIds!.includes(p.id));
+  const products = (await loadCatalog()).filter((p) => body.productIds!.includes(p.id));
   const templates = Object.fromEntries(products.map((p) => [p.id, templateExplanation(answers, p, locale)]));
   const key = process.env.DEEPSEEK_API_KEY;
   if (!key || !body.allowAi) return Response.json({ ai: false, explanations: templates });

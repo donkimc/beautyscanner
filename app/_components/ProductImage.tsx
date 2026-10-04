@@ -15,7 +15,7 @@ export default function ProductImage({ product, locale, className = "" }: { prod
   const name = localized(product, locale).name;
   if (product.image) {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={product.image} alt={name} loading="lazy" decoding="async" className={`object-cover ${className}`} />;
+    return <img src={product.image} alt={name} loading="lazy" decoding="async" referrerPolicy="no-referrer" className={`object-cover ${className}`} />;
   }
   const Art = ART[product.step];
   return (

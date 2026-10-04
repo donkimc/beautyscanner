@@ -49,4 +49,27 @@ CREATE TABLE IF NOT EXISTS cart_items (
   added_at timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY (user_id, product_id)
 );
+CREATE TABLE IF NOT EXISTS catalog_products (
+  id text PRIMARY KEY,
+  data jsonb NOT NULL,
+  active boolean NOT NULL DEFAULT true,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS product_listings (
+  product_id text PRIMARY KEY,
+  source text NOT NULL DEFAULT 'naver',
+  naver_product_id text,
+  title text NOT NULL,
+  image_url text NOT NULL,
+  link text NOT NULL,
+  price integer NOT NULL,
+  mall text,
+  brand text,
+  maker text,
+  category text,
+  approved boolean NOT NULL DEFAULT false,
+  approved_by text,
+  fetched_at timestamptz NOT NULL DEFAULT now()
+);
 `;

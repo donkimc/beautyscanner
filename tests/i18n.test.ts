@@ -65,7 +65,7 @@ test("legal documents exist in both languages with the same section count", () =
 
 test("privacy policy discloses every processor the app uses", () => {
   const text = JSON.stringify(DOCS.privacy.en);
-  for (const name of ["Railway", "Resend", "Google", "DeepSeek"]) assert.ok(text.includes(name), name);
+  for (const name of ["Railway", "Resend", "Google", "DeepSeek", "Naver"]) assert.ok(text.includes(name), name);
 });
 
 test("price bands match the original survey page exactly", () => {

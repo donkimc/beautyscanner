@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { priceText, totalText } from "../../lib/price";
-import { PRODUCTS, hasBuyLink, localized } from "../../lib/products";
+import { hasBuyLink, isAffiliate, localized, type Product } from "../../lib/products";
 import type { Answers } from "../../lib/recommend";
 import { notifyCartChanged } from "./cartClient";
 import { useI18n } from "./I18nProvider";
@@ -163,10 +163,10 @@ export function SkinProfile({ answers }: { answers: Answers | null }) {
 // ---------------------------------------------------------------- shopping cart
 interface Item { productId: string; qty: number; routine: "morning" | "evening" | null }
 
-export function CartList({ initial }: { initial: Item[] }) {
+export function CartList({ initial, products }: { initial: Item[]; products: Product[] }) {
   const { m, locale } = useI18n();
   const [items, setItems] = useState(initial);
-  const rows = items.flatMap((i) => { const p = PRODUCTS.find((x) => x.id === i.productId); return p ? [{ ...i, p }] : []; });
+  const rows = items.flatMap((i) => { const p = products.find((x) => x.id === i.productId); return p ? [{ ...i, p }] : []; });
 
   async function change(productId: string, qty: number) {
     const q = Math.min(9, Math.max(1, qty));
@@ -218,7 +218,9 @@ export function CartList({ initial }: { initial: Item[] }) {
                 <div className="flex items-center gap-3 text-sm">
                   <Link href={`/products/${p.id}`} className="underline">{m.cart.viewProduct}</Link>
                   {hasBuyLink(p) ? (
-                    <a href={p.url} target="_blank" rel="sponsored noopener noreferrer" className="font-semibold text-accent">{m.cart.buy}</a>
+                    <a href={p.url} target="_blank" rel={isAffiliate(p) ? "sponsored noopener noreferrer" : "noopener noreferrer nofollow"} className="font-semibold text-accent">
+                      {isAffiliate(p) ? m.cart.buy : m.product.viewAt(m.product.naver)}
+                    </a>
                   ) : p.real ? (
                     <RetailerLinks product={p} />
                   ) : (
