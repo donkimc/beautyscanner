@@ -138,6 +138,7 @@ function AddProduct() {
   const f = m.admin.form;
   const errors = m.admin.errors as Record<string, string>;
   const [cand, setCand] = useState<Cand | null>(null);
+  const [blank, setBlank] = useState(false);
   const [form, setForm] = useState({ name: "", nameEn: "", brand: "", step: "" as Step | "", concerns: [] as Concern[], texture: "light", time: "both", price: 0, grade: "unrated", evidence: "", evidenceEn: "", fragranceFree: false, vegan: false, sensitiveSafe: false });
   const [msg, setMsg] = useState("");
 
@@ -151,7 +152,7 @@ function AddProduct() {
     const res = await fetch("/api/admin/products", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ product: form, candidate: cand }) }).catch(() => null);
     const data = await res?.json().catch(() => null);
     if (!res?.ok) return setMsg(errors[data?.error] ?? m.admin.failed);
-    setMsg(m.admin.saved); setCand(null); router.refresh();
+    setMsg(m.admin.saved); setCand(null); setBlank(false); router.refresh();
   }
 
   const label = "mb-1 block text-xs font-semibold text-ink-soft";
@@ -159,15 +160,20 @@ function AddProduct() {
     <section className="rounded-card bg-surface p-5 shadow-phone">
       <h2 className="font-display text-xl font-semibold">{m.admin.add}</h2>
       <p className="mt-1 text-xs text-ink-soft">{m.admin.addSub}</p>
-      {!cand ? (
-        <SearchPanel initialQuery="" pickLabel={m.admin.create} onPick={choose} />
+      {!cand && !blank ? (
+        <>
+          <button className={`${btn} mt-3`} onClick={() => setBlank(true)}>{m.admin.manual}</button>
+          <SearchPanel initialQuery="" pickLabel={m.admin.create} onPick={choose} />
+        </>
       ) : (
         <div className="mt-3 space-y-3">
-          <div className="flex gap-3 rounded-xl bg-surface-soft p-2.5">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={cand.image} alt="" referrerPolicy="no-referrer" className="size-16 shrink-0 rounded-lg border border-border object-cover" />
-            <p className="text-xs">{cand.title}<br /><span className="text-ink-soft">{cand.price.toLocaleString()}원 · {cand.mall}</span></p>
-          </div>
+          {cand && (
+            <div className="flex gap-3 rounded-xl bg-surface-soft p-2.5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={cand.image} alt="" referrerPolicy="no-referrer" className="size-16 shrink-0 rounded-lg border border-border object-cover" />
+              <p className="text-xs">{cand.title}<br /><span className="text-ink-soft">{cand.price.toLocaleString()}원 · {cand.mall}</span></p>
+            </div>
+          )}
           <div><label className={label}>{f.name}</label><input className={input} value={form.name} onChange={(e) => set("name", e.target.value)} /></div>
           <div><label className={label}>{f.nameEn}</label><input className={input} value={form.nameEn} onChange={(e) => set("nameEn", e.target.value)} /></div>
           <div className="grid grid-cols-2 gap-3">
@@ -204,7 +210,7 @@ function AddProduct() {
           <div><label className={label}>{f.evidenceEn}</label><textarea className={input} rows={2} value={form.evidenceEn} onChange={(e) => set("evidenceEn", e.target.value)} /></div>
           <div className="flex items-center gap-3">
             <button className={btnPrimary} onClick={save}>{f.save}</button>
-            <button className="text-sm text-ink-soft underline" onClick={() => setCand(null)}>{m.admin.close}</button>
+            <button className="text-sm text-ink-soft underline" onClick={() => { setCand(null); setBlank(false); }}>{m.admin.close}</button>
           </div>
         </div>
       )}
