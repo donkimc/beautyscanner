@@ -5,7 +5,8 @@ import { createServer } from "node:http";
 import { readFileSync } from "node:fs";
 
 const PORT = Number(process.env.PORT ?? 4010);
-const photo = (name: string) => readFileSync(new URL(`../public/products/${name}.jpg`, import.meta.url));
+// Stand-in pictures: the AI-generated sample images (never real product photos).
+const photo = (name: string) => readFileSync(new URL(`../public/products/demo/${{ beplain: "c01", snature: "t06", tonymoly: "m21" }[name]}.jpg`, import.meta.url));
 const IMAGES: Record<string, Buffer> = { beplain: photo("beplain"), snature: photo("snature"), tonymoly: photo("tonymoly") };
 
 const item = (id: string, title: string, price: number, img: keyof typeof IMAGES, extra: Record<string, string> = {}) => ({

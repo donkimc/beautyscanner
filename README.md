@@ -2,7 +2,7 @@
 
 An MVP demo of an evidence-based skincare recommender, in **Korean and English**. A mobile-first landing page leads to a short survey that produces a budget-aware routine. Each product shows an evidence grade, a reason, and an AD-labelled buy link. Users can sign up with an emailed confirmation link (or Google) to save routines.
 
-> **Demo status:** the 200 sample products in `lib/samples.ts` are fictional (invented brands, names start with "[Sample]" / "[샘플]", no evidence grade) and their pictures are AI-generated, **buy links are placeholders (no retailer or Coupang integration exists yet) and real product photos exist for three of the five real products, the rest use illustrations**, the newsletter is a mock, and the legal pages are draft templates that need a lawyer's review.
+> **Demo status:** the 200 sample products in `lib/samples.ts` are fictional (invented brands, names start with "[Sample]" / "[샘플]", no evidence grade) and their pictures are AI-generated, **buy links are placeholders (no retailer or Coupang integration exists yet) and the five real products use illustrations until clean, licensed photos are added**, the newsletter is a mock, and the legal pages are draft templates that need a lawyer's review.
 
 Live demo (Railway): https://web-production-318ac.up.railway.app
 
@@ -76,7 +76,7 @@ The catalog has **5 real products** taken from the original evening-routine page
 Pictures go through `ProductImage` (`app/_components/ProductImage.tsx`): the product's own photo (`image` in `lib/products.ts`, a file under `public/products/`) when it has one, otherwise a clean illustration of that kind of product.
 
 The 200 fictional sample products (`lib/samples.ts`: 30 cleansers, 35 toners, 55 serums, 45 creams, 35 sunscreens) use AI-generated pictures in `public/products/demo/` (generic packaging with a made-up brand label; the product page says the picture is AI-generated). They were made once with `npm run gen:images`; the script skips pictures that already exist and needs `ATLAS_API_KEY` in a git-ignored `.env.local`. Never use these pictures for real products.
-- Photos for **Beplain, S.Nature and TonyMoly** come from the original page's product photos (clean product shots).
+- The real products have no photo yet and show the illustration. The earlier retailer photos of Beplain, S.Nature and TonyMoly were removed because their rights were unclear (they remain in the git history).
 - **Torriden and Anua use the illustration for now**: the original page's images are retailer promo shots (Torriden's is an ad banner with a "No. 1 serum" claim; Anua's shows a celebrity model), which don't belong on an evidence-first site. Add a clean packshot as `public/products/<name>.jpg` and set `image` to switch.
 - Product photos belong to their brands/sellers: confirm you may use them commercially, or take images from the retailer's official API (Coupang Partners, Naver Shopping) once connected.
 
@@ -213,3 +213,7 @@ See `plan/plan.json`. Next steps:
 - A real newsletter needs separate advertising-message consent and an unsubscribe path; the current one is a mock.
 - Keep the AD label next to every affiliate link, and do not let affiliate income influence evidence grades.
 - This tool does not diagnose or treat any condition.
+
+## License
+
+[PolyForm Noncommercial 1.0.0](LICENSE): you may read, use and modify the code for non-commercial purposes only. Commercial use needs the owner's written permission. Note this is "source-available", not an open-source license.
