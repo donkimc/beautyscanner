@@ -24,21 +24,21 @@ const anon = (path: string, method = "GET", json?: unknown) => new Request(`http
 const answers: Answers = { skinType: "dry", concerns: ["dryness"], priority: "hydration", budget: 70000, texture: "light", note: "" };
 
 test("cart, profile and routines need a login", async () => {
-  for (const res of [await cartGet(anon("/api/cart")), await cartPost(anon("/api/cart", "POST", { productIds: ["c1"] })), await cartPatch(anon("/api/cart", "PATCH", {})), await cartDelete(anon("/api/cart", "DELETE")), await profileGet(anon("/api/profile")), await profilePut(anon("/api/profile", "PUT", { name: "x" })), await routinesPost(anon("/api/routines", "POST", {})), await exportGet(anon("/api/account/export"))]) {
+  for (const res of [await cartGet(anon("/api/cart")), await cartPost(anon("/api/cart", "POST", { productIds: ["c01"] })), await cartPatch(anon("/api/cart", "PATCH", {})), await cartDelete(anon("/api/cart", "DELETE")), await profileGet(anon("/api/profile")), await profilePut(anon("/api/profile", "PUT", { name: "x" })), await routinesPost(anon("/api/routines", "POST", {})), await exportGet(anon("/api/account/export"))]) {
     assert.equal(res.status, 401);
   }
 });
 
 test("cart: add, list, change quantity, remove, empty", async () => {
   const req = await asUser("cart-api@x.co");
-  assert.equal((await cartPost(req("/api/cart", { method: "POST", json: { productIds: ["c1", "t1"], routine: "evening" } }))).status, 200);
+  assert.equal((await cartPost(req("/api/cart", { method: "POST", json: { productIds: ["c01", "t01"], routine: "evening" } }))).status, 200);
   let items = (await (await cartGet(req("/api/cart"))).json()).items;
-  assert.deepEqual(items.map((i: { productId: string; routine: string }) => [i.productId, i.routine]).sort(), [["c1", "evening"], ["t1", "evening"]]);
-  await cartPatch(req("/api/cart", { method: "PATCH", json: { productId: "c1", qty: 3 } }));
+  assert.deepEqual(items.map((i: { productId: string; routine: string }) => [i.productId, i.routine]).sort(), [["c01", "evening"], ["t01", "evening"]]);
+  await cartPatch(req("/api/cart", { method: "PATCH", json: { productId: "c01", qty: 3 } }));
   items = (await (await cartGet(req("/api/cart"))).json()).items;
-  assert.equal(items.find((i: { productId: string }) => i.productId === "c1").qty, 3);
+  assert.equal(items.find((i: { productId: string }) => i.productId === "c01").qty, 3);
   assert.equal((await (await meGet(req("/api/auth/me"))).json()).cartCount, 4);
-  await cartDelete(req("/api/cart?productId=c1", { method: "DELETE" }));
+  await cartDelete(req("/api/cart?productId=c01", { method: "DELETE" }));
   assert.equal((await (await cartGet(req("/api/cart"))).json()).items.length, 1);
   await cartDelete(req("/api/cart", { method: "DELETE" }));
   assert.equal((await (await cartGet(req("/api/cart"))).json()).items.length, 0);
@@ -46,10 +46,10 @@ test("cart: add, list, change quantity, remove, empty", async () => {
 
 test("cart rejects unknown products, bad quantities and oversized requests", async () => {
   const req = await asUser("cart-bad@x.co");
-  for (const json of [{ productIds: ["nope"] }, { productIds: [] }, { productIds: "c1" }, { productIds: Array(11).fill("c1") }, {}]) {
+  for (const json of [{ productIds: ["nope"] }, { productIds: [] }, { productIds: "c01" }, { productIds: Array(11).fill("c01") }, {}]) {
     assert.equal((await cartPost(req("/api/cart", { method: "POST", json }))).status, 400);
   }
-  assert.equal((await cartPatch(req("/api/cart", { method: "PATCH", json: { productId: "c1", qty: "3" } }))).status, 400);
+  assert.equal((await cartPatch(req("/api/cart", { method: "PATCH", json: { productId: "c01", qty: "3" } }))).status, 400);
   assert.equal((await cartPatch(req("/api/cart", { method: "PATCH", json: { productId: "nope", qty: 3 } }))).status, 400);
   assert.equal((await cartDelete(req("/api/cart?productId=nope", { method: "DELETE" }))).status, 400);
 });
@@ -57,7 +57,7 @@ test("cart rejects unknown products, bad quantities and oversized requests", asy
 test("users only see their own cart", async () => {
   const a = await asUser("iso-a@x.co");
   const b = await asUser("iso-b@x.co");
-  await cartPost(a("/api/cart", { method: "POST", json: { productIds: ["c1"] } }));
+  await cartPost(a("/api/cart", { method: "POST", json: { productIds: ["c01"] } }));
   assert.equal((await (await cartGet(b("/api/cart"))).json()).items.length, 0);
 });
 
@@ -76,10 +76,10 @@ test("profile: edit the name and the saved answers, with validation", async () =
 
 test("saving a routine also saves the profile, and the export includes cart and profile", async () => {
   const req = await asUser("save-api@x.co");
-  const res = await routinesPost(req("/api/routines", { method: "POST", json: { answers, productIds: ["c1", "m1"], total: 21800 } }));
+  const res = await routinesPost(req("/api/routines", { method: "POST", json: { answers, productIds: ["c01", "m01"], total: 21800 } }));
   assert.equal(res.status, 200);
   assert.deepEqual((await (await profileGet(req("/api/profile"))).json()).answers, answers);
-  await cartPost(req("/api/cart", { method: "POST", json: { productIds: ["c1"] } }));
+  await cartPost(req("/api/cart", { method: "POST", json: { productIds: ["c01"] } }));
   const exported = await (await exportGet(req("/api/account/export"))).json();
   assert.deepEqual(Object.keys(exported).sort(), ["cart", "consents", "exportedAt", "profile", "routines", "user"]);
   assert.equal(exported.cart.length, 1);

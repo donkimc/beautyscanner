@@ -15,20 +15,20 @@ const render = (product: typeof p, locale: "ko" | "en" = "en") => renderToStatic
 test("a product with a photo renders an <img> with the product name as alt text", () => {
   const html = render({ ...p, image: "/products/c1.webp" });
   assert.match(html, /<img[^>]+src="\/products\/c1\.webp"/);
-  assert.match(html, /alt="\[Sample\] Mild-acid gel cleanser"/);
+  assert.match(html, /alt="\[Sample\] Haneuldam mild-acid gel cleanser"/);
   assert.match(html, /loading="lazy"/);
 });
 
 test("a product without a photo renders an accessible illustration instead", () => {
-  const html = render(p);
+  const html = render({ ...p, image: undefined });
   assert.match(html, /role="img"/);
-  assert.match(html, /aria-label="\[Sample\] Mild-acid gel cleanser"/);
+  assert.match(html, /aria-label="\[Sample\] Haneuldam mild-acid gel cleanser"/);
   assert.match(html, /<svg/);
   assert.doesNotMatch(html, /<img/);
 });
 
 test("the alt text follows the language", () => {
-  assert.match(render(p, "ko"), /aria-label="\[샘플\] 약산성 젤 클렌저"/);
+  assert.match(render(p, "ko"), /alt="\[샘플\] 하늘담 약산성 젤 클렌저"/);
 });
 
 test("every routine step has an illustration, and every product renders a picture", () => {
@@ -55,7 +55,7 @@ test("real products: photos exist on disk, and only clean product shots are used
   // Anua's promo photo shows a celebrity's face and Torriden's is an ad banner with a "No.1" claim: they stay on the illustration until clean photos exist.
   assert.equal(PRODUCTS.find((p) => p.id === "r4")!.image, undefined);
   assert.equal(PRODUCTS.find((p) => p.id === "r3")!.image, undefined);
-  assert.ok(PRODUCTS.filter((p) => !p.real).every((p) => !p.image && p.name.includes("[샘플]")));
+  assert.ok(PRODUCTS.filter((p) => !p.real).every((p) => p.name.includes("[샘플]") && p.image?.startsWith("/products/demo/")));
 });
 
 test("real products are not given evidence we don't have: unreviewed ones are 'unrated'", () => {
@@ -79,7 +79,7 @@ test("estimated prices are marked, quoted ones are not", () => {
   assert.equal(priceText(byId("r1"), "en"), "~13,000 KRW");     // estimate
   assert.equal(priceText(byId("r1"), "ko"), "약 13,000원");
   assert.equal(money(1000, "ko"), "1,000원");
-  assert.equal(totalText([{ product: byId("r3") }, { product: byId("c1") }], "en"), "23,800 KRW");
+  assert.equal(totalText([{ product: byId("r3") }, { product: byId("c01") }], "en"), "23,100 KRW");
   assert.equal(totalText([{ product: byId("r3") }, { product: byId("r1") }], "en"), "~29,900 KRW");
   assert.equal(totalText([{ product: byId("r1"), qty: 2 }], "ko"), "약 26,000원");
 });

@@ -1,0 +1,1202 @@
+{
+ "t06": {
+  "prompt": "Product photo of a soft beige pump bottle of skincare exfoliating toner. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"BHA smoothing toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:36:47.075Z"
+ },
+ "c01": {
+  "prompt": "Product photo of a amber glass tube of skincare gel cleanser. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"mild-acid gel cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:36:43.128Z"
+ },
+ "s11": {
+  "prompt": "Product photo of a frosted clear airless pump bottle of skincare serum. A simple minimal label on the front reads \"Supdam\" in large letters and \"retinal 0.1% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:36:43.126Z"
+ },
+ "m21": {
+  "prompt": "Product photo of a frosted clear jar of skincare face cream. A simple minimal label on the front reads \"Solbit\" in large letters and \"niacinamide tone cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:36:55.942Z"
+ },
+ "f31": {
+  "prompt": "Product photo of a pale pink stick of skincare sunscreen stick. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"sun stick\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:36:55.965Z"
+ },
+ "c03": {
+  "prompt": "Product photo of a light grey tube of skincare gel cleanser. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"mild-acid gel cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:40:08.345Z"
+ },
+ "c04": {
+  "prompt": "Product photo of a lavender pump bottle of skincare gel cleanser. A simple minimal label on the front reads \"Supdam\" in large letters and \"mild-acid gel cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:40:15.140Z"
+ },
+ "c02": {
+  "prompt": "Product photo of a pale pink pump bottle of skincare gel cleanser. A simple minimal label on the front reads \"Solbit\" in large letters and \"mild-acid gel cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:40:15.245Z"
+ },
+ "c05": {
+  "prompt": "Product photo of a white tube of skincare gel cleanser. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"mild-acid gel cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:40:23.836Z"
+ },
+ "c06": {
+  "prompt": "Product photo of a pale blue pump bottle of skincare cream cleanser. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"ceramide cream cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:40:26.481Z"
+ },
+ "c07": {
+  "prompt": "Product photo of a amber glass tube of skincare cream cleanser. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"ceramide cream cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:40:27.976Z"
+ },
+ "c09": {
+  "prompt": "Product photo of a light grey tube of skincare cream cleanser. A simple minimal label on the front reads \"Yundam\" in large letters and \"ceramide cream cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:40:38.616Z"
+ },
+ "c08": {
+  "prompt": "Product photo of a pale pink pump bottle of skincare cream cleanser. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"ceramide cream cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:40:39.375Z"
+ },
+ "c10": {
+  "prompt": "Product photo of a lavender pump bottle of skincare cream cleanser. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"ceramide cream cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:40:42.838Z"
+ },
+ "c12": {
+  "prompt": "Product photo of a pale blue pump bottle of skincare foaming cleanser. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"green tea foam cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:40:55.493Z"
+ },
+ "c11": {
+  "prompt": "Product photo of a soft beige tube of skincare foaming cleanser. A simple minimal label on the front reads \"Supdam\" in large letters and \"green tea foam cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:40:56.573Z"
+ },
+ "c13": {
+  "prompt": "Product photo of a amber glass tube of skincare foaming cleanser. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"green tea foam cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:40:57.801Z"
+ },
+ "c14": {
+  "prompt": "Product photo of a pale pink pump bottle of skincare foaming cleanser. A simple minimal label on the front reads \"Solbit\" in large letters and \"green tea foam cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:41:11.487Z"
+ },
+ "c15": {
+  "prompt": "Product photo of a light grey tube of skincare foaming cleanser. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"green tea foam cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:41:12.506Z"
+ },
+ "c16": {
+  "prompt": "Product photo of a frosted clear jar of skincare clay cleanser. A simple minimal label on the front reads \"Yundam\" in large letters and \"clay pore cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:41:21.116Z"
+ },
+ "c17": {
+  "prompt": "Product photo of a soft beige tube of skincare clay cleanser. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"clay pore cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:41:25.215Z"
+ },
+ "c18": {
+  "prompt": "Product photo of a pale blue jar of skincare clay cleanser. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"clay pore cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:41:26.401Z"
+ },
+ "c19": {
+  "prompt": "Product photo of a amber glass tube of skincare clay cleanser. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"clay pore cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:41:33.737Z"
+ },
+ "c21": {
+  "prompt": "Product photo of a cream jar of skincare cleansing balm. A simple minimal label on the front reads \"Solbit\" in large letters and \"cleansing balm\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:41:35.962Z"
+ },
+ "c20": {
+  "prompt": "Product photo of a pale pink jar of skincare clay cleanser. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"clay pore cleanser\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:41:40.488Z"
+ },
+ "c22": {
+  "prompt": "Product photo of a frosted clear tub of skincare cleansing balm. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"cleansing balm\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:41:49.492Z"
+ },
+ "c23": {
+  "prompt": "Product photo of a soft beige jar of skincare cleansing balm. A simple minimal label on the front reads \"Supdam\" in large letters and \"cleansing balm\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:41:50.445Z"
+ },
+ "c24": {
+  "prompt": "Product photo of a pale blue tub of skincare cleansing balm. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"cleansing balm\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:41:53.730Z"
+ },
+ "c25": {
+  "prompt": "Product photo of a amber glass jar of skincare cleansing balm. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"cleansing balm\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:01.430Z"
+ },
+ "c27": {
+  "prompt": "Product photo of a cream jar of skincare powder wash. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"enzyme powder wash\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:04.917Z"
+ },
+ "c26": {
+  "prompt": "Product photo of a pale green small canister of skincare powder wash. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"enzyme powder wash\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:06.238Z"
+ },
+ "c28": {
+  "prompt": "Product photo of a frosted clear small canister of skincare powder wash. A simple minimal label on the front reads \"Yundam\" in large letters and \"enzyme powder wash\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:13.645Z"
+ },
+ "c29": {
+  "prompt": "Product photo of a soft beige jar of skincare powder wash. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"enzyme powder wash\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:17.831Z"
+ },
+ "c30": {
+  "prompt": "Product photo of a pale blue small canister of skincare powder wash. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"enzyme powder wash\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:21.083Z"
+ },
+ "t01": {
+  "prompt": "Product photo of a pale blue bottle with screw cap of skincare toner. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"hyaluronic acid toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:23.507Z"
+ },
+ "t02": {
+  "prompt": "Product photo of a amber glass pump bottle of skincare toner. A simple minimal label on the front reads \"Solbit\" in large letters and \"hyaluronic acid toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:31.920Z"
+ },
+ "t03": {
+  "prompt": "Product photo of a pale pink bottle with screw cap of skincare toner. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"hyaluronic acid toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:33.402Z"
+ },
+ "t04": {
+  "prompt": "Product photo of a light grey pump bottle of skincare toner. A simple minimal label on the front reads \"Supdam\" in large letters and \"hyaluronic acid toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:35.646Z"
+ },
+ "t07": {
+  "prompt": "Product photo of a pale blue bottle with screw cap of skincare exfoliating toner. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"BHA smoothing toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:47.709Z"
+ },
+ "t08": {
+  "prompt": "Product photo of a amber glass pump bottle of skincare exfoliating toner. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"BHA smoothing toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:48.337Z"
+ },
+ "t05": {
+  "prompt": "Product photo of a lavender bottle with screw cap of skincare toner. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"hyaluronic acid toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:50.960Z"
+ },
+ "t10": {
+  "prompt": "Product photo of a light grey pump bottle of skincare exfoliating toner. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"BHA smoothing toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:42:59.136Z"
+ },
+ "t09": {
+  "prompt": "Product photo of a pale pink bottle with screw cap of skincare exfoliating toner. A simple minimal label on the front reads \"Yundam\" in large letters and \"BHA smoothing toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:43:00.249Z"
+ },
+ "t11": {
+  "prompt": "Product photo of a frosted clear bottle with screw cap of skincare toner. A simple minimal label on the front reads \"Supdam\" in large letters and \"centella calming toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:43:06.479Z"
+ },
+ "t12": {
+  "prompt": "Product photo of a soft beige pump bottle of skincare toner. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"centella calming toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:43:10.689Z"
+ },
+ "t13": {
+  "prompt": "Product photo of a pale blue bottle with screw cap of skincare toner. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"centella calming toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:43:15.669Z"
+ },
+ "t14": {
+  "prompt": "Product photo of a amber glass pump bottle of skincare toner. A simple minimal label on the front reads \"Solbit\" in large letters and \"centella calming toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:43:24.290Z"
+ },
+ "t15": {
+  "prompt": "Product photo of a pale pink bottle with screw cap of skincare toner. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"centella calming toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:43:25.810Z"
+ },
+ "t16": {
+  "prompt": "Product photo of a cream jar of skincare thick toner. A simple minimal label on the front reads \"Yundam\" in large letters and \"ceramide mochi toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:43:27.639Z"
+ },
+ "t17": {
+  "prompt": "Product photo of a frosted clear wide bottle of skincare thick toner. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"ceramide mochi toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:43:37.106Z"
+ },
+ "t18": {
+  "prompt": "Product photo of a soft beige jar of skincare thick toner. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"ceramide mochi toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:43:38.949Z"
+ },
+ "t19": {
+  "prompt": "Product photo of a pale blue wide bottle of skincare thick toner. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"ceramide mochi toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:43:39.879Z"
+ },
+ "t20": {
+  "prompt": "Product photo of a amber glass jar of skincare thick toner. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"ceramide mochi toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:43:49.704Z"
+ },
+ "t21": {
+  "prompt": "Product photo of a pale green bottle with screw cap of skincare exfoliating toner. A simple minimal label on the front reads \"Solbit\" in large letters and \"PHA gentle exfoliating toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:43:50.674Z"
+ },
+ "t22": {
+  "prompt": "Product photo of a cream pump bottle of skincare exfoliating toner. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"PHA gentle exfoliating toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:43:51.688Z"
+ },
+ "t23": {
+  "prompt": "Product photo of a frosted clear bottle with screw cap of skincare exfoliating toner. A simple minimal label on the front reads \"Supdam\" in large letters and \"PHA gentle exfoliating toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:00.423Z"
+ },
+ "t25": {
+  "prompt": "Product photo of a pale blue bottle with screw cap of skincare exfoliating toner. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"PHA gentle exfoliating toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:01.301Z"
+ },
+ "t24": {
+  "prompt": "Product photo of a soft beige pump bottle of skincare exfoliating toner. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"PHA gentle exfoliating toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:03.894Z"
+ },
+ "t26": {
+  "prompt": "Product photo of a white pump bottle of skincare toner. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"niacinamide brightening toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:12.664Z"
+ },
+ "t27": {
+  "prompt": "Product photo of a pale green bottle with screw cap of skincare toner. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"niacinamide brightening toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:14.685Z"
+ },
+ "t28": {
+  "prompt": "Product photo of a cream pump bottle of skincare toner. A simple minimal label on the front reads \"Yundam\" in large letters and \"niacinamide brightening toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:26.516Z"
+ },
+ "t29": {
+  "prompt": "Product photo of a frosted clear bottle with screw cap of skincare toner. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"niacinamide brightening toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:27.650Z"
+ },
+ "t30": {
+  "prompt": "Product photo of a soft beige pump bottle of skincare toner. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"niacinamide brightening toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:28.550Z"
+ },
+ "t31": {
+  "prompt": "Product photo of a lavender wide bottle of skincare essence toner. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"rice bran moisture essence toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:38.773Z"
+ },
+ "t33": {
+  "prompt": "Product photo of a pale green wide bottle of skincare essence toner. A simple minimal label on the front reads \"Solbit\" in large letters and \"rice bran moisture essence toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:40.548Z"
+ },
+ "t32": {
+  "prompt": "Product photo of a white bottle with screw cap of skincare essence toner. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"rice bran moisture essence toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:41.895Z"
+ },
+ "t35": {
+  "prompt": "Product photo of a frosted clear wide bottle of skincare essence toner. A simple minimal label on the front reads \"Supdam\" in large letters and \"rice bran moisture essence toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:51.599Z"
+ },
+ "t34": {
+  "prompt": "Product photo of a cream bottle with screw cap of skincare essence toner. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"rice bran moisture essence toner\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:53.297Z"
+ },
+ "s01": {
+  "prompt": "Product photo of a pale blue dropper bottle of skincare serum. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"low-molecular hyaluronic serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:44:53.520Z"
+ },
+ "s02": {
+  "prompt": "Product photo of a amber glass pump bottle of skincare serum. A simple minimal label on the front reads \"Solbit\" in large letters and \"low-molecular hyaluronic serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:45:02.104Z"
+ },
+ "s04": {
+  "prompt": "Product photo of a light grey pump bottle of skincare serum. A simple minimal label on the front reads \"Supdam\" in large letters and \"low-molecular hyaluronic serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:45:05.182Z"
+ },
+ "s03": {
+  "prompt": "Product photo of a pale pink dropper bottle of skincare serum. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"low-molecular hyaluronic serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:45:08.207Z"
+ },
+ "s05": {
+  "prompt": "Product photo of a lavender dropper bottle of skincare serum. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"low-molecular hyaluronic serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:45:17.986Z"
+ },
+ "s07": {
+  "prompt": "Product photo of a pale blue dropper bottle of skincare serum. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"niacinamide 10% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:45:21.928Z"
+ },
+ "s06": {
+  "prompt": "Product photo of a soft beige pump bottle of skincare serum. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"niacinamide 10% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:45:30.309Z"
+ },
+ "s08": {
+  "prompt": "Product photo of a amber glass pump bottle of skincare serum. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"niacinamide 10% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:45:30.605Z"
+ },
+ "s09": {
+  "prompt": "Product photo of a pale pink dropper bottle of skincare serum. A simple minimal label on the front reads \"Yundam\" in large letters and \"niacinamide 10% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:45:38.656Z"
+ },
+ "s12": {
+  "prompt": "Product photo of a soft beige dropper bottle of skincare serum. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"retinal 0.1% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:45:41.935Z"
+ },
+ "s10": {
+  "prompt": "Product photo of a light grey pump bottle of skincare serum. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"niacinamide 10% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:45:43.656Z"
+ },
+ "s13": {
+  "prompt": "Product photo of a pale blue airless pump bottle of skincare serum. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"retinal 0.1% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:45:51.667Z"
+ },
+ "s15": {
+  "prompt": "Product photo of a pale pink airless pump bottle of skincare serum. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"retinal 0.1% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:45:53.553Z"
+ },
+ "s14": {
+  "prompt": "Product photo of a amber glass dropper bottle of skincare serum. A simple minimal label on the front reads \"Solbit\" in large letters and \"retinal 0.1% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:45:54.882Z"
+ },
+ "s17": {
+  "prompt": "Product photo of a frosted clear dropper bottle of skincare serum. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"centella cica calming serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:46:07.752Z"
+ },
+ "s16": {
+  "prompt": "Product photo of a cream pump bottle of skincare serum. A simple minimal label on the front reads \"Yundam\" in large letters and \"centella cica calming serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:46:08.864Z"
+ },
+ "s18": {
+  "prompt": "Product photo of a soft beige pump bottle of skincare serum. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"centella cica calming serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:46:09.429Z"
+ },
+ "s21": {
+  "prompt": "Product photo of a pale green dark dropper bottle of skincare serum. A simple minimal label on the front reads \"Solbit\" in large letters and \"vitamin C 15% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:46:21.618Z"
+ },
+ "s19": {
+  "prompt": "Product photo of a pale blue dropper bottle of skincare serum. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"centella cica calming serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:46:22.872Z"
+ },
+ "s20": {
+  "prompt": "Product photo of a amber glass pump bottle of skincare serum. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"centella cica calming serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:46:23.364Z"
+ },
+ "s22": {
+  "prompt": "Product photo of a cream airless pump bottle of skincare serum. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"vitamin C 15% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:46:34.123Z"
+ },
+ "s24": {
+  "prompt": "Product photo of a soft beige airless pump bottle of skincare serum. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"vitamin C 15% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:46:35.052Z"
+ },
+ "s23": {
+  "prompt": "Product photo of a frosted clear dark dropper bottle of skincare serum. A simple minimal label on the front reads \"Supdam\" in large letters and \"vitamin C 15% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:46:38.187Z"
+ },
+ "s25": {
+  "prompt": "Product photo of a pale blue dark dropper bottle of skincare serum. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"vitamin C 15% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:46:46.600Z"
+ },
+ "s26": {
+  "prompt": "Product photo of a white pump bottle of skincare serum. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"gentle vitamin C derivative serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:46:48.773Z"
+ },
+ "s27": {
+  "prompt": "Product photo of a pale green dropper bottle of skincare serum. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"gentle vitamin C derivative serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:46:51.438Z"
+ },
+ "s28": {
+  "prompt": "Product photo of a cream pump bottle of skincare serum. A simple minimal label on the front reads \"Yundam\" in large letters and \"gentle vitamin C derivative serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:46:57.248Z"
+ },
+ "s30": {
+  "prompt": "Product photo of a soft beige pump bottle of skincare serum. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"gentle vitamin C derivative serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:47:01.395Z"
+ },
+ "s29": {
+  "prompt": "Product photo of a frosted clear dropper bottle of skincare serum. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"gentle vitamin C derivative serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:47:03.064Z"
+ },
+ "s31": {
+  "prompt": "Product photo of a lavender dropper bottle of skincare serum. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"peptide firming serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:47:09.794Z"
+ },
+ "s32": {
+  "prompt": "Product photo of a white airless pump bottle of skincare serum. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"peptide firming serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:47:18.596Z"
+ },
+ "s33": {
+  "prompt": "Product photo of a pale green dropper bottle of skincare serum. A simple minimal label on the front reads \"Solbit\" in large letters and \"peptide firming serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:47:18.653Z"
+ },
+ "s34": {
+  "prompt": "Product photo of a cream airless pump bottle of skincare serum. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"peptide firming serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:47:21.196Z"
+ },
+ "s36": {
+  "prompt": "Product photo of a light grey pump bottle of skincare serum. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"azelaic acid 10% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:47:29.453Z"
+ },
+ "s35": {
+  "prompt": "Product photo of a frosted clear dropper bottle of skincare serum. A simple minimal label on the front reads \"Supdam\" in large letters and \"peptide firming serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:47:33.651Z"
+ },
+ "s37": {
+  "prompt": "Product photo of a lavender tube of skincare serum. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"azelaic acid 10% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:47:37.582Z"
+ },
+ "s38": {
+  "prompt": "Product photo of a white pump bottle of skincare serum. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"azelaic acid 10% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:47:41.283Z"
+ },
+ "s39": {
+  "prompt": "Product photo of a pale green tube of skincare serum. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"azelaic acid 10% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:47:43.727Z"
+ },
+ "s40": {
+  "prompt": "Product photo of a cream pump bottle of skincare serum. A simple minimal label on the front reads \"Yundam\" in large letters and \"azelaic acid 10% serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:47:50.718Z"
+ },
+ "s41": {
+  "prompt": "Product photo of a pale pink dropper bottle of skincare ampoule. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"ceramide barrier ampoule\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:47:51.834Z"
+ },
+ "s42": {
+  "prompt": "Product photo of a light grey small pump bottle of skincare ampoule. A simple minimal label on the front reads \"Supdam\" in large letters and \"ceramide barrier ampoule\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:01.764Z"
+ },
+ "s43": {
+  "prompt": "Product photo of a lavender dropper bottle of skincare ampoule. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"ceramide barrier ampoule\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:03.573Z"
+ },
+ "s44": {
+  "prompt": "Product photo of a white small pump bottle of skincare ampoule. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"ceramide barrier ampoule\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:08.058Z"
+ },
+ "s45": {
+  "prompt": "Product photo of a pale green dropper bottle of skincare ampoule. A simple minimal label on the front reads \"Solbit\" in large letters and \"ceramide barrier ampoule\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:13.795Z"
+ },
+ "s46": {
+  "prompt": "Product photo of a amber glass pump bottle of skincare serum. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"tranexamic acid tone serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:14.199Z"
+ },
+ "s47": {
+  "prompt": "Product photo of a pale pink dropper bottle of skincare serum. A simple minimal label on the front reads \"Yundam\" in large letters and \"tranexamic acid tone serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:20.775Z"
+ },
+ "s49": {
+  "prompt": "Product photo of a lavender dropper bottle of skincare serum. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"tranexamic acid tone serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:23.997Z"
+ },
+ "s48": {
+  "prompt": "Product photo of a light grey pump bottle of skincare serum. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"tranexamic acid tone serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:25.227Z"
+ },
+ "s50": {
+  "prompt": "Product photo of a white pump bottle of skincare serum. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"tranexamic acid tone serum\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:33.106Z"
+ },
+ "s51": {
+  "prompt": "Product photo of a pale blue dropper bottle of skincare ampoule. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"collagen firming ampoule\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:36.828Z"
+ },
+ "s52": {
+  "prompt": "Product photo of a amber glass small pump bottle of skincare ampoule. A simple minimal label on the front reads \"Solbit\" in large letters and \"collagen firming ampoule\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:38.978Z"
+ },
+ "s53": {
+  "prompt": "Product photo of a pale pink dropper bottle of skincare ampoule. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"collagen firming ampoule\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:47.461Z"
+ },
+ "s54": {
+  "prompt": "Product photo of a light grey small pump bottle of skincare ampoule. A simple minimal label on the front reads \"Supdam\" in large letters and \"collagen firming ampoule\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:50.254Z"
+ },
+ "s55": {
+  "prompt": "Product photo of a lavender dropper bottle of skincare ampoule. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"collagen firming ampoule\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:56.350Z"
+ },
+ "m01": {
+  "prompt": "Product photo of a pale pink jar of skincare face cream. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"ceramide barrier cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:48:58.960Z"
+ },
+ "m02": {
+  "prompt": "Product photo of a light grey tube of skincare face cream. A simple minimal label on the front reads \"Solbit\" in large letters and \"ceramide barrier cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:49:03.624Z"
+ },
+ "m03": {
+  "prompt": "Product photo of a lavender jar of skincare face cream. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"ceramide barrier cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:49:08.224Z"
+ },
+ "m04": {
+  "prompt": "Product photo of a white tube of skincare face cream. A simple minimal label on the front reads \"Supdam\" in large letters and \"ceramide barrier cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:49:09.629Z"
+ },
+ "m06": {
+  "prompt": "Product photo of a amber glass tube of skincare gel cream. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"light hydrating gel cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:49:28.890Z"
+ },
+ "m07": {
+  "prompt": "Product photo of a pale pink jar of skincare gel cream. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"light hydrating gel cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:49:30.722Z"
+ },
+ "m05": {
+  "prompt": "Product photo of a pale green jar of skincare face cream. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"ceramide barrier cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:49:38.476Z"
+ },
+ "m09": {
+  "prompt": "Product photo of a lavender jar of skincare gel cream. A simple minimal label on the front reads \"Yundam\" in large letters and \"light hydrating gel cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:49:44.436Z"
+ },
+ "m08": {
+  "prompt": "Product photo of a light grey tube of skincare gel cream. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"light hydrating gel cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:49:45.131Z"
+ },
+ "m12": {
+  "prompt": "Product photo of a amber glass tube of skincare face cream. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"centella calming cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:49:57.789Z"
+ },
+ "m11": {
+  "prompt": "Product photo of a pale blue jar of skincare face cream. A simple minimal label on the front reads \"Supdam\" in large letters and \"centella calming cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:49:58.593Z"
+ },
+ "m10": {
+  "prompt": "Product photo of a white tube of skincare gel cream. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"light hydrating gel cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:49:59.195Z"
+ },
+ "m14": {
+  "prompt": "Product photo of a light grey tube of skincare face cream. A simple minimal label on the front reads \"Solbit\" in large letters and \"centella calming cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:50:09.144Z"
+ },
+ "m13": {
+  "prompt": "Product photo of a pale pink jar of skincare face cream. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"centella calming cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:50:10.385Z"
+ },
+ "m15": {
+  "prompt": "Product photo of a lavender jar of skincare face cream. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"centella calming cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:50:12.405Z"
+ },
+ "m17": {
+  "prompt": "Product photo of a pale blue jar of skincare face cream. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"hyaluronic hydrating cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:50:20.865Z"
+ },
+ "m16": {
+  "prompt": "Product photo of a soft beige tube of skincare face cream. A simple minimal label on the front reads \"Yundam\" in large letters and \"hyaluronic hydrating cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:50:21.438Z"
+ },
+ "m18": {
+  "prompt": "Product photo of a amber glass tube of skincare face cream. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"hyaluronic hydrating cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:50:23.852Z"
+ },
+ "m19": {
+  "prompt": "Product photo of a pale pink jar of skincare face cream. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"hyaluronic hydrating cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:50:33.134Z"
+ },
+ "m22": {
+  "prompt": "Product photo of a soft beige tube of skincare face cream. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"niacinamide tone cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:50:35.338Z"
+ },
+ "m20": {
+  "prompt": "Product photo of a light grey tube of skincare face cream. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"hyaluronic hydrating cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:50:36.285Z"
+ },
+ "m24": {
+  "prompt": "Product photo of a amber glass tube of skincare face cream. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"niacinamide tone cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:50:48.662Z"
+ },
+ "m25": {
+  "prompt": "Product photo of a pale pink jar of skincare face cream. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"niacinamide tone cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:50:49.019Z"
+ },
+ "m23": {
+  "prompt": "Product photo of a pale blue jar of skincare face cream. A simple minimal label on the front reads \"Supdam\" in large letters and \"niacinamide tone cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:50:49.569Z"
+ },
+ "m26": {
+  "prompt": "Product photo of a cream airless pump jar of skincare face cream. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"peptide firming cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:50:59.473Z"
+ },
+ "m27": {
+  "prompt": "Product photo of a frosted clear jar of skincare face cream. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"peptide firming cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:00.018Z"
+ },
+ "m28": {
+  "prompt": "Product photo of a soft beige airless pump jar of skincare face cream. A simple minimal label on the front reads \"Yundam\" in large letters and \"peptide firming cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:02.769Z"
+ },
+ "m29": {
+  "prompt": "Product photo of a pale blue jar of skincare face cream. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"peptide firming cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:12.004Z"
+ },
+ "m30": {
+  "prompt": "Product photo of a amber glass airless pump jar of skincare face cream. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"peptide firming cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:13.116Z"
+ },
+ "m32": {
+  "prompt": "Product photo of a cream tub of skincare rich face cream. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"squalane nourishing cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:22.831Z"
+ },
+ "m31": {
+  "prompt": "Product photo of a pale green jar of skincare rich face cream. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"squalane nourishing cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:23.404Z"
+ },
+ "m33": {
+  "prompt": "Product photo of a frosted clear jar of skincare rich face cream. A simple minimal label on the front reads \"Solbit\" in large letters and \"squalane nourishing cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:24.968Z"
+ },
+ "m35": {
+  "prompt": "Product photo of a pale blue jar of skincare rich face cream. A simple minimal label on the front reads \"Supdam\" in large letters and \"squalane nourishing cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:34.068Z"
+ },
+ "m36": {
+  "prompt": "Product photo of a white airless pump jar of skincare night cream. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"retinol night cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:36.426Z"
+ },
+ "m34": {
+  "prompt": "Product photo of a soft beige tub of skincare rich face cream. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"squalane nourishing cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:38.042Z"
+ },
+ "m38": {
+  "prompt": "Product photo of a cream airless pump jar of skincare night cream. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"retinol night cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:46.989Z"
+ },
+ "m37": {
+  "prompt": "Product photo of a pale green jar of skincare night cream. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"retinol night cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:50.320Z"
+ },
+ "m39": {
+  "prompt": "Product photo of a frosted clear jar of skincare night cream. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"retinol night cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:53.152Z"
+ },
+ "m40": {
+  "prompt": "Product photo of a soft beige airless pump jar of skincare night cream. A simple minimal label on the front reads \"Yundam\" in large letters and \"retinol night cream\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:58.993Z"
+ },
+ "m41": {
+  "prompt": "Product photo of a lavender pump bottle of skincare lotion. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"oil-free moisture lotion\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:51:59.856Z"
+ },
+ "m42": {
+  "prompt": "Product photo of a white tube of skincare lotion. A simple minimal label on the front reads \"Supdam\" in large letters and \"oil-free moisture lotion\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:52:04.640Z"
+ },
+ "m43": {
+  "prompt": "Product photo of a pale green pump bottle of skincare lotion. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"oil-free moisture lotion\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:52:08.867Z"
+ },
+ "m44": {
+  "prompt": "Product photo of a cream tube of skincare lotion. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"oil-free moisture lotion\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:52:12.243Z"
+ },
+ "m45": {
+  "prompt": "Product photo of a frosted clear pump bottle of skincare lotion. A simple minimal label on the front reads \"Solbit\" in large letters and \"oil-free moisture lotion\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:52:16.803Z"
+ },
+ "f01": {
+  "prompt": "Product photo of a frosted clear tube of skincare sunscreen. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"mineral sunscreen SPF50+\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:52:19.115Z"
+ },
+ "f02": {
+  "prompt": "Product photo of a soft beige squeeze bottle of skincare sunscreen. A simple minimal label on the front reads \"Solbit\" in large letters and \"mineral sunscreen SPF50+\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:52:23.545Z"
+ },
+ "f04": {
+  "prompt": "Product photo of a amber glass squeeze bottle of skincare sunscreen. A simple minimal label on the front reads \"Supdam\" in large letters and \"mineral sunscreen SPF50+\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:52:31.678Z"
+ },
+ "f05": {
+  "prompt": "Product photo of a pale pink tube of skincare sunscreen. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"mineral sunscreen SPF50+\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:52:33.201Z"
+ },
+ "f03": {
+  "prompt": "Product photo of a pale blue tube of skincare sunscreen. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"mineral sunscreen SPF50+\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:52:36.228Z"
+ },
+ "f07": {
+  "prompt": "Product photo of a frosted clear tube of skincare sun essence. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"chemical sun essence SPF50+\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:52:47.381Z"
+ },
+ "f06": {
+  "prompt": "Product photo of a cream squeeze bottle of skincare sun essence. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"chemical sun essence SPF50+\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:52:48.158Z"
+ },
+ "f08": {
+  "prompt": "Product photo of a soft beige squeeze bottle of skincare sun essence. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"chemical sun essence SPF50+\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:52:55.383Z"
+ },
+ "f10": {
+  "prompt": "Product photo of a amber glass squeeze bottle of skincare sun essence. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"chemical sun essence SPF50+\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:02.068Z"
+ },
+ "f09": {
+  "prompt": "Product photo of a pale blue tube of skincare sun essence. A simple minimal label on the front reads \"Yundam\" in large letters and \"chemical sun essence SPF50+\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:03.176Z"
+ },
+ "f11": {
+  "prompt": "Product photo of a pale green tube of skincare sunscreen. A simple minimal label on the front reads \"Supdam\" in large letters and \"gentle mineral sun lotion\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:09.795Z"
+ },
+ "f13": {
+  "prompt": "Product photo of a frosted clear tube of skincare sunscreen. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"gentle mineral sun lotion\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:12.970Z"
+ },
+ "f12": {
+  "prompt": "Product photo of a cream pump bottle of skincare sunscreen. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"gentle mineral sun lotion\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:15.175Z"
+ },
+ "f14": {
+  "prompt": "Product photo of a soft beige pump bottle of skincare sunscreen. A simple minimal label on the front reads \"Solbit\" in large letters and \"gentle mineral sun lotion\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:19.793Z"
+ },
+ "f15": {
+  "prompt": "Product photo of a pale blue tube of skincare sunscreen. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"gentle mineral sun lotion\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:25.245Z"
+ },
+ "f17": {
+  "prompt": "Product photo of a pale green tube of skincare sun gel. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"lightweight sun gel\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:33.793Z"
+ },
+ "f16": {
+  "prompt": "Product photo of a white squeeze bottle of skincare sun gel. A simple minimal label on the front reads \"Yundam\" in large letters and \"lightweight sun gel\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:34.225Z"
+ },
+ "f18": {
+  "prompt": "Product photo of a cream squeeze bottle of skincare sun gel. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"lightweight sun gel\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:39.603Z"
+ },
+ "f20": {
+  "prompt": "Product photo of a soft beige squeeze bottle of skincare sun gel. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"lightweight sun gel\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:46.179Z"
+ },
+ "f19": {
+  "prompt": "Product photo of a frosted clear tube of skincare sun gel. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"lightweight sun gel\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:46.655Z"
+ },
+ "f21": {
+  "prompt": "Product photo of a lavender tube of skincare sunscreen. A simple minimal label on the front reads \"Solbit\" in large letters and \"tone-up sunscreen\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:53.868Z"
+ },
+ "f22": {
+  "prompt": "Product photo of a white squeeze bottle of skincare sunscreen. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"tone-up sunscreen\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:53:57.851Z"
+ },
+ "f24": {
+  "prompt": "Product photo of a cream squeeze bottle of skincare sunscreen. A simple minimal label on the front reads \"Eungyeol\" in large letters and \"tone-up sunscreen\" in small letters below it, nothing else, no logo, no other text, no claims. No people, white marble background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:54:06.633Z"
+ },
+ "f23": {
+  "prompt": "Product photo of a pale green tube of skincare sunscreen. A simple minimal label on the front reads \"Supdam\" in large letters and \"tone-up sunscreen\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:54:07.811Z"
+ },
+ "f25": {
+  "prompt": "Product photo of a frosted clear tube of skincare sunscreen. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"tone-up sunscreen\" in small letters below it, nothing else, no logo, no other text, no claims. No people, off-white background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:54:13.502Z"
+ },
+ "f27": {
+  "prompt": "Product photo of a lavender tube of skincare sunscreen. A simple minimal label on the front reads \"Dalgyeol\" in large letters and \"hydrating sunscreen\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:54:20.289Z"
+ },
+ "f26": {
+  "prompt": "Product photo of a light grey pump bottle of skincare sunscreen. A simple minimal label on the front reads \"Iseulgyeol\" in large letters and \"hydrating sunscreen\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:54:21.104Z"
+ },
+ "f28": {
+  "prompt": "Product photo of a white pump bottle of skincare sunscreen. A simple minimal label on the front reads \"Yundam\" in large letters and \"hydrating sunscreen\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:54:27.661Z"
+ },
+ "f30": {
+  "prompt": "Product photo of a cream pump bottle of skincare sunscreen. A simple minimal label on the front reads \"Mulgyeoldam\" in large letters and \"hydrating sunscreen\" in small letters below it, nothing else, no logo, no other text, no claims. No people, soft pink background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:54:33.598Z"
+ },
+ "f29": {
+  "prompt": "Product photo of a pale green tube of skincare sunscreen. A simple minimal label on the front reads \"Achimgyeol\" in large letters and \"hydrating sunscreen\" in small letters below it, nothing else, no logo, no other text, no claims. No people, light wooden background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:54:35.080Z"
+ },
+ "f32": {
+  "prompt": "Product photo of a light grey stick of skincare sunscreen stick. A simple minimal label on the front reads \"Haneuldam\" in large letters and \"sun stick\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:54:40.293Z"
+ },
+ "f33": {
+  "prompt": "Product photo of a lavender stick of skincare sunscreen stick. A simple minimal label on the front reads \"Solbit\" in large letters and \"sun stick\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:54:44.028Z"
+ },
+ "f34": {
+  "prompt": "Product photo of a white stick of skincare sunscreen stick. A simple minimal label on the front reads \"Bomddeul\" in large letters and \"sun stick\" in small letters below it, nothing else, no logo, no other text, no claims. No people, plain light grey background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:54:53.954Z"
+ },
+ "f35": {
+  "prompt": "Product photo of a pale green stick of skincare sunscreen stick. A simple minimal label on the front reads \"Supdam\" in large letters and \"sun stick\" in small letters below it, nothing else, no logo, no other text, no claims. No people, pale beige background, soft natural light, realistic photograph",
+  "model": "openai/gpt-image-1-mini/text-to-image",
+  "size": "1024x1024",
+  "at": "2026-10-05T04:54:55.923Z"
+ }
+}

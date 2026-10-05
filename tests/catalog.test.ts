@@ -34,7 +34,7 @@ test("an approved listing supplies the photo, quoted price and a plain (non-AD) 
 
 test("the merged catalog adds admin products, applies listings, and can hide samples", () => {
   const extra = { ...PRODUCTS[0], id: "nabc123", real: true, name: "새 제품" };
-  const merged = mergeCatalog([extra, { ...PRODUCTS[0], id: "c1" }], [listing()]);
+  const merged = mergeCatalog([extra, { ...PRODUCTS[0], id: "c01" }], [listing()]);
   assert.equal(merged.length, PRODUCTS.length + 1); // the duplicate id c1 is ignored
   assert.equal(merged.find((p) => p.id === "r1")!.price, 12500);
   assert.ok(merged.some((p) => p.id === "nabc123"));

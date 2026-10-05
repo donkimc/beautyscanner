@@ -35,7 +35,7 @@ test("upsert keeps one user per email and links earlier consents", async () => {
 
 test("routines are saved per user and deleted with the account", async () => {
   const u = await upsertUser("routine@x.co");
-  await saveRoutine(u.id, { skinType: "dry" }, ["c1", "t1"], 19800);
+  await saveRoutine(u.id, { skinType: "dry" }, ["c01", "t01"], 19800);
   assert.equal((await listRoutines(u.id)).length, 1);
   await deleteUser(u.id);
   assert.equal((await listRoutines(u.id)).length, 0);
@@ -56,14 +56,14 @@ test("the profile keeps the latest answers and an editable name", async () => {
 
 test("the cart adds once per product, clamps quantity, removes and clears", async () => {
   const u = await upsertUser("cart@x.co");
-  await addToCart(u.id, ["c1", "t1", "c1"], "morning");
-  await addToCart(u.id, ["c1"], "evening"); // already there: untouched
-  assert.deepEqual((await listCart(u.id)).map((r) => [r.product_id, r.qty, r.routine]).sort(), [["c1", 1, "morning"], ["t1", 1, "morning"]]);
-  await setQty(u.id, "c1", 4);
-  await setQty(u.id, "t1", 99);
-  assert.deepEqual((await listCart(u.id)).map((r) => [r.product_id, r.qty]).sort(), [["c1", 4], ["t1", 9]]);
+  await addToCart(u.id, ["c01", "t01", "c01"], "morning");
+  await addToCart(u.id, ["c01"], "evening"); // already there: untouched
+  assert.deepEqual((await listCart(u.id)).map((r) => [r.product_id, r.qty, r.routine]).sort(), [["c01", 1, "morning"], ["t01", 1, "morning"]]);
+  await setQty(u.id, "c01", 4);
+  await setQty(u.id, "t01", 99);
+  assert.deepEqual((await listCart(u.id)).map((r) => [r.product_id, r.qty]).sort(), [["c01", 4], ["t01", 9]]);
   assert.equal(await cartCount(u.id), 13);
-  await removeFromCart(u.id, "c1");
+  await removeFromCart(u.id, "c01");
   assert.equal((await listCart(u.id)).length, 1);
   await clearCart(u.id);
   assert.equal(await cartCount(u.id), 0);
@@ -72,7 +72,7 @@ test("the cart adds once per product, clamps quantity, removes and clears", asyn
 test("a cart and profile belong to one user and are deleted with the account", async () => {
   const a = await upsertUser("own-a@x.co");
   const b = await upsertUser("own-b@x.co");
-  await addToCart(a.id, ["c1"], null);
+  await addToCart(a.id, ["c01"], null);
   await saveProfileAnswers(a.id, { x: 1 });
   assert.equal((await listCart(b.id)).length, 0);
   assert.equal(await getProfileAnswers(b.id), null);

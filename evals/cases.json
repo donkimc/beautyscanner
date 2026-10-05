@@ -43,7 +43,7 @@
       "expect": {
         "allSensitiveSafe": true,
         "includes": [
-          "s4"
+          "s18"
         ]
       }
     },
@@ -99,7 +99,7 @@
       },
       "expect": {
         "includes": [
-          "s2"
+          "s06"
         ]
       }
     },
@@ -118,7 +118,7 @@
       },
       "expect": {
         "includes": [
-          "t2"
+          "t06"
         ]
       }
     },
