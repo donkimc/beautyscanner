@@ -1,6 +1,6 @@
 # BeautyScanner: project handoff
 
-Status as of 2026-10-04. Branch `claude/compassionate-franklin-blpqqa` (repo `donkimc/beautyscanner`). This file records what exists, what was decided, what is blocked, and what to do next. Read `CLAUDE.md` (project rules), `README.md` and `SECURITY.md` too.
+Status as of 2026-10-05. Branch `claude/compassionate-franklin-blpqqa` (repo `donkimc/beautyscanner`). This file records what exists, what was decided, what is blocked, and what to do next. Read `CLAUDE.md` (project rules), `README.md` and `SECURITY.md` too.
 
 ## What the product is
 
@@ -13,7 +13,7 @@ Stack: Next.js 16 (App Router), TypeScript, Tailwind v4, Postgres on Railway (`p
 - Landing page (mobile first, animation, Login and Try buttons), survey with the 5 original questions, result cards with photos, routine view, cart, dashboard, product pages, legal pages (terms, privacy, security: drafts, need a lawyer), mock newsletter.
 - ko/en by phone language (`i18n/`), consent popups (`consent/purposes.ts`), design tokens from the original pages (`design/tokens.json`).
 - Rules in `lib/recommend.ts` choose products; the AI explainer (`agent/explainer.ts`, DeepSeek, optional) only rephrases.
-- Catalog: 13 fictional "[샘플]" products plus 5 real ones (`r1` to `r5`), merged with admin-added products and approved listings (`catalog/load.ts`).
+- Catalog: 200 fictional "[샘플]" products (`lib/samples.ts`, generated from formulas; unrated, no buy links, AI-generated pictures in `public/products/demo/`) plus 5 real ones (`r1` to `r5`), merged with admin-added products and approved listings (`catalog/load.ts`).
 - Admin page `/admin/catalog` (admin emails only, 404 for others): link a real product to a link, price and own photo.
   - **Manual entry (use this now):** "직접 입력" on a product row sets link, price, store and optional photo path (only files under `public/products/`). "새 실제 상품 추가" can start from a blank form.
   - Naver Shopping search and approval pipeline (`retailer/naver.ts`, `retailer/match.ts`, `catalog/refresh.ts`) exists and is tested against a mock, but is unusable for new apps (see Blocked).
@@ -33,7 +33,7 @@ Stack: Next.js 16 (App Router), TypeScript, Tailwind v4, Postgres on Railway (`p
 
 1. Open `/admin/catalog` and enter real data for the 5 real products (link, price, own photo) and add real moisturizer and sunscreen products; then set `HIDE_SAMPLES=true` in Railway.
 2. Optional: bulk import from a spreadsheet (one row per product).
-3. Idea discussed, not started: generate 100+ clearly labelled fictional demo products. Rules: fictional brands only, `[샘플]` label, grade `unrated`, no invented evidence or claims, no buy links; illustrations only unless the user supplies images. Images from Atlas Cloud (OpenAI-compatible, `https://api.atlascloud.ai/v1`) were considered; needs network access from a local session and an `ATLAS_API_KEY` set as a server-side secret (never in chat or the repo). Check each model's licence.
+3. Done (2026-10-05): 200 fictional demo products with AI pictures. Pictures: `openai/gpt-image-1-mini` at low quality via Atlas Cloud (`npm run gen:images`, about $0.80 in total). Flux Schnell errors on Atlas Cloud (server-side bug), so it is not used. Labels on the packaging show a made-up brand; some letters are garbled by the cheap model. Old ids (`c1`, `t1`, ...) are gone, so saved carts or routines that used them no longer match. Delete the Atlas key from `.env.local` when done.
 4. Affiliate links: once the user has a Coupang Partners (or other) link, add an "affiliate link" checkbox to the manual form so the AD label and disclosure appear (AD only on real affiliate links).
 5. Make the admin banner actually test the Naver key if the Naver client is ever revived (today it only shows that variables are set).
 6. Before launch: lawyer review of legal pages and a real contact address (currently `privacy@example.com`), evidence review with real citations for any graded product, verify a sending domain in Resend, optional Google OAuth credentials, link pre-signup consents to the account.

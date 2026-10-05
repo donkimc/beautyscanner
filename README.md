@@ -2,7 +2,7 @@
 
 An MVP demo of an evidence-based skincare recommender, in **Korean and English**. A mobile-first landing page leads to a short survey that produces a budget-aware routine. Each product shows an evidence grade, a reason, and an AD-labelled buy link. Users can sign up with an emailed confirmation link (or Google) to save routines.
 
-> **Demo status:** products and evidence notes in `lib/products.ts` are fictional sample data (names start with "[Sample]" / "[샘플]"), **buy links are placeholders (no retailer or Coupang integration exists yet) and real product photos exist for three of the five real products, the rest use illustrations**, the newsletter is a mock, and the legal pages are draft templates that need a lawyer's review.
+> **Demo status:** the 200 sample products in `lib/samples.ts` are fictional (invented brands, names start with "[Sample]" / "[샘플]", no evidence grade) and their pictures are AI-generated, **buy links are placeholders (no retailer or Coupang integration exists yet) and real product photos exist for three of the five real products, the rest use illustrations**, the newsletter is a mock, and the legal pages are draft templates that need a lawyer's review.
 
 Live demo (Railway): https://web-production-318ac.up.railway.app
 
@@ -61,7 +61,7 @@ How the answers drive the routine (`lib/recommend.ts`):
 
 ### From recommendation to a morning / evening routine
 After the recommendation, **"아침·저녁 루틴 만들기"** turns the recommended products into a personalized routine for the morning or the evening (tabs, same look as the original evening-routine page): numbered steps in application order, a picture per step, a short how-to tip, and a total. It follows simple rules in `lib/routine.ts`:
-- Every product has a time of day: sunscreen is morning-only; strong exfoliants and retinoids (the BHA toner and the retinal serum in the sample data) are evening-only; the rest suit both.
+- Every product has a time of day: sunscreen is morning-only; strong exfoliants and retinoids (e.g. the BHA toner and the retinal serum) are evening-only; the rest suit both.
 - A product that suits the other time of day is left out, with the reason shown ("evening-only, so it's left out of the morning routine").
 - An amber note appears when the routine has no moisturizer, or a morning routine has no sunscreen.
 The routine's products can be added to the shopping cart in one tap (recorded as coming from the morning or evening routine), as can any single product or the whole recommendation.
@@ -74,6 +74,8 @@ The routine's products can be added to the shopping cart in one tap (recorded as
 The catalog has **5 real products** taken from the original evening-routine page (ids `r1`–`r5`: Beplain mung bean cleansing foam, S.Nature Aqua Oasis toner, Torriden DIVE-IN hyaluronic serum, Anua PDRN serum, TonyMoly ceramide mochi toner) plus **sample products** (`[샘플]`, fictional) that fill the gaps (moisturizer, sunscreen, more choices). Real products are preferred by the recommender when they fit.
 
 Pictures go through `ProductImage` (`app/_components/ProductImage.tsx`): the product's own photo (`image` in `lib/products.ts`, a file under `public/products/`) when it has one, otherwise a clean illustration of that kind of product.
+
+The 200 fictional sample products (`lib/samples.ts`: 30 cleansers, 35 toners, 55 serums, 45 creams, 35 sunscreens) use AI-generated pictures in `public/products/demo/` (generic packaging with a made-up brand label; the product page says the picture is AI-generated). They were made once with `npm run gen:images`; the script skips pictures that already exist and needs `ATLAS_API_KEY` in a git-ignored `.env.local`. Never use these pictures for real products.
 - Photos for **Beplain, S.Nature and TonyMoly** come from the original page's product photos (clean product shots).
 - **Torriden and Anua use the illustration for now**: the original page's images are retailer promo shots (Torriden's is an ad banner with a "No. 1 serum" claim; Anua's shows a celebrity model), which don't belong on an evidence-first site. Add a clean packshot as `public/products/<name>.jpg` and set `image` to switch.
 - Product photos belong to their brands/sellers: confirm you may use them commercially, or take images from the retailer's official API (Coupang Partners, Naver Shopping) once connected.
@@ -158,6 +160,7 @@ The visual system is taken from the two original design pages (the survey-intera
 | `npm test` | Unit tests (`tests/`) |
 | `npm run eval` | Scenario evals (`evals/cases.json`); exits non-zero on failure |
 | `npm run tokens` | Regenerate `app/tokens.css` from `design/tokens.json` |
+| `npm run gen:images` | One-off: make the missing sample-product pictures with Atlas Cloud (`--dry-run`, `--ids`, `--limit`; needs `ATLAS_API_KEY` in `.env.local`) |
 | `npm run verify` | Typecheck, tests, evals, and build (what CI runs) |
 
 ## Project structure
@@ -179,7 +182,7 @@ evals/          Scenario evals for the recommender and guardrails
 tests/          Unit tests, including architecture-boundary checks
 architecture/   Layer rules (rules.json) and a diagram (diagram.mmd)
 plan/           Decisions, milestones, risks (plan.json)
-scripts/        Token generation
+scripts/        Token generation, sample-picture generation (gen-images.ts)
 ```
 
 Import directions between folders are defined in `architecture/rules.json` and enforced by `tests/architecture.test.ts`.
